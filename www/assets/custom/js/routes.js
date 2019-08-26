@@ -9,6 +9,27 @@ window.routes = [
 		path: '/walkthrough',
 		componentUrl: './partials/screens/walkthrough.html'
 	},
+  {
+    path: '/maps503',
+    componentUrl: './partials/maps/maps.html'
+  },
+  ,
+	{
+		path: '/maps-screen',
+		componentUrl: './partials/maps/mapselect.html'
+  },
+  {
+    path: '/maps_routes',
+    componentUrl: './partials/maps/route_map.html'
+  },
+  {
+    path: '/maps_area',
+    componentUrl: './partials/maps/area_map.html'
+  },
+  {
+    path: '/maps_walking',
+    componentUrl: './partials/maps/walking_view.html'
+  },
 	{
 		path: '/home',
 		componentUrl: './partials/screens/home.html'
@@ -21,6 +42,7 @@ window.routes = [
 				path: '/accordion',
 				componentUrl: './partials/components/accordion.html'
 			},
+
 			{
 				path: '/action-sheet',
 				componentUrl: './partials/components/action-sheet.html'
@@ -91,6 +113,7 @@ window.routes = [
 					}
 				]
 			},
+
       {
 				path: '/form-elements',
 				componentUrl: './partials/components/form-elements.html'
@@ -931,4 +954,8 @@ window.routes = [
 		path: '(.*)',
 		componentUrl: './partials/screens/404.html'
 	}
+
+
+
+
 ];
