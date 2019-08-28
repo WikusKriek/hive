@@ -5,6 +5,10 @@ window.routes = [
 		path: '/',
 		componentUrl: './partials/screens/splash.html'
 	},
+  {
+		path: '/academic-dashboard',
+		componentUrl: './partials/academic/academic_dashboard.html'
+	},
 	{
 		path: '/walkthrough',
 		componentUrl: './partials/screens/walkthrough.html'

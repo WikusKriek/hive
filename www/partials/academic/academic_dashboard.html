@@ -1,0 +1,546 @@
+<template>
+	<div class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="link back">
+						<i class="icon icon-back"></i>
+						<span class="ios-only" data-i18n="back">Back</span>
+					</a>
+				</div>
+				<div class="title md-only" data-i18n="academics">Academics</div>
+				<div class="right">
+					<a href="#" class="link icon-only">
+						<i class="icon f7-icons ios-only">bell<span class="badge color-red">5</span></i>
+						<i class="icon material-icons md-only">notifications<span class="badge color-red">5</span></i>
+					</a>
+				</div>
+
+				<div class="subnavbar ios-only">
+					<div class="subnavbar-inner">
+						<div class="title" data-i18n="academics">Academics</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="toolbar tabbar tabbar-labels">
+			<div class="toolbar-inner">
+				<a href="#tab-profile" class="tab-link tab-link-active">
+					<i class="icon f7-icons ios-only">data</i>
+					<i class="icon material-icons md-only">dashboard</i>
+					<span class="tabbar-label">Dashboard</span>
+				</a>
+				<a href="#tab-notifications" class="tab-link">
+					<i class="icon f7-icons ios-only">alert</i>
+					<i class="icon material-icons md-only">announcement</i>
+					<span class="tabbar-label">Announcements</span>
+				</a>
+				<a href="#tab-home" class="tab-link">
+					<i class="icon f7-icons ios-only">document_text</i>
+					<i class="icon material-icons md-only">assignment</i>
+					<span class="tabbar-label">Assignments</span>
+				</a>
+				<a href="#tab-settings" class="tab-link">
+					<i class="icon f7-icons ios-only">calendar</i>
+					<i class="icon material-icons md-only">date_range</i>
+					<span class="tabbar-label">Timetables</span>
+				</a>
+			</div>
+		</div>
+
+
+			<div class="tabs-swipeable-wrap">
+				<div class="tabs">
+
+					<div id="tab-profile" class="page-content tab tab-active" >
+
+							<!__ start of content inside tab  __>
+
+							<div class="block block-greet">
+								<div class="greet-avatar">
+									<img class="img-circle" src="https://randomuser.me/api/portraits/men/60.jpg" height="72" alt="" />
+								</div>
+								<div class="greet-text">
+									<div class="greet-message">Welcome!</div>
+									<div class="greet-username">Praveen</div>
+								</div>
+								<div class="greet-icon">
+									<img src="assets/custom/img/sun.svg" height="72" alt="" />
+								</div>
+							</div>
+
+							<div class="block block-stats">
+								<div class="row">
+									<div class="col-100 tablet-50 margin-top">
+										<div class="card card-stats" style="background-image: linear-gradient(135deg, #5F72BD 0%, #9B23EA 100%);">
+											<div class="card-content card-content-padding">
+												<div class="card-stats-icon">
+													<i class="fa-stack fa-2x">
+														<span class="fas fa-circle fa-stack-2x"></span>
+														<span class="fas fa-award fa-stack-1x fa-inverse"></span>
+													</i>
+												</div>
+												<div class="card-stats-info">
+
+													<div class="card-stats-value">Grades</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-100 tablet-50 margin-top">
+										<div class="card card-stats" style="background-image: linear-gradient(135deg, #FE5196 0%, #F77062 100%);">
+											<div class="card-content card-content-padding">
+												<div class="card-stats-icon">
+													<i class="fa-stack fa-2x">
+														<span class="fas fa-circle fa-stack-2x"></span>
+														<span class="fas fa-wallet fa-stack-1x fa-inverse"></span>
+													</i>
+												</div>
+												<div class="card-stats-info">
+													<div class="card-stats-label">Student Card Balance</div>
+													<div class="card-stats-value">R 750.00</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-100 margin-top">
+										<div class="card card-stats" style="background-image: linear-gradient(135deg, #04BEFE 0%, #4481EB 100%);">
+											<div class="card-content card-content-padding">
+												<div class="card-stats-icon">
+													<i class="fa-stack fa-2x">
+														<span class="fas fa-circle fa-stack-2x"></span>
+														<span class="fas fa-chalkboard-teacher fa-stack-1x fa-inverse"></span>
+													</i>
+												</div>
+												<div class="card-stats-info">
+													<div class="card-stats-label">Classes Today</div>
+													<div class="card-stats-value">6</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="block block-chart">
+								<div class="card card-chart" style="background-image: linear-gradient(135deg, #F5F5F5 0%, #F7F7F7 100%);">
+									<div class="card-content card-content-padding">
+										<canvas id="chart" class="chart" height="256"></canvas>
+									</div>
+								</div>
+							</div>
+
+							<div class="block block-vitals">
+								<div class="row">
+									<div class="col">
+										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #F59F00 0%, #FCC419 100%);">
+											<div class="card-content card-content-padding">
+												<i class="material-icons-outlined text-color-white">local_library</i>
+												<span>Efundi</span>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #1C7ED6 0%, #339AF0 100%);">
+											<div class="card-content card-content-padding">
+												<i class="material-icons-outlined text-color-white">priority_high</i>
+												<span>Emergency</span>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #74B816 0%, #94D82D 100%);">
+											<div class="card-content card-content-padding">
+												<i class="material-icons-outlined text-color-white">exit_to_app</i>
+												<span>Log Out</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+					</div>
+
+					<div id="tab-notifications" class="page-content tab">
+						<div class="block">
+							<div class="block-title">Pagination Footer</div>
+							<div class="data-table card">
+								<table>
+									<thead>
+										<tr>
+											<th class="label-cell">Dessert (Per 100g)</th>
+											<th class="numeric-cell">Calories</th>
+											<th class="numeric-cell">Fat (g)</th>
+											<th class="numeric-cell">Carbohydrate (g)</th>
+											<th class="numeric-cell">Protein (g)</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{#each desserts}}
+										<tr>
+											<td class="label-cell">{{name}}</td>
+											<td class="numeric-cell">{{calories}}</td>
+											<td class="numeric-cell">{{fat}}</td>
+											<td class="numeric-cell">{{carbohydrate}}</td>
+											<td class="numeric-cell">{{protein}}</td>
+										</tr>
+										{{/each}}
+									</tbody>
+								</table>
+								<div class="data-table-footer">
+									<div class="data-table-rows-select">Per Page:
+										<div class="input input-dropdown">
+											<select>
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="all">All</option>
+											</select>
+										</div>
+									</div>
+									<div class="data-table-pagination">
+										<span class="data-table-pagination-label">1-5 of 10</span>
+										<a href="#" class="link disabled">
+											<i class="icon icon-prev color-gray"></i>
+										</a>
+										<a href="#" class="link">
+											<i class="icon icon-next color-gray"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="tab-home" class="page-content tab">
+						<div class="block">
+							<div class="block-title">Pagination Footer</div>
+							<div class="data-table card">
+								<table>
+									<thead>
+										<tr>
+											<th class="label-cell">Dessert (Per 100g)</th>
+											<th class="numeric-cell">Calories</th>
+											<th class="numeric-cell">Fat (g)</th>
+											<th class="numeric-cell">Carbohydrate (g)</th>
+											<th class="numeric-cell">Protein (g)</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{#each desserts}}
+										<tr>
+											<td class="label-cell">{{name}}</td>
+											<td class="numeric-cell">{{calories}}</td>
+											<td class="numeric-cell">{{fat}}</td>
+											<td class="numeric-cell">{{carbohydrate}}</td>
+											<td class="numeric-cell">{{protein}}</td>
+										</tr>
+										{{/each}}
+									</tbody>
+								</table>
+								<div class="data-table-footer">
+									<div class="data-table-rows-select">Per Page:
+										<div class="input input-dropdown">
+											<select>
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="all">All</option>
+											</select>
+										</div>
+									</div>
+									<div class="data-table-pagination">
+										<span class="data-table-pagination-label">1-5 of 10</span>
+										<a href="#" class="link disabled">
+											<i class="icon icon-prev color-gray"></i>
+										</a>
+										<a href="#" class="link">
+											<i class="icon icon-next color-gray"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="tab-settings" class="page-content tab">
+						<div class="block">
+							<!__ begin the table construct here__>
+							{{#if articles}}
+				      <div class="cards">
+				        {{#each articles}}
+
+				            <p>{{this.title}}</p>
+				            <span class="badge color-yellow text-color-black">{{this.venue}}</span>
+										<span class="badge color-green text-color-black">{{this.Mo}}</span>
+										<span class="badge color-blue text-color-black">{{this.Tu}}</span>
+										<span class="badge color-yellow text-color-black">{{this.We}}</span>
+										<span class="badge color-red text-color-black">{{this.Th}}</span>
+										<span class="badge color-orange text-color-black">{{this.Fr}}</span>
+
+				        {{/each}}
+				      </div>
+				      {{/if}}
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+
+
+
+	</div>
+</template>
+
+<style scoped>
+	.block-greet {
+		align-items: center;
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	.greet-text {
+		padding: 0 16px;
+	}
+
+	.greet-message {
+		font-size: 20px;
+		line-height: 1.2;
+	}
+
+	.greet-username {
+		font-size: 32px;
+		font-weight: bold;
+		line-height: 1.2;
+	}
+
+	.greet-icon {
+		margin-left: auto;
+		margin-right: 0;
+	}
+
+	html[dir=rtl] {{this}} .greet-icon {
+		margin-left: 0;
+		margin-right: auto;
+	}
+
+	.card-stats {
+		border: none;
+		box-shadow: none;
+		color: #FFFFFF;
+		margin: 0;
+	}
+
+	.card-stats .card-content {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.card-stats-icon i {
+		width: 2em;
+	}
+
+	.card-stats-icon .fa-circle {
+		color: rgba(0, 0, 0, 0.25);
+	}
+
+	.card-stats-info {
+		text-align: right;
+	}
+
+	html[dir=rtl] {{this}} .card-stats-info {
+		text-align: left;
+	}
+
+	.card-stats-label {
+		font-size: 15px;
+	}
+
+	.card-stats-value {
+		font-size: 32px;
+		font-weight: bold;
+		line-height: 1;
+	}
+
+	.card-stats-value .progressbar {
+		height: 8px;
+		margin-top: 8px;
+		width: 144px;
+	}
+
+	.card-vitals {
+		border: none;
+		box-shadow: none;
+		color: #FFFFFF;
+		margin: 0;
+	}
+
+	.card-vitals .card-content {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.card-vitals i {
+		font-size: 48px;
+	}
+
+	.card-vitals span {
+		font-size: 16px;
+	}
+
+	.card-chart {
+		border: none;
+		box-shadow: none;
+		margin: 0;
+	}
+
+	.card-chart .chart {
+		margin: 0 auto;
+		width: 100%;
+	}
+	.cards .card {
+		background-color: #292929;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		box-shadow: none;
+		color: #FFFFFF;
+		display: flex;
+		height: 48vw;
+	}
+
+	.theme-dark {{this}} .cards .card {
+		background-color: #292929;
+	}
+
+	.card .card-content {
+		align-items: flex-start;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+</style>
+
+<script>
+
+
+
+	return {
+
+		methods: {
+			loadData: function() {
+				var self = this;
+				app.request.json(
+					'assets/custom/dataset/timetable.json',
+					function(data) {
+						if (data) {
+							self.$setState({
+								articles: data
+							});
+						}
+					}
+				);
+			},
+			animateGreetIcon: function() {
+				var self = this;
+				var animation = anime({
+					targets: ['.greet-icon img'],
+					duration: 10000,
+					easing: 'linear',
+					loop: true,
+					rotate: 360
+				});
+			},
+			renderChart: function() {
+				var self = this;
+				var config = {
+					type: 'horizontalBar',
+					data: {
+						labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+						datasets: [
+							{
+								label: 'Dataset',
+								backgroundColor: window.config.colors.oc.green4,
+								borderColor: window.config.colors.oc.green6,
+								borderWidth: 1,
+								data: [80, -5, 25, 50, -15, 75]
+							}
+						]
+					},
+					options: {
+						responsive: false
+					}
+				};
+				var chart = new Chart(document.getElementById('chart').getContext('2d'), config);
+			}
+		},
+		on: {
+			pageInit: function() {
+				var self = this;
+				self.animateGreetIcon();
+				self.renderChart();
+				self.loadData();
+			}
+		},
+		data: function() {
+			return {
+				articles: null,
+				desserts: [
+					{
+						name: 'Cupcake',
+						calories: '305',
+						fat: '3.7',
+						carbohydrate: '67',
+						protein: '4.3'
+					},
+					{
+						name: 'Donut',
+						calories: '452',
+						fat: '25',
+						carbohydrate: '51',
+						protein: '4.9'
+					},
+					{
+						name: 'Frozen Yogurt',
+						calories: '159',
+						fat: '6',
+						carbohydrate: '24',
+						protein: '4'
+					},
+					{
+						name: 'Gingerbread',
+						calories: '356',
+						fat: '16',
+						carbohydrate: '49',
+						protein: '3.9'
+					},
+					{
+						name: 'Icecream Sandwich',
+						calories: '237',
+						fat: '9',
+						carbohydrate: '37',
+						protein: '4.3'
+					},
+					{
+						name: 'Nougat',
+						calories: '398',
+						fat: '1.7',
+						carbohydrate: '92',
+						protein: '3.3'
+					}
+				]
+			}
+		}
+
+	}
+
+</script>
