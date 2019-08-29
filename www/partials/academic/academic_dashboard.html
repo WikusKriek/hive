@@ -1,3 +1,4 @@
+
 <template>
 	<div class="page">
 
@@ -267,25 +268,34 @@
 					</div>
 
 					<div id="tab-settings" class="page-content tab">
-						<div class="block">
-							<!__ begin the table construct here__>
-							{{#if articles}}
-				      <div class="cards">
-				        {{#each articles}}
 
-				            <p>{{this.title}}</p>
-				            <span class="badge color-yellow text-color-black">{{this.venue}}</span>
-										<span class="badge color-green text-color-black">{{this.Mo}}</span>
-										<span class="badge color-blue text-color-black">{{this.Tu}}</span>
-										<span class="badge color-yellow text-color-black">{{this.We}}</span>
-										<span class="badge color-red text-color-black">{{this.Th}}</span>
-										<span class="badge color-orange text-color-black">{{this.Fr}}</span>
 
-				        {{/each}}
-				      </div>
-				      {{/if}}
+								<table class="time-table" id="table1">
 
-						</div>
+									<thead>
+										<tr>
+											<th class="label-cell">Time</th>
+											<th class="numeric-cell">M</th>
+											<th class="numeric-cell">T</th>
+											<th class="numeric-cell">W</th>
+											<th class="numeric-cell">T</th>
+											<th class="numeric-cell">F</th>
+										</tr>
+									</thead>
+									<tbody id="timetable">
+
+
+									<script>
+										generatetimetable();
+									</script>
+
+
+									</tbody >
+								</table>
+
+
+
+
 					</div>
 
 				</div>
@@ -407,27 +417,7 @@
 		margin: 0 auto;
 		width: 100%;
 	}
-	.cards .card {
-		background-color: #292929;
-		background-position: center center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		box-shadow: none;
-		color: #FFFFFF;
-		display: flex;
-		height: 48vw;
-	}
 
-	.theme-dark {{this}} .cards .card {
-		background-color: #292929;
-	}
-
-	.card .card-content {
-		align-items: flex-start;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
-	}
 </style>
 
 <script>
@@ -489,55 +479,12 @@
 				self.animateGreetIcon();
 				self.renderChart();
 				self.loadData();
+				self.inseritem();
 			}
 		},
 		data: function() {
 			return {
 				articles: null,
-				desserts: [
-					{
-						name: 'Cupcake',
-						calories: '305',
-						fat: '3.7',
-						carbohydrate: '67',
-						protein: '4.3'
-					},
-					{
-						name: 'Donut',
-						calories: '452',
-						fat: '25',
-						carbohydrate: '51',
-						protein: '4.9'
-					},
-					{
-						name: 'Frozen Yogurt',
-						calories: '159',
-						fat: '6',
-						carbohydrate: '24',
-						protein: '4'
-					},
-					{
-						name: 'Gingerbread',
-						calories: '356',
-						fat: '16',
-						carbohydrate: '49',
-						protein: '3.9'
-					},
-					{
-						name: 'Icecream Sandwich',
-						calories: '237',
-						fat: '9',
-						carbohydrate: '37',
-						protein: '4.3'
-					},
-					{
-						name: 'Nougat',
-						calories: '398',
-						fat: '1.7',
-						carbohydrate: '92',
-						protein: '3.3'
-					}
-				]
 			}
 		}
 
