@@ -1,5 +1,5 @@
 'use strict';
-function generatetimetable(){
+function generatetimetablelocal(){
   var self = this;
   const BACKGROUNDS = [
       "#FF0099",
@@ -19,10 +19,8 @@ function generatetimetable(){
       '#e1fde9',
       '#83dcf5'
   ];
-	app.request.json(
-					'assets/custom/dataset/timetable.json',
-					function(data) {
-						if (data) {
+  var getObject = JSON.parse(localStorage.getItem('storeObj'));
+
 
               var TIMES = [
                 "7:30 - 9:15",
@@ -66,11 +64,42 @@ function generatetimetable(){
                    flag = 0;
 
                    num=0;
-                  for (const subject of data){
-
-                    if(subject[day]===time) {
-                      cel1.innerHTML = subject.title.trim()+"\n";
-                      cel1.innerHTML += subject.venue.trim();
+                  for (const num of getObject){
+                    subject=getObject[num]
+                    switch(subject.day.Time) {
+                      case "07:30":
+                        subTime = "7:30 - 9:15";
+                        break;
+                      case "08:00":
+                        subTime = "7:30 - 9:15";
+                        break;
+                      case "09:30":
+                        subTime = "9:30 - 10:45";
+                        break;
+                        case "11:00":
+                          subTime = "11:00 - 12:45";
+                          break;
+                        case "12:15":
+                          subTime = "11:00 - 12:45";
+                          break;
+                        case "13:00":
+                          subTime = "13:00 - 14:15";
+                          break;
+                        case "14:30":
+                          subTime = "14:30 - 15:45";
+                          break;
+                        case "16:00":
+                          subTime = "16:00 - 17:45";
+                          break;
+                        case "17:15":
+                          subTime = "16:00 - 17:45";
+                          break;
+                      default:
+                        subTime = "16:00 - 17:45";
+                    }
+                    if(subTime===time) {
+                      cel1.innerHTML = subject.subject.trim()+"\n";
+                      cel1.innerHTML += subject.day.Venue.trim();
                       cel1.style.backgroundColor=BACKGROUNDS[num];
 
                       flag=1;
@@ -94,10 +123,8 @@ function generatetimetable(){
 
               }
 
-							}
-						}
 
-				);
+
 
 
 

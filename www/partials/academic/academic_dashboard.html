@@ -49,6 +49,11 @@
 					<i class="icon material-icons md-only">date_range</i>
 					<span class="tabbar-label">Timetables</span>
 				</a>
+				<a href="#tab-subjects" class="tab-link">
+					<i class="icon f7-icons ios-only">calendar</i>
+					<i class="icon material-icons md-only">date_range</i>
+					<span class="tabbar-label">Subjects</span>
+				</a>
 			</div>
 		</div>
 
@@ -267,10 +272,15 @@
 						</div>
 					</div>
 
-					<div id="tab-settings" class="page-content tab">
+					<div id="tab-settings" class="page-content tab" >
 
 
-								<table class="time-table" id="table1">
+						<div class="card" width="100%">
+
+
+							<div class="block-title">Timetable</div>
+
+								<table class="time-table" id="table1" >
 
 									<thead>
 										<tr>
@@ -286,18 +296,107 @@
 
 
 									<script>
-										generatetimetable();
+										generatetimetablelocal();
 									</script>
 
 
 									</tbody >
 								</table>
 
-
+							</div>
 
 
 					</div>
+					<div id="tab-subjects" class="page-content tab" >
 
+
+						<div class="block block-strong">
+
+
+							<label class="radio">
+								<input type="radio" name="radio" value="1" />
+								<i class="icon-radio"></i>
+							</label>
+							<span>Use Default subject List</span>
+
+
+								<div class="list simple-list">
+									<ul>
+										<li>Item 1</li>
+										<li>Item 2</li>
+										<li>Item 3</li>
+								</ul>
+							</div>
+
+						</div>
+						<div class="block block-strong">
+
+
+							<label class="radio">
+								<input type="radio" name="radio" value="2" />
+								<i class="icon-radio"></i>
+							</label>
+							<span>Use Custom 1</span>
+
+
+								<div class="list simple-list">
+									<ul id="custom1list">
+
+								</ul>
+							</div>
+							<div class="block block-strong">
+								<div class="row">
+									<div class="col">
+										<a href="/academic/addremove" class="button button-fill button-raised button-round">Edit</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="block block-strong">
+
+
+							<label class="radio">
+								<input type="radio" name="radio" value="3"/>
+								<i class="icon-radio"></i>
+							</label>
+							<span>Use Custom 2</span>
+
+
+								<div class="list simple-list">
+									<ul id="custom2list">
+
+
+								</ul>
+
+							</div>
+							<div class="block block-strong">
+								<div class="row">
+									<div class="col">
+										<a href="/academic/virtual/subject" class="button button-fill button-raised button-round">Virtual</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<script type="text/javascript">
+
+
+							$('input[type=radio][name=radio]').change(function() {
+    if (this.value == '1') {
+        alert("Selected 1");
+    }
+    else if (this.value == '2') {
+        alert("Selected 2");
+    }else{
+			alert("Selected 3");
+		}
+});
+
+
+
+						</script>
+					</div>
 				</div>
 			</div>
 
@@ -418,6 +517,37 @@
 		width: 100%;
 	}
 
+}
+.time-table {
+	background:theme-color;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th{
+	background:theme-color
+}
+.cell {
+    width: 50px;
+    min-height: 40px;
+    border: 1px solid rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-break: break-word;
+    padding: 3px;
+    font-size: 12px;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+		overflow: hidden;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+}
+
+
+
 </style>
 
 <script>
@@ -439,6 +569,19 @@
 						}
 					}
 				);
+			},
+			loadlist:function(){
+
+				var getObject = JSON.parse(localStorage.getItem('storeObj'));
+
+				if (getObject!=null){
+					for(var sub in getObject){
+
+						$("#custom1list").append('<li>'+getObject[sub].subject+'</li>');
+					}
+
+				}
+
 			},
 			animateGreetIcon: function() {
 				var self = this;
@@ -479,7 +622,9 @@
 				self.animateGreetIcon();
 				self.renderChart();
 				self.loadData();
-				self.inseritem();
+					self.loadlist();
+
+
 			}
 		},
 		data: function() {

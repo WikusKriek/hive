@@ -1,6 +1,14 @@
  'use strict';
 
 window.routes = [
+  {
+		path: '/academic/virtual/subject',
+		componentUrl: './partials/academic/virtual_subject_list.html'
+	},
+  {
+		path: '/academic/addremove',
+		componentUrl: './partials/academic/subject-add-with-checkbox.html'
+	},
 	{
 		path: '/',
 		componentUrl: './partials/screens/splash.html'

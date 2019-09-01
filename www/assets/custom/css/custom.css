@@ -46,7 +46,7 @@
 	background: transparent;
 }
 
-time-table {
+table {
   width: 100%;
   border-collapse: collapse;
 }
@@ -60,8 +60,10 @@ th {
   font-weight: bold;
 }
 td, th {
-  padding: 6px;
+
   border: 1px solid #ccc;
-  text-align: left;
-	text
+  text-align: center;
+	font-size:12px;
+		text-overflow: clip;
+
 }
