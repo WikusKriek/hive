@@ -37,21 +37,21 @@
 				<a href="#tab-notifications" class="tab-link">
 					<i class="icon f7-icons ios-only">alert</i>
 					<i class="icon material-icons md-only">announcement</i>
-					<span class="tabbar-label">Announcements</span>
+					<span class="tabbar-label">Announ</span>
 				</a>
 				<a href="#tab-home" class="tab-link">
 					<i class="icon f7-icons ios-only">document_text</i>
 					<i class="icon material-icons md-only">assignment</i>
-					<span class="tabbar-label">Assignments</span>
+					<span class="tabbar-label">Assign</span>
 				</a>
 				<a href="#tab-settings" class="tab-link">
 					<i class="icon f7-icons ios-only">calendar</i>
 					<i class="icon material-icons md-only">date_range</i>
-					<span class="tabbar-label">Timetables</span>
+					<span class="tabbar-label">Tables</span>
 				</a>
 				<a href="#tab-subjects" class="tab-link">
-					<i class="icon f7-icons ios-only">calendar</i>
-					<i class="icon material-icons md-only">date_range</i>
+					<i class="icon f7-icons ios-only">abc</i>
+					<i class="icon material-icons md-only">school</i>
 					<span class="tabbar-label">Subjects</span>
 				</a>
 			</div>
@@ -296,7 +296,9 @@
 
 
 									<script>
+
 										generatetimetablelocal();
+
 									</script>
 
 
@@ -314,7 +316,7 @@
 
 
 							<label class="radio">
-								<input type="radio" name="radio" value="1" />
+								<input id="radio1" type="radio" name="radio" value="1" />
 								<i class="icon-radio"></i>
 							</label>
 							<span>Use Default subject List</span>
@@ -333,7 +335,7 @@
 
 
 							<label class="radio">
-								<input type="radio" name="radio" value="2" />
+								<input id="radio2" type="radio" name="radio" value="2" />
 								<i class="icon-radio"></i>
 							</label>
 							<span>Use Custom 1</span>
@@ -347,7 +349,7 @@
 							<div class="block block-strong">
 								<div class="row">
 									<div class="col">
-										<a href="/academic/addremove" class="button button-fill button-raised button-round">Edit</a>
+										<a href="/academic/addremove" id="editcustom1" class="button button-fill button-raised button-round"onclick='buttonnum(1);'>Edit Custom 1</a>
 									</div>
 
 								</div>
@@ -357,7 +359,7 @@
 
 
 							<label class="radio">
-								<input type="radio" name="radio" value="3"/>
+								<input id="radio3" type="radio" name="radio" value="3"/>
 								<i class="icon-radio"></i>
 							</label>
 							<span>Use Custom 2</span>
@@ -373,7 +375,7 @@
 							<div class="block block-strong">
 								<div class="row">
 									<div class="col">
-										<a href="/academic/virtual/subject" class="button button-fill button-raised button-round">Virtual</a>
+										<a href="/academic/addremove"id="editcustom2" class="button button-fill button-raised button-round"onclick='buttonnum(2);'>Edit Custom 2</a>
 									</div>
 
 								</div>
@@ -384,12 +386,15 @@
 
 							$('input[type=radio][name=radio]').change(function() {
     if (this.value == '1') {
-        alert("Selected 1");
+			localStorage.removeItem('radio1');
+			localStorage.setItem('radio1', '1');
     }
     else if (this.value == '2') {
-        alert("Selected 2");
+			localStorage.removeItem('radio1');
+			localStorage.setItem('radio1', '2');
     }else{
-			alert("Selected 3");
+			localStorage.removeItem('radio1');
+			localStorage.setItem('radio1', '3');
 		}
 });
 
@@ -570,14 +575,27 @@
 					}
 				);
 			},
+			setradio:function(){
+				if(localStorage.getItem('radio1')==null){
+					localStorage.setItem('radio1', '1');
+				}
+			document.getElementById('radio'+localStorage.getItem('radio1')).checked="true"	;
+			},
 			loadlist:function(){
 
-				var getObject = JSON.parse(localStorage.getItem('storeObj'));
+				var custom1 = JSON.parse(localStorage.getItem('custom1'));
+				var custom2 = JSON.parse(localStorage.getItem('custom2'));
+				if (custom1!=null){
+					for(var sub in custom1){
 
-				if (getObject!=null){
-					for(var sub in getObject){
+						$("#custom1list").append('<li>'+custom1[sub].subject+'</li>');
+					}
 
-						$("#custom1list").append('<li>'+getObject[sub].subject+'</li>');
+				}
+				if (custom2!=null){
+					for(var sub in custom2){
+
+						$("#custom2list").append('<li>'+custom2[sub].subject+'</li>');
 					}
 
 				}
@@ -623,6 +641,9 @@
 				self.renderChart();
 				self.loadData();
 					self.loadlist();
+					self.scraper23();
+					self.setradio();
+
 
 
 			}

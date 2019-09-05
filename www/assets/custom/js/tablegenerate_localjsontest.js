@@ -1,6 +1,7 @@
 'use strict';
 function generatetimetablelocal(){
   var self = this;
+  alert("here");
   const BACKGROUNDS = [
       "#FF0099",
       "#f3f315",
@@ -19,7 +20,15 @@ function generatetimetablelocal(){
       '#e1fde9',
       '#83dcf5'
   ];
-  var getObject = JSON.parse(localStorage.getItem('storeObj'));
+  alert("here");
+  var subjectTable=null
+  if(localStorage.getItem('radio1')=='1'){
+   subjectTable = JSON.parse(localStorage.getItem('defaultsubjects'));
+}else if(localStorage.getItem('radio1')=='2'){
+   subjectTable = JSON.parse(localStorage.getItem('custom1'));
+} else {
+     subjectTable = JSON.parse(localStorage.getItem('custom2'));
+}
 
 
               var TIMES = [
@@ -64,8 +73,8 @@ function generatetimetablelocal(){
                    flag = 0;
 
                    num=0;
-                  for (const num of getObject){
-                    subject=getObject[num]
+                  for (const num of subjectTable ){
+                    subject=subjectTable[num]
                     switch(subject.day.Time) {
                       case "07:30":
                         subTime = "7:30 - 9:15";

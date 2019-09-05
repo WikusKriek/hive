@@ -2,6 +2,14 @@
 
 window.routes = [
   {
+		path: '/scraper/proxy',
+		componentUrl: './partials/scraper/proxy.php'
+	},
+  {
+		path: '/scraper',
+		componentUrl: './partials/scraper/scraper.html'
+	},
+  {
 		path: '/academic/virtual/subject',
 		componentUrl: './partials/academic/virtual_subject_list.html'
 	},

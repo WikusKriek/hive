@@ -14,15 +14,29 @@ function checkbox(){
               checkboxesChecked.push(checkboxes[i].value);
            }
         }
-        document.getElementById("show").value = checkboxesChecked;
         var obj=[]
         for (i=0;i<checkboxesChecked.length;i++){
         obj.push(data[checkboxesChecked[i]]);
-  }
-localStorage.removeItem('storeObj');
-localStorage.setItem('storeObj', JSON.stringify(obj));
 
-var getObject = JSON.parse(localStorage.getItem('storeObj'));
+  }
+  if(localStorage.getItem('buttonclicked')==1){
+    if(localStorage.getItem('custom1')==null){
+      localStorage.setItem('custom1', JSON.stringify(obj));
+    }else{
+      localStorage.removeItem('custom1');
+      localStorage.setItem('custom1', JSON.stringify(obj));
+    }
+  }else{
+    if(localStorage.getItem('custom2')==null){
+      localStorage.setItem('custom2', JSON.stringify(obj));
+    }else{
+      localStorage.removeItem('custom2');
+      localStorage.setItem('custom2', JSON.stringify(obj));
+    }
+  }
+var cus1 = JSON.parse(localStorage.getItem('custom1'));
+var cus2 = JSON.parse(localStorage.getItem('custom2'));
+
 
 }
 );};
@@ -48,7 +62,14 @@ function generatetimetablelocal(){
       '#e1fde9',
       '#83dcf5'
   ];
-  var getObject = JSON.parse(localStorage.getItem('storeObj'));
+
+  if(localStorage.getItem('radio1')=='1'){
+   var subjectTable = JSON.parse(localStorage.getItem('defaultsubjects'));
+}else if(localStorage.getItem('radio1')=='2'){
+   var subjectTable = JSON.parse(localStorage.getItem('custom1'));
+} else {
+     var subjectTable = JSON.parse(localStorage.getItem('custom2'));
+}
 
 
               var TIMES = [
@@ -93,7 +114,7 @@ function generatetimetablelocal(){
                    flag = 0;
 
                    num=0;
-                  for (var subject of getObject){
+                  for (var subject of subjectTable){
 
 
                     var subTime;
@@ -160,4 +181,14 @@ function generatetimetablelocal(){
 
 
 
-};
+  };
+  function buttonnum(num){
+    localStorage.removeItem('buttonclicked')
+    localStorage.setItem('buttonclicked',num)
+
+  };
+
+
+  function scraper23(){
+    alert("hello");
+  };
