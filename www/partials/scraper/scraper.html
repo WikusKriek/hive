@@ -72,12 +72,12 @@
 		methods: {
 			scraper: function(){
 				var self = this;
-				alert('here 1');
-				app.request.get("partials/scraper/proxy.php?a=1"
+				app.request.get("partials/scraper/proxy.php?a=25917498&b=Anamax@4"
 
 		   ,function(error,response,data){
 		        // The full html of the authenticated page
-		        alert(data.responseText);
+		        var nwuAppData=JSON.parse(data.responseText);
+						alert(nwuAppData.balance);
 		    });
 			},
 			loadData: function() {
