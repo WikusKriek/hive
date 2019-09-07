@@ -74,10 +74,15 @@
 				var self = this;
 				app.request.get("partials/scraper/proxy.php?a=25917498&b=Anamax@4"
 
-		   ,function(error,response,data){
+		   ,function(login,response,data){
 		        // The full html of the authenticated page
-		        var nwuAppData=JSON.parse(data.responseText);
-						alert(nwuAppData.balance);
+						var login=JSON.parse(login);
+						if(login.status==='true'){
+			        var nwuAppData=JSON.parse(data.responseText);
+							alert(nwuAppData.balance);
+					}else{
+						alert('Could not login');
+					}
 		    });
 			},
 			loadData: function() {

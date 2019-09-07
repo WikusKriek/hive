@@ -2,7 +2,8 @@
 
 include "simple_html_dom.php";
 
-
+$user=$_GET['a'];
+$pass=$_GET['b'];
 $urlefundilogin = "https://casprd.nwu.ac.za/cas/login?service=http%3A%2F%2Fefundi.nwu.ac.za%2Fsakai-login-tool%2Fcontainer";
 
 
@@ -26,8 +27,8 @@ $ltvalue=$html->find('input[name=lt]',0)->value;
 
 //got the lt value now pass it with post request
 $fields = [
-  'username'=> '25917498',
-  'password'=> 'Anamax@4',
+  'username'=> $user,
+  'password'=> $pass,
   'execution'=> 'e1s1',
   '_eventId'=> 'submit',
   'submit'=> 'LOGIN',
