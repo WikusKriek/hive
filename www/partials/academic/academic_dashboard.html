@@ -107,7 +107,10 @@
 												</div>
 												<div class="card-stats-info">
 													<div class="card-stats-label">Student Card Balance</div>
-													<div class="card-stats-value">R 750.00</div>
+													<div id= "studentbalancedisplay" class="card-stats-value">
+
+
+													</div>
 												</div>
 											</div>
 										</div>
@@ -611,6 +614,39 @@
 					rotate: 360
 				});
 			},
+			scraper: function(){
+				var self = this;
+				var pass=`Anamax@4`;
+				var username=`25917498`;
+				app.request.get(`partials/scraper/proxy.php?a=${username}&b=${pass} `
+
+		   ,function(login,response,data){
+		        // The full html of the authenticated page
+						var login=JSON.parse(login);
+						if(login.status==='true'){
+			        var nwuAppData=JSON.parse(data.responseText);
+							if(localStorage.getItem('studentBalance')==null){
+								localStorage.setItem('studentBalance', nwuAppData.balance);
+							}
+							document.getElementById("studentbalancedisplay").innerHTML = 'R'+localStorage.getItem('studentBalance');
+
+					}else{
+						alert('Could not login');
+					}
+		    });
+				app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
+
+		   ,function(login,response,data){
+		        // The full html of the authenticated page
+						var login=JSON.parse(login);
+						if(login[0].login==='true'){
+			        var nwuAppData=JSON.parse(data.responseText);
+							
+					}else{
+						alert('Could not login');
+					}
+		    });
+			},
 			renderChart: function() {
 				var self = this;
 				var config = {
@@ -641,8 +677,9 @@
 				self.renderChart();
 				self.loadData();
 					self.loadlist();
-					self.scraper23();
+					self.scraper();
 					self.setradio();
+
 
 
 

@@ -44,10 +44,15 @@ curl_setopt($ch,CURLOPT_POST, true);
 curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
 curl_setopt($ch,CURLOPT_COOKIEJAR, $cookie1);
 $result1 = curl_exec($ch);
+
 //logged in now get announcement url
 
 $html->load($result1);
 
+$login=$html->find('head',0)->find('title',0)->plaintext;
+//if logged in crape
+if(strpos($login, 'Home')){
+array_push($student,array('login'=>'true'));
 $anounurl=$html->find('a[title=Announcements - For posting current, time-critical information]',0)->href;
 $accounturl=$html->find('a[title=Account - View and modify my user profile]',0)->href;
 $starsubjects=$html->find('li[class=Mrphs-sitesNav__menuitem]');
@@ -134,6 +139,11 @@ echo json_encode($student);
 //start assignment scraper
 
 curl_close($ch);
+
+  }else{
+  echo '[{"login":"false"}]';
+  }
+
 
 
 
