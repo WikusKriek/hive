@@ -1,0 +1,110 @@
+<template>
+	<div class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="link back">
+						<i class="icon icon-back"></i>
+						<span class="ios-only" data-i18n="exam-results">Exam Results</span>
+					</a>
+				</div>
+				<div class="title md-only" data-i18n="exam-results">Exam Results</div>
+				<div class="subnavbar ios-only">
+					<div class="subnavbar-inner">
+						<div class="title" data-i18n="exam-results">Exam Results</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content">
+
+
+
+			<div class="block-title">Pull to refresh exam results</div>
+			<div class="list custom-list">
+{{#if examresults}}
+				<ul>
+{{#each examresults}}
+					<li>
+						<div class="block-title">{{this.moduleName}}</div>
+						<div class="item-content">
+							<div class="item-inner item-cell">
+								<div class="item-row bg-color-blue-1">
+									<div class="item-cell">Participation Mark</div>
+									<div class="item-cell-data">{{this.participationMark}}</div>
+
+								</div>
+								<div class="item-row bg-color-blue-1">
+									<div class="item-cell">Exam Mark</div>
+									<div class="item-cell-data">{{this.examMark}}</div>
+								</div>
+								<div class="item-row bg-color-blue-1">
+									<div class="item-cell">Module Mark</div>
+									<div class="item-cell-data">{{this.finalMark}}</div>
+								</div>
+								<div class="item-row bg-color-blue-1">
+									<div class="item-cell-data">{{this.finalMarkComment}}</div>
+
+								</div>
+							</div>
+						</div>
+					</li>
+{{/each}}
+				</ul>
+{{/if}}
+			</div>
+
+
+
+		</div>
+
+	</div>
+</template>
+
+<style scoped>
+	.fa-stack {
+		width: 2em;
+	}
+
+	.custom-list .item-row .item-cell {
+		box-sizing: border-box;
+		color: #000;
+		padding: 4px;
+		text-align: left;
+	}
+	.item-cell-data{
+		box-sizing: border-box;
+		color: #000;
+		padding: 4px;
+		text-align: center;
+	}
+</style>
+
+<script>
+	return {
+		data: function() {
+			return {
+				examresults: null
+			}
+		},
+		methods: {
+		loadExam: function() {
+			var self = this;
+	var	examresults= JSON.parse(localStorage.getItem('examResults'));
+			self.$setState({
+				examresults: examresults
+			});
+
+
+		}
+},
+		on: {
+			pageInit: function() {
+				var self = this;
+				self.loadExam();
+			}
+		}
+	}
+</script>

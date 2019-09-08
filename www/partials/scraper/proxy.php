@@ -43,10 +43,9 @@ if(strpos($result1, 'true')){
   curl_setopt($ch,CURLOPT_COOKIEJAR, $cookie);
   $result3 = curl_exec($ch);
   echo '"exam":'.$result3.'}';
-  curl_close($ch);
 }else{
   echo '{"status":"false"}';
 
 }
-
+curl_close($ch);
 ?>

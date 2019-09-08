@@ -34,12 +34,12 @@
 					<i class="icon material-icons md-only">dashboard</i>
 					<span class="tabbar-label">Dashboard</span>
 				</a>
-				<a href="#tab-notifications" class="tab-link">
+				<a href="#tab-announcements" class="tab-link">
 					<i class="icon f7-icons ios-only">alert</i>
 					<i class="icon material-icons md-only">announcement</i>
 					<span class="tabbar-label">Announ</span>
 				</a>
-				<a href="#tab-home" class="tab-link">
+				<a href="#tab-assignments" class="tab-link">
 					<i class="icon f7-icons ios-only">document_text</i>
 					<i class="icon material-icons md-only">assignment</i>
 					<span class="tabbar-label">Assign</span>
@@ -71,7 +71,7 @@
 								</div>
 								<div class="greet-text">
 									<div class="greet-message">Welcome!</div>
-									<div class="greet-username">Praveen</div>
+									<div id='username' class="greet-username">Praveen</div>
 								</div>
 								<div class="greet-icon">
 									<img src="assets/custom/img/sun.svg" height="72" alt="" />
@@ -80,7 +80,9 @@
 
 							<div class="block block-stats">
 								<div class="row">
+
 									<div class="col-100 tablet-50 margin-top">
+										<a href="/academic/examresults">
 										<div class="card card-stats" style="background-image: linear-gradient(135deg, #5F72BD 0%, #9B23EA 100%);">
 											<div class="card-content card-content-padding">
 												<div class="card-stats-icon">
@@ -95,7 +97,9 @@
 												</div>
 											</div>
 										</div>
+										</a>
 									</div>
+
 									<div class="col-100 tablet-50 margin-top">
 										<div class="card card-stats" style="background-image: linear-gradient(135deg, #FE5196 0%, #F77062 100%);">
 											<div class="card-content card-content-padding">
@@ -173,28 +177,28 @@
 
 					</div>
 
-					<div id="tab-notifications" class="page-content tab">
+					<div id="tab-announcements" class="page-content tab">
 						<div class="block">
 							<div class="block-title">Pagination Footer</div>
 							<div class="data-table card">
 								<table>
 									<thead>
 										<tr>
-											<th class="label-cell">Dessert (Per 100g)</th>
-											<th class="numeric-cell">Calories</th>
-											<th class="numeric-cell">Fat (g)</th>
-											<th class="numeric-cell">Carbohydrate (g)</th>
-											<th class="numeric-cell">Protein (g)</th>
+											<th class="label-cell">Title</th>
+											<th class="numeric-cell">Author</th>
+											<th class="numeric-cell">Date</th>
+											<th class="numeric-cell">Subject</th>
+
 										</tr>
 									</thead>
 									<tbody>
-										{{#each desserts}}
+										{{#each announcements}}
 										<tr>
-											<td class="label-cell">{{name}}</td>
-											<td class="numeric-cell">{{calories}}</td>
-											<td class="numeric-cell">{{fat}}</td>
-											<td class="numeric-cell">{{carbohydrate}}</td>
-											<td class="numeric-cell">{{protein}}</td>
+											<td class="label-cell">{{this.title}}</td>
+											<td class="numeric-cell">{{this.author}}</td>
+											<td class="numeric-cell">{{this.date}}</td>
+											<td class="numeric-cell">{{this.module}}</td>
+
 										</tr>
 										{{/each}}
 									</tbody>
@@ -224,28 +228,26 @@
 						</div>
 					</div>
 
-					<div id="tab-home" class="page-content tab">
+					<div id="tab-assignments" class="page-content tab">
 						<div class="block">
 							<div class="block-title">Pagination Footer</div>
 							<div class="data-table card">
 								<table>
 									<thead>
 										<tr>
-											<th class="label-cell">Dessert (Per 100g)</th>
-											<th class="numeric-cell">Calories</th>
-											<th class="numeric-cell">Fat (g)</th>
-											<th class="numeric-cell">Carbohydrate (g)</th>
-											<th class="numeric-cell">Protein (g)</th>
+											<th class="label-cell">Subject</th>
+											<th class="label-cell">Title</th>
+											<th class="numeric-cell">due</th>
+											<th class="numeric-cell">Status</th>
 										</tr>
 									</thead>
 									<tbody>
-										{{#each desserts}}
+										{{#each assignments}}
 										<tr>
-											<td class="label-cell">{{name}}</td>
-											<td class="numeric-cell">{{calories}}</td>
-											<td class="numeric-cell">{{fat}}</td>
-											<td class="numeric-cell">{{carbohydrate}}</td>
-											<td class="numeric-cell">{{protein}}</td>
+											<td class="label-cell">{{this.assignment.subject}}</td>
+											<td class="label-cell">{{this.assignment.title}}</td>
+											<td class="numeric-cell">{{this.assignment.due}}</td>
+											<td class="numeric-cell">{{this.assignment.status}}</td>
 										</tr>
 										{{/each}}
 									</tbody>
@@ -326,10 +328,8 @@
 
 
 								<div class="list simple-list">
-									<ul>
-										<li>Item 1</li>
-										<li>Item 2</li>
-										<li>Item 3</li>
+									<ul id='defaultlist'>
+
 								</ul>
 							</div>
 
@@ -567,6 +567,19 @@
 		methods: {
 			loadData: function() {
 				var self = this;
+				var	announ= JSON.parse(localStorage.getItem('announcements'));
+				var	assign= JSON.parse(localStorage.getItem('assignments'));
+				self.$setState({
+					assignments: assign
+				});
+						self.$setState({
+							announcements: announ
+						});
+
+				document.getElementById("studentbalancedisplay").innerHTML = 'R'+localStorage.getItem('studentBalance');
+				var userName=JSON.parse(localStorage.getItem('user'));
+				document.getElementById("username").innerHTML = String(userName[1]).split("Name")[1].trim();
+
 				app.request.json(
 					'assets/custom/dataset/timetable.json',
 					function(data) {
@@ -577,6 +590,7 @@
 						}
 					}
 				);
+
 			},
 			setradio:function(){
 				if(localStorage.getItem('radio1')==null){
@@ -585,6 +599,7 @@
 			document.getElementById('radio'+localStorage.getItem('radio1')).checked="true"	;
 			},
 			loadlist:function(){
+
 
 				var custom1 = JSON.parse(localStorage.getItem('custom1'));
 				var custom2 = JSON.parse(localStorage.getItem('custom2'));
@@ -602,6 +617,35 @@
 					}
 
 				}
+				var subjects=JSON.parse(localStorage.getItem('subjects'));
+				for(var sub in subjects){
+					$("#defaultlist").append('<li>'+subjects[sub].subject+'</li>');
+				}
+
+			},
+			logincheck: function() {
+
+				var self = this;
+
+						if(localStorage.getItem('credentials')==null){
+
+							app.dialog.login(
+								'Enter your university number and password',
+								window.config.app.title,
+								function(username, password) {
+									alert("hello");
+									credentials={"username":username,"password":password};
+									localStorage.setItem('credentials', JSON.stringify(credentials));
+									app.toast.show({
+										text: 'Welcome!',
+										position:'bottom',
+										cssClass: 'toast-round bg-color-green'
+									});
+								}
+							);
+
+
+				    }
 
 			},
 			animateGreetIcon: function() {
@@ -616,19 +660,27 @@
 			},
 			scraper: function(){
 				var self = this;
-				var pass=`Anamax@4`;
-				var username=`25917498`;
+				var pass=JSON.parse(localStorage.getItem('credentials')).password;
+				var username=JSON.parse(localStorage.getItem('credentials')).username;
 				app.request.get(`partials/scraper/proxy.php?a=${username}&b=${pass} `
 
 		   ,function(login,response,data){
 		        // The full html of the authenticated page
+
 						var login=JSON.parse(login);
 						if(login.status==='true'){
 			        var nwuAppData=JSON.parse(data.responseText);
 							if(localStorage.getItem('studentBalance')==null){
 								localStorage.setItem('studentBalance', nwuAppData.balance);
 							}
-							document.getElementById("studentbalancedisplay").innerHTML = 'R'+localStorage.getItem('studentBalance');
+
+							if(localStorage.getItem('examResults')==null){
+								localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+							}else{
+							localStorage.removeItem('examResults');
+							localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+							}
+
 
 					}else{
 						alert('Could not login');
@@ -638,10 +690,35 @@
 
 		   ,function(login,response,data){
 		        // The full html of the authenticated page
+
 						var login=JSON.parse(login);
 						if(login[0].login==='true'){
 			        var nwuAppData=JSON.parse(data.responseText);
-							
+
+						if(localStorage.getItem('subjects')==null){
+								localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+							}else{
+							localStorage.removeItem('subjects');
+							localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+							}
+						if(localStorage.getItem('assignments')==null){
+								localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+							}else{
+							localStorage.removeItem('assignments');
+							localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+							}
+						if(localStorage.getItem('announcements')==null){
+								localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+							}else{
+							localStorage.removeItem('announcements');
+							localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+							}
+						if(localStorage.getItem('user')==null){
+								localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+							}else{
+							localStorage.removeItem('user');
+							localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+							}
 					}else{
 						alert('Could not login');
 					}
@@ -673,6 +750,7 @@
 		on: {
 			pageInit: function() {
 				var self = this;
+				self.logincheck();
 				self.animateGreetIcon();
 				self.renderChart();
 				self.loadData();

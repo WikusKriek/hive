@@ -2,6 +2,10 @@
 
 window.routes = [
   {
+		path: '/academic/examresults',
+		componentUrl: './partials/academic/examResults.html'
+	},
+  {
 		path: '/scraper/proxy',
 		componentUrl: './partials/scraper/proxy.php'
 	},

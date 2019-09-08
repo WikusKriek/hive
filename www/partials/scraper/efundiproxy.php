@@ -132,18 +132,18 @@ $fields2=$html->find('div[class=shorttext]');
 $userinfo=array();
 foreach($fields2 as $row){
   array_push($userinfo,array(trim($row->plaintext)));
+
 }
 
 array_push($student,array("user"=>$userinfo));
 echo json_encode($student);
 //start assignment scraper
 
-curl_close($ch);
 
   }else{
   echo '[{"login":"false"}]';
   }
-
+curl_close($ch);
 
 
 
