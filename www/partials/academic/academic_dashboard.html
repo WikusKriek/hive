@@ -71,7 +71,7 @@
 								</div>
 								<div class="greet-text">
 									<div class="greet-message">Welcome!</div>
-									<div id='username' class="greet-username">Praveen</div>
+									<div id='username' class="greet-username">student</div>
 								</div>
 								<div class="greet-icon">
 									<img src="assets/custom/img/sun.svg" height="72" alt="" />
@@ -633,7 +633,6 @@
 								'Enter your university number and password',
 								window.config.app.title,
 								function(username, password) {
-									alert("hello");
 									credentials={"username":username,"password":password};
 									localStorage.setItem('credentials', JSON.stringify(credentials));
 									app.toast.show({
@@ -753,10 +752,10 @@
 				self.logincheck();
 				self.animateGreetIcon();
 				self.renderChart();
-				self.loadData();
 					self.loadlist();
 					self.scraper();
 					self.setradio();
+					self.loadData();
 
 
 
