@@ -70,8 +70,9 @@
 									<img class="img-circle" src="https://randomuser.me/api/portraits/men/60.jpg" height="72" alt="" />
 								</div>
 								<div class="greet-text">
-									<div class="greet-message">Welcome!</div>
+									<div class="greet-message">Welcome</div>
 									<div id='username' class="greet-username">student</div>
+									<div id="date"></div>
 								</div>
 								<div class="greet-icon">
 									<img src="assets/custom/img/sun.svg" height="72" alt="" />
@@ -149,20 +150,24 @@
 							<div class="block block-vitals">
 								<div class="row">
 									<div class="col">
+										<a href="http://efundi.nwu.ac.za/portal/" target="_blank" class="external">
 										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #F59F00 0%, #FCC419 100%);">
 											<div class="card-content card-content-padding">
 												<i class="material-icons-outlined text-color-white">local_library</i>
 												<span>Efundi</span>
 											</div>
 										</div>
+										</a>
 									</div>
 									<div class="col">
+										<a href="/academic/emergency" >
 										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #1C7ED6 0%, #339AF0 100%);">
 											<div class="card-content card-content-padding">
 												<i class="material-icons-outlined text-color-white">priority_high</i>
 												<span>Emergency</span>
 											</div>
 										</div>
+										</a>
 									</div>
 									<div class="col">
 										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #74B816 0%, #94D82D 100%);">
@@ -178,103 +183,75 @@
 					</div>
 
 					<div id="tab-announcements" class="page-content tab">
-						<div class="block">
-							<div class="block-title">Pagination Footer</div>
-							<div class="data-table card">
-								<table>
-									<thead>
-										<tr>
-											<th class="label-cell">Title</th>
-											<th class="numeric-cell">Author</th>
-											<th class="numeric-cell">Date</th>
-											<th class="numeric-cell">Subject</th>
-
-										</tr>
-									</thead>
-									<tbody>
+						<div class="list custom-list">
+							<div class="block-title">Announcements</div>
+							{{#if announcements}}
+											<ul>
 										{{#each announcements}}
-										<tr>
-											<td class="label-cell">{{this.title}}</td>
-											<td class="numeric-cell">{{this.author}}</td>
-											<td class="numeric-cell">{{this.date}}</td>
-											<td class="numeric-cell">{{this.module}}</td>
+										<li>
+											<div class="block-title">{{this.module}}</div>
+											<div class="item-content">
+												<div class="item-inner item-cell">
+													<div class="item-row bg-color-blue-1">
+														<div class="item-cell">{{this.author}}</div>
+														<div class="item-cell-data">{{this.date}}</div>
+													</div>
+													<div class="item-row bg-color-blue-1">
+														<div class="item-cell">{{this.title}}</div>
 
-										</tr>
+													</div>
+
+
+												</div>
+											</div>
+										</li>
+
+
 										{{/each}}
-									</tbody>
-								</table>
-								<div class="data-table-footer">
-									<div class="data-table-rows-select">Per Page:
-										<div class="input input-dropdown">
-											<select>
-												<option value="5">5</option>
-												<option value="10">10</option>
-												<option value="25">25</option>
-												<option value="all">All</option>
-											</select>
-										</div>
-									</div>
-									<div class="data-table-pagination">
-										<span class="data-table-pagination-label">1-5 of 10</span>
-										<a href="#" class="link disabled">
-											<i class="icon icon-prev color-gray"></i>
-										</a>
-										<a href="#" class="link">
-											<i class="icon icon-next color-gray"></i>
-										</a>
-									</div>
-								</div>
-							</div>
+									</ul>
+					  {{/if}}
 						</div>
 					</div>
 
 					<div id="tab-assignments" class="page-content tab">
-						<div class="block">
-							<div class="block-title">Pagination Footer</div>
-							<div class="data-table card">
-								<table>
-									<thead>
-										<tr>
-											<th class="label-cell">Subject</th>
-											<th class="label-cell">Title</th>
-											<th class="numeric-cell">due</th>
-											<th class="numeric-cell">Status</th>
-										</tr>
-									</thead>
-									<tbody>
+						<div class="list custom-list">
+							<div class="block-title">Assignments</div>
+							{{#if assignments}}
+											<ul>
 										{{#each assignments}}
-										<tr>
-											<td class="label-cell">{{this.assignment.subject}}</td>
-											<td class="label-cell">{{this.assignment.title}}</td>
-											<td class="numeric-cell">{{this.assignment.due}}</td>
-											<td class="numeric-cell">{{this.assignment.status}}</td>
-										</tr>
+										<li>
+											<div class="block-title">{{this.assignment.subject}}</div>
+											<div class="item-content">
+												<div class="item-inner item-cell">
+													<div class="item-row bg-color-blue-1">
+														<div class="item-cell">{{this.assignment.title}}</div>
+
+													</div>
+													<div class="item-row bg-color-blue-1">
+														<div class="item-cell">
+															<div class="item-row">Due</div>
+															<div class="item-row">{{this.assignment.due}}</div>
+														</div>
+														<div class="item-cell">
+															<div class="item-row">Status</div>
+															<div class="item-row">{{this.assignment.status}}</div>
+														</div>
+
+
+													</div>
+
+
+												</div>
+											</div>
+										</li>
+
+
 										{{/each}}
-									</tbody>
-								</table>
-								<div class="data-table-footer">
-									<div class="data-table-rows-select">Per Page:
-										<div class="input input-dropdown">
-											<select>
-												<option value="5">5</option>
-												<option value="10">10</option>
-												<option value="25">25</option>
-												<option value="all">All</option>
-											</select>
-										</div>
-									</div>
-									<div class="data-table-pagination">
-										<span class="data-table-pagination-label">1-5 of 10</span>
-										<a href="#" class="link disabled">
-											<i class="icon icon-prev color-gray"></i>
-										</a>
-										<a href="#" class="link">
-											<i class="icon icon-next color-gray"></i>
-										</a>
-									</div>
-								</div>
-							</div>
+									</ul>
+					  {{/if}}
 						</div>
+
+
 					</div>
 
 					<div id="tab-settings" class="page-content tab" >
@@ -647,7 +624,7 @@
 				    }
 
 			},
-			animateGreetIcon: function() {
+			greetBar: function() {
 				var self = this;
 				var animation = anime({
 					targets: ['.greet-icon img'],
@@ -656,6 +633,38 @@
 					loop: true,
 					rotate: 360
 				});
+				startTime();
+				function startTime() {
+				    var today = new Date();
+				    var hr = today.getHours();
+				    var min = today.getMinutes();
+				    var sec = today.getSeconds();
+				    ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
+				    hr = (hr == 0) ? 12 : hr;
+				    hr = (hr > 12) ? hr - 12 : hr;
+				    //Add a zero in front of numbers<10
+				    hr = checkTime(hr);
+				    min = checkTime(min);
+				    sec = checkTime(sec);
+				    //document.getElementById("clock").innerHTML = hr + ":" + min + ":" + sec + " " + ap;
+
+				    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+				    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+				    var curWeekDay = days[today.getDay()];
+				    var curDay = today.getDate();
+				    var curMonth = months[today.getMonth()];
+				    var curYear = today.getFullYear();
+				    var date = curWeekDay+", "+curDay+" "+curMonth;
+				    document.getElementById("date").innerHTML = date;
+
+				    var time = setTimeout(function(){ startTime() }, 500);
+				}
+				function checkTime(i) {
+				    if (i < 10) {
+				        i = "0" + i;
+				    }
+				    return i;
+				}
 			},
 			scraper: function(){
 				var self = this;
@@ -750,7 +759,7 @@
 			pageInit: function() {
 				var self = this;
 				self.logincheck();
-				self.animateGreetIcon();
+				self.greetBar();
 				self.renderChart();
 					self.loadlist();
 					self.scraper();
