@@ -12,7 +12,7 @@
 				</div>
 				<div class="title md-only" data-i18n="academics">Academics</div>
 				<div class="right">
-					<a href="#" class="link icon-only">
+					<a id="assignmentduetoday"  data-popup=".popup" class="link icon-only popup-open">
 						<i class="icon f7-icons ios-only">bell<span class="badge color-red">5</span></i>
 						<i class="icon material-icons md-only">notifications<span class="badge color-red">5</span></i>
 					</a>
@@ -54,6 +54,45 @@
 					<i class="icon material-icons md-only">settings</i>
 					<span class="custom1">Settings</span>
 				</a>
+			</div>
+		</div>
+		<div class="popup popup-tablet-fullscreen">
+			<div class="view">
+				<div class="page">
+
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="left ios-only">
+								<a href="#" class="link popup-close">
+									<span data-i18n="close">Close</span>
+								</a>
+							</div>
+							<div class="title">Assignments Due Today</div>
+							<div class="right md-only">
+								<a href="#" class="link icon-only popup-close">
+									<i class="icon material-icons md-only">close</i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+
+						<div  class="block">
+
+
+								<div class="list custom-list">
+									<div class="block-title">Assignments</div>
+												<ul id="assignmentsduetodaypopup">
+
+
+												</ul>
+								</div>
+						</div>
+
+					</div>
+
+				</div>
 			</div>
 		</div>
 
@@ -130,8 +169,8 @@
 													</i>
 												</div>
 												<div class="card-stats-info">
-													<div class="card-stats-label">Classes Today</div>
-													<div class="card-stats-value">6</div>
+													<div class="card-stats-label">Assignments Still Due</div>
+													<div id="assignmentsdue" class="card-stats-value"></div>
 												</div>
 											</div>
 										</div>
@@ -159,11 +198,7 @@
 										<tbody id="timetable">
 
 
-										<script>
 
-											generatetimetablelocal();
-
-										</script>
 
 
 										</tbody >
@@ -794,10 +829,11 @@
 				self.logincheck();
 				self.greetBar();
 				//self.renderChart();
-
 					self.scraper();
-
+defaultsubjectlist();
+dashtablegen();
 					self.loadData();
+					assignmentsDue();
 
 
 
