@@ -3,6 +3,22 @@ function generatetimetablelocal(){
   var self = this;
   alert("here");
   const BACKGROUNDS = [
+    "#da77f2",
+    "#ffd43b",
+    "#69db7c",
+    "#fab005",
+    "#4c6ef5",
+    "#228be6",
+    "#a9e34b",
+    "#ffc078",
+    "#ff6b6b",
+    "#ccff6a",
+    '#9B9AFF',
+    '#61ff91',
+    '#e2fe4d',
+    '#B2585C',
+    '#e1fde9',
+    '#83dcf5',
       "#FF0099",
       "#f3f315",
       "#83f52c",

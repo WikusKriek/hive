@@ -52,18 +52,27 @@ table {
 }
 /* Zebra striping */
 tr:nth-of-type(odd) {
-  background: #eee;
+  background: #adb5bd;
+}
+tr:nth-of-type(even) {
+  background: #ced4da;
 }
 th {
-  background: #333;
-  color: white;
+  background: #495057;
   font-weight: bold;
+	font-size:12px;
 }
 td, th {
 
   border: 1px solid #ccc;
+	color:#000;
   text-align: center;
 	font-size:12px;
 		text-overflow: clip;
 
+}
+th {
+  background: #495057;
+  font-weight: bold;
+	font-size:18px;
 }
