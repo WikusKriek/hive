@@ -42,7 +42,7 @@ var cus2 = JSON.parse(localStorage.getItem('custom2'));
 );};
 
 function generatetimetablelocal(){
-
+console.log("here");
   var self = this;
   const BACKGROUNDS = [
       "#FF0099",
@@ -115,10 +115,11 @@ function generatetimetablelocal(){
 
                    num=0;
                   for (var subject of subjectTable){
-
+                    for (var numb of subject[day]){
+                      console.log(numb);
 
                     var subTime;
-                    switch(subject[day].Time) {
+                    switch(numb.Time) {
                       case "07:30":
                         subTime = "7:30 - 9:15";
                         break;
@@ -160,6 +161,7 @@ function generatetimetablelocal(){
                     }
                     num+=1;
                   }
+                  }
 
                   if(flag===0){
 
@@ -187,8 +189,4 @@ function generatetimetablelocal(){
     localStorage.setItem('buttonclicked',num)
 
   };
-
-
-  function scraper23(){
-    alert("hello");
-  };
+  

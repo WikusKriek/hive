@@ -2,6 +2,10 @@
 
 window.routes = [
   {
+		path: '/academic/image',
+		componentUrl: './partials/academic/imageSelector.html'
+	},
+  {
 		path: '/academic/subjects',
 		componentUrl: './partials/academic/subjects.html'
 	},

@@ -106,7 +106,9 @@
 
 							<div class="block block-greet">
 								<div class="greet-avatar">
-									<img class="img-circle" src="https://randomuser.me/api/portraits/men/60.jpg" height="72" alt="" />
+									<a href='/academic/image'>
+									<img id="profilepic" class="img-circle" src="https://randomuser.me/api/portraits/men/60.jpg" height="72" width="72" alt="" />
+									</a>
 								</div>
 								<div class="greet-text">
 									<div class="greet-message">Welcome</div>
@@ -274,41 +276,32 @@
 
 					<div id="tab-assignments" class="page-content tab">
 						<div class="list custom-list">
-							<div class="block-title">Assignments</div>
-							{{#if assignments}}
-											<ul>
-										{{#each assignments}}
-										<li>
-											<div class="block-title">{{this.assignment.subject}}</div>
-											<div class="item-content">
-												<div class="item-inner item-cell">
-													<div class="item-row bg-color-blue-1">
-														<div class="item-cell">{{this.assignment.title}}</div>
+							<div class="block-title">Assignments Due Today</div>
 
-													</div>
-													<div class="item-row bg-color-blue-1">
-														<div class="item-cell">
-															<div class="item-row">Due</div>
-															<div class="item-row">{{this.assignment.due}}</div>
-														</div>
-														<div class="item-cell">
-															<div class="item-row">Status</div>
-															<div class="item-row">{{this.assignment.status}}</div>
-														</div>
+											<ul id="assignDueToday">
+												<!-- script-->
 
-
-													</div>
-
-
-												</div>
-											</div>
-										</li>
-
-
-										{{/each}}
 									</ul>
-					  {{/if}}
+
 						</div>
+						<div class="list custom-list">
+							<div class="block-title">Assignments Still Due</div>
+
+											<ul id="assignStillDue">
+<!-- script-->
+									</ul>
+
+						</div>
+						<div class="list custom-list">
+							<div class="block-title">Assignments Expired/Completed</div>
+
+											<ul id="assignDone">
+<!-- script-->
+
+									</ul>
+
+						</div>
+
 
 
 					</div>
@@ -318,7 +311,13 @@
 
 						<div class="card" width="100%">
 
+							<div class="block-title">Exam Timeline</div>
+							<div class="block block-strong">
+								<div id="examtimeline" class="timeline timeline-vertical">
 
+
+								</div>
+							</div>
 
 
 							</div>
@@ -645,14 +644,12 @@
 			loadData: function() {
 				var self = this;
 				var	announ= JSON.parse(localStorage.getItem('announcements'));
-				var	assign= JSON.parse(localStorage.getItem('assignments'));
-				self.$setState({
-					assignments: assign
-				});
 						self.$setState({
 							announcements: announ
 						});
-
+						if(localStorage.getItem('profileimage')!=null){
+					document.getElementById("profilepic").src=JSON.parse(localStorage.getItem('profileimage'));
+				}
 				document.getElementById("studentbalancedisplay").innerHTML = 'R'+localStorage.getItem('studentBalance');
 				var userName=JSON.parse(localStorage.getItem('user'));
 				document.getElementById("username").innerHTML = String(userName[1]).split("Name")[1].trim();
@@ -831,9 +828,10 @@
 				//self.renderChart();
 					self.scraper();
 defaultsubjectlist();
-dashtablegen();
 					self.loadData();
+					dashtablegen();
 					assignmentsDue();
+					examtimeline();
 
 
 

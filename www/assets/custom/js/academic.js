@@ -109,10 +109,11 @@ function dashtablegen(){
 
                    num=0;
                   for (var subject of subjectTable){
+                    for (var numb of subject[day]){
 
 
                     var subTime;
-                    switch(subject[day].Time) {
+                    switch(numb.Time) {
                       case "07:30":
                         subTime = "7:30 - 9:15";
                         break;
@@ -146,15 +147,16 @@ function dashtablegen(){
 
                     if(subTime===time) {
                       cel1.innerHTML = subject.subject.trim()+"\n";
-                      cel1.innerHTML += subject[day].Venue.trim();
+                      cel1.innerHTML += numb.Venue.trim();
                       cel1.style.backgroundColor=BACKGROUNDS[num];
 
                       flag=1;
 
                     }
-                    num+=1;
-                  }
 
+                  }
+                  num+=1;
+}
                   if(flag===0){
 
 
@@ -178,7 +180,13 @@ function dashtablegen(){
   };
 
   function assignmentsDue(){
+    function comp(b, a) {
+    return new Date(a.assignment.due).getTime() - new Date(b.assignment.due).getTime();
+}
+
+
     var	assign= JSON.parse(localStorage.getItem('assignments'));
+    assign=assign.sort(comp);
     var i=0;
     var k=0;
     var obj=[];
@@ -189,36 +197,80 @@ function dashtablegen(){
       if((((date.getDate()>=today.getDate())&&(date.getMonth()==today.getMonth()))||(date.getMonth()>today.getMonth()) )&&
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
-        i++;
-      }
-      if(((date.getDate()==today.getDate())&&(date.getMonth()==today.getMonth()))&&
-      (assign[ass].assignment.status.includes("Not")) &&
-      (date.getFullYear()==today.getFullYear())){
-        k++;
-        obj.push(assign[ass]);
-      }
-      
-    }
-    if(k>=1){
-        document.getElementById("assignmentduetoday").innerHTML = `<i class="icon f7-icons ios-only">bell<span class="badge color-red">5</span></i>
-        <i class="icon material-icons md-only">notifications<span class="badge color-red">${k}</span></i>`;
-        for(var i=0;i<=3;i++){
-        document.getElementById("assignmentsduetodaypopup").innerHTML += `<li>
-          <div class="block-title">${assign[3].assignment.subject}</div>
+        document.getElementById("assignStillDue").innerHTML += `<li>
+          <div class="block-title">${assign[ass].assignment.subject}</div>
           <div class="item-content">
             <div class="item-inner item-cell">
               <div class="item-row bg-color-blue-1">
-                <div class="item-cell">${assign[3].assignment.this.assignment.title}</div>
+                <div class="item-cell">${assign[ass].assignment.title}</div>
 
               </div>
               <div class="item-row bg-color-blue-1">
                 <div class="item-cell">
                   <div class="item-row">Due</div>
-                  <div class="item-row">${assign[3].assignment.due}</div>
+                  <div class="item-row">${assign[ass].assignment.due}</div>
                 </div>
                 <div class="item-cell">
                   <div class="item-row">Status</div>
-                  <div class="item-row">${assign[3].assignment.status}</div>
+                  <div class="item-row">${assign[ass].assignment.status}</div>
+                </div>
+
+
+              </div>
+
+
+            </div>
+          </div>
+        </li>`
+        i++;
+      }
+      else if(((date.getDate()==today.getDate())&&(date.getMonth()==today.getMonth()))&&
+      (assign[ass].assignment.status.includes("Not")) &&
+      (date.getFullYear()==today.getFullYear())){
+        document.getElementById("assignDueToday").innerHTML += `<li>
+          <div class="block-title">${assign[ass].assignment.subject}</div>
+          <div class="item-content">
+            <div class="item-inner item-cell">
+              <div class="item-row bg-color-blue-1">
+                <div class="item-cell">${assign[ass].assignment.title}</div>
+
+              </div>
+              <div class="item-row bg-color-blue-1">
+                <div class="item-cell">
+                  <div class="item-row">Due</div>
+                  <div class="item-row">${assign[ass].assignment.due}</div>
+                </div>
+                <div class="item-cell">
+                  <div class="item-row">Status</div>
+                  <div class="item-row">${assign[ass].assignment.status}</div>
+                </div>
+
+
+              </div>
+
+
+            </div>
+          </div>
+        </li>`
+        k++;
+      }
+      else{
+        document.getElementById("assignDone").innerHTML += `<li>
+          <div class="block-title">${assign[ass].assignment.subject}</div>
+          <div class="item-content">
+            <div class="item-inner item-cell">
+              <div class="item-row bg-color-blue-1">
+                <div class="item-cell">${assign[ass].assignment.title}</div>
+
+              </div>
+              <div class="item-row bg-color-blue-1">
+                <div class="item-cell">
+                  <div class="item-row">Due</div>
+                  <div class="item-row">${assign[ass].assignment.due}</div>
+                </div>
+                <div class="item-cell">
+                  <div class="item-row">Status</div>
+                  <div class="item-row">${assign[ass].assignment.status}</div>
                 </div>
 
 
@@ -229,12 +281,83 @@ function dashtablegen(){
           </div>
         </li>`
       }
+
+    }
+    if(k>=1){
+        document.getElementById("assignmentduetoday").innerHTML = `<i class="icon f7-icons ios-only">bell<span class="badge color-red">5</span></i>
+        <i class="icon material-icons md-only">notifications<span class="badge color-red">${k}</span></i>`;
+        document.getElementById("assignmentsduetodaypopup").innerHTML = `<p>${k} Assignments Due Today</p>`;
+
     }else{
         document.getElementById("assignmentduetoday").innerHTML = `<i class="icon f7-icons ios-only">bell</i> <i class="icon material-icons md-only">notifications</i>`;
-        document.getElementById("assignmentsduetodaypopup").innerHTML = "<p>No Assignments Due Today</p>";
+        document.getElementById("assignmentsduetodaypopup").innerHTML = `<p>${k} Assignments Due Today</p>`;
 
     }
     localStorage.removeItem('assignduetoday');
     localStorage.setItem('assignduetoday', JSON.stringify(obj));
     document.getElementById("assignmentsdue").innerHTML = i;
   };
+
+function examtimeline(){
+  function comp(a, b) {
+  return new Date(a.fulldate).getTime() - new Date(b.fulldate).getTime();
+}
+
+
+
+
+
+  if(localStorage.getItem("subjects")!=null){
+  app.request.json(
+    'assets/custom/dataset/examtimes.json',
+    function(data) {
+      var cleaned='';
+      var obj=[];
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        var scrapedSubjects = JSON.parse(localStorage.getItem("subjects"));
+        // loop over them all
+        for (var k=0; k<scrapedSubjects.length; k++) {
+           // And stick the checked ones onto an array...
+           cleaned=scrapedSubjects[k].subject.replace(/\s/g, '').slice(0,7);
+
+           for (i=1; i<Object.keys(data).length;i++){
+
+           if (cleaned==data[i].module.replace(/\s/g, '')) {
+             data[i]['fulldate']=data[i].date+' '+data[i].time;
+             console.log(data[i].fulldate);
+            obj.push(data[i]);
+
+           }
+         }
+        }
+        obj=obj.sort(comp);
+        for(i in obj){
+
+          var date= new Date(obj[i].date+' '+obj[i].time);
+          document.getElementById("examtimeline").innerHTML+=`<div class="timeline-item">
+            <div class="timeline-item-date">${days[date.getDay()]}  ${date.getDate()} <small>${months[date.getMonth()]}</small></div>
+            <div class="timeline-item-divider"></div>
+            <div class="timeline-item-content">
+              <div class="timeline-item-inner">
+                <div class="timeline-item-time">${obj[i].time}</div>
+                <div class="timeline-item-title">${obj[i].module.replace(/\s/g, '')}</div>
+                <div class="timeline-item-subtitle">${obj[i].duration}</div>
+              </div>
+            </div>
+          </div>`;
+        }
+
+
+
+
+      localStorage.removeItem('examtime');
+      localStorage.setItem('examtime', JSON.stringify(obj));
+
+var def = JSON.parse(localStorage.getItem('defaultsubjects'));
+
+
+
+});}
+};

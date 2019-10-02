@@ -60,7 +60,11 @@ for subject in finalline[1:]:
         monday=0
         Venue=subject[subject.find("Venue:")+6:subject.find(",")]
         venuestr=subject[subject.find(",")+1:subject.find(".")]
-
+        moarr=[]
+        tuarr=[]
+        tharr=[]
+        wearr=[]
+        frarr=[]
         for i in range(venuestr.count(",")+1):
 
             monday=venuestr[venuestr.find("Mo"):venuestr.find("Mo")+7]
@@ -80,24 +84,29 @@ for subject in finalline[1:]:
             if(monday!=''):
                 m1=monday
                 m1v=Venue
+                moarr.append({"Time": m1,"Venue":m1v})
             if(tuesday!=''):
                 m2=tuesday
                 m2v=Venue
+                tuarr.append({"Time": m2,"Venue":m2v})
             if(wednesday!=''):
                 m3=wednesday
                 m3v=Venue
+                wearr.append({"Time": m3,"Venue":m3v})
             if(thursday!=''):
                 m4=thursday
                 m4v=Venue
+                tharr.append({"Time": m4,"Venue":m4v})
             if(friday!=''):
                 m5=friday
                 m5v=Venue
+                frarr.append({"Time": m5,"Venue":m5v})
         if (venuestr==','):
             break
         subject=subject[subject.find(".")+1:]
 
 
-    data.append({"subject":subjectname,"number":k,'Mo':{"Time": m1,"Venue":m1v},'Tu':{"Time":m2,"Venue":m2v},'We':{"Time":m3,"Venue":m3v},'Th':{"Time":m4,"Venue":m4v},'Fr':{"Time":m5,"Venue":m5v}})
+    data.append({"subject":subjectname,"number":k,'Mo':moarr,'Tu':tuarr,'We':wearr,'Th':tharr,'Fr':frarr})
     k=k+1
 
 
