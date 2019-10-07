@@ -68,7 +68,7 @@ window.routes = [
   },
 	{
 		path: '/home',
-		componentUrl: './partials/screens/home.html'
+		componentUrl: './partials/academic/academic_dashboard.html'
 	},
 	{
 		path: '/components',
@@ -539,7 +539,7 @@ window.routes = [
 			},
 			{
 				path: '/home',
-				componentUrl: './partials/screens/home.html'
+				componentUrl: './partials/academic/academic_dashboard.html'
 			},
 			{
 				path: '/invite-friends',

@@ -311,7 +311,7 @@ function initializeBackButton() {
 		}
 		else {
 			var currentRoute = app.views.current.router.currentRoute.url;
-			if (currentRoute == '/home' || currentRoute == '/screens/home') {
+			if (currentRoute == '/home' || currentRoute == '/academic/academic_dashboard') {
 				app.dialog.confirm(
 					'<div class="text-align-center"><img src="assets/custom/img/exit.svg" width="80" alt="" /><div>Do you want to exit the app?</div></div>',
 					'',

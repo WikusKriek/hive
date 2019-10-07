@@ -189,4 +189,195 @@ console.log("here");
     localStorage.setItem('buttonclicked',num)
 
   };
-  
+
+  function scraper(){
+    var self = this;
+    var pass=JSON.parse(localStorage.getItem('credentials')).password;
+    var username=JSON.parse(localStorage.getItem('credentials')).username;
+    app.request.get(`partials/scraper/proxy.php?a=${username}&b=${pass} `
+
+   ,function(login,response,data){
+        // The full html of the authenticated page
+        var login=JSON.parse(login);
+        if(login.status==='true'){
+          var nwuAppData=JSON.parse(data.responseText);
+          if(localStorage.getItem('studentBalance')==null){
+            localStorage.setItem('studentBalance', nwuAppData.balance);
+          }
+
+          if(localStorage.getItem('examResults')==null){
+            localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+          }else{
+          localStorage.removeItem('examResults');
+          localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+          }
+
+
+      }else{
+        alert('Could not login');
+      }
+    });
+    app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
+
+   ,function(login,response,data){
+        // The full html of the authenticated page
+
+        var login=JSON.parse(login);
+        if(login[0].login==='true'){
+          var nwuAppData=JSON.parse(data.responseText);
+
+        if(localStorage.getItem('subjects')==null){
+            localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+          }else{
+          localStorage.removeItem('subjects');
+          localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+          }
+        if(localStorage.getItem('assignments')==null){
+            localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+          }else{
+          localStorage.removeItem('assignments');
+          localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+          }
+        if(localStorage.getItem('announcements')==null){
+            localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+          }else{
+          localStorage.removeItem('announcements');
+          localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+          }
+        if(localStorage.getItem('user')==null){
+            localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+          }else{
+          localStorage.removeItem('user');
+          localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+          }
+      }else{
+        alert('Could not login');
+      }
+    });
+  };
+
+  function InitialWalkthroughScraper(){
+    var self = this;
+    alert("ahere");
+    var pass=JSON.parse(localStorage.getItem('credentials')).password;
+    var username=JSON.parse(localStorage.getItem('credentials')).username;
+    app.request.get(`partials/scraper/proxy.php?a=${username}&b=${pass} `
+
+   ,function(login,response,data){
+        // The full html of the authenticated page
+        var login=JSON.parse(login);
+        if(login.status==='true'){
+          var nwuAppData=JSON.parse(data.responseText);
+          if(localStorage.getItem('studentBalance')==null){
+            localStorage.setItem('studentBalance', nwuAppData.balance);
+          }
+
+          if(localStorage.getItem('examResults')==null){
+            localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+          }else{
+          localStorage.removeItem('examResults');
+          localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+          }
+
+
+      }else{
+        alert('Could not login');
+      }
+    });
+    app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
+
+   ,function(login,response,data){
+        // The full html of the authenticated page
+alert("proxy done");
+        var login=JSON.parse(login);
+        if(login[0].login==='true'){
+          var nwuAppData=JSON.parse(data.responseText);
+
+        if(localStorage.getItem('subjects')==null){
+            localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+          }else{
+          localStorage.removeItem('subjects');
+          localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+          }
+        if(localStorage.getItem('assignments')==null){
+            localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+          }else{
+          localStorage.removeItem('assignments');
+          localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+          }
+        if(localStorage.getItem('announcements')==null){
+            localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+          }else{
+          localStorage.removeItem('announcements');
+          localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+          }
+        if(localStorage.getItem('user')==null){
+            localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+          }else{
+          localStorage.removeItem('user');
+          localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+          }
+
+      }else{
+        alert('Could not login');
+      }
+    });
+  };
+  function checkmarkCurrentTheme(){
+    var self = this;
+    var currentThemeColor = app.utils.theme.getColor();
+    self.$('[name=theme-color][value=' + currentThemeColor + ']').prop('checked', true);
+  };
+  function initializeWalkthrough(){
+    var self = this;
+    self.walkthrough = app.swiper.create('.walkthrough-container', {
+      allowTouchMove: false,
+      pagination: {
+        el: '.walkthrough-pagination',
+        type: 'progressbar'
+      }
+    });
+  };
+  function openSlideTheme() {
+    var self = this;
+    self.walkthrough.slideNext();
+    self.$('[name=theme-color]').on('change', function() {
+      app.utils.theme.setColor(this.value);
+    });
+  };
+  function openSlideExplore(){
+    var self = this;
+    self.walkthrough.slideNext();
+  };
+  function loadNextScreen(){
+    var self = this;
+    localStorage.setItem('Nectar_OldUser', 'true');
+    app.views.current.router.navigate(self.nextScreen);
+  }
+  };
+  function openSlideLanguage(){
+    var self = this;
+    self.walkthrough.slideNext();
+    if(localStorage.getItem('credentials')==null){
+
+      app.dialog.login(
+        'Enter your university number and password',
+        window.config.app.title,
+        function(username, password) {
+
+          credentials={"username":username,"password":password};
+          localStorage.setItem('credentials', JSON.stringify(credentials));
+          app.toast.show({
+            text: 'Welcome!',
+            position:'bottom',
+            cssClass: 'toast-round bg-color-green'
+          });
+        }
+      );
+
+
+    }
+  InitialWalkthroughScraper();
+
+
+  };

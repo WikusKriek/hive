@@ -21,35 +21,16 @@
 						</div>
 
 						<div class="swiper-slide walkthrough-slide">
-							<div class="slide-title">Choose your Language</div>
-							<div class="slide-media">
-								<ul class="flags-wrapper">
-									<li>
-										<label>
-											<input type="radio" name="language" value="en" data-dir="ltr" />
-											<img src="assets/custom/img/flag-united-kingdom.svg" alt="" />
-											<span data-i18n="english">English</span>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="radio" name="language" value="hi" data-dir="ltr" />
-											<img src="assets/custom/img/flag-india.svg" alt="" />
-											<span data-i18n="hindi">Hindi</span>
-										</label>
-									</li>
-									<li>
-										<label>
-											<input type="radio" name="language" value="ar" data-dir="rtl" />
-											<img src="assets/custom/img/flag-saudi-arabia.svg" alt="" />
-											<span data-i18n="arabic">Arabic</span>
-										</label>
-									</li>
-								</ul>
+							<div class="slide-title">Setting up your account for the first time</div>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title">Multicolor</div>
+									<div class="item-after">
+										<div class="preloader color-multi"></div>
+									</div>
+								</div>
 							</div>
-							<div class="slide-actions">
-								<button class="button button-big button-fill button-round" data-i18n="next" @click="openSlideTheme">Next</button>
-							</div>
+
 						</div>
 
 						<div class="swiper-slide walkthrough-slide">
@@ -352,10 +333,97 @@
 			},
 			openSlideLanguage: function() {
 				var self = this;
-				self.walkthrough.slideNext();
-				self.$('[name=language]').on('change', function() {
-					app.utils.i18n.setLanguage({lang: this.value, dir: this.dataset.dir});
-				});
+
+
+				if(localStorage.getItem('credentials')==null){
+
+					app.dialog.login(
+						'Enter your university number and password',
+						window.config.app.title,
+						function(username, password) {
+							credentials={"username":username,"password":password};
+							localStorage.setItem('credentials', JSON.stringify(credentials));
+	self.walkthrough.slideNext();
+							app.toast.show({
+								text: 'Welcome!',
+								position:'bottom',
+								cssClass: 'toast-round bg-color-green'
+							});
+							var pass=JSON.parse(localStorage.getItem('credentials')).password;
+							var username=JSON.parse(localStorage.getItem('credentials')).username;
+							app.preloader.show();
+							app.request.get(`partials/scraper/proxy.php?a=${username}&b=${pass} `
+
+							,function(login,response,data){
+									// The full html of the authenticated page
+									var login=JSON.parse(login);
+									if(login.status==='true'){
+										var nwuAppData=JSON.parse(data.responseText);
+										if(localStorage.getItem('studentBalance')==null){
+											localStorage.setItem('studentBalance', nwuAppData.balance);
+										}
+
+										if(localStorage.getItem('examResults')==null){
+											localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+										}else{
+										localStorage.removeItem('examResults');
+										localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+										}
+
+
+								}else{
+									alert('Could not login');
+								}
+							});
+							app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
+
+							,function(login,response,data){
+									// The full html of the authenticated page
+									var login=JSON.parse(login);
+									if(login[0].login==='true'){
+										var nwuAppData=JSON.parse(data.responseText);
+										localStorage.setItem("radio1","1")
+
+
+									if(localStorage.getItem('subjects')==null){
+											localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+										}else{
+										localStorage.removeItem('subjects');
+										localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+										}
+									if(localStorage.getItem('assignments')==null){
+											localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+										}else{
+										localStorage.removeItem('assignments');
+										localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+										}
+									if(localStorage.getItem('announcements')==null){
+											localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+										}else{
+										localStorage.removeItem('announcements');
+										localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+										}
+									if(localStorage.getItem('user')==null){
+											localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+										}else{
+										localStorage.removeItem('user');
+										localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+										}
+										defaultsubjectlist();
+										app.preloader.hide();
+										self.openSlideTheme();
+								}else{
+									alert('Could not login');
+								}
+							});
+
+						}
+					);
+
+
+				}
+
+
 			},
 			openSlideTheme: function() {
 				var self = this;
@@ -377,7 +445,6 @@
 		on: {
 			pageInit: function() {
 				var self = this;
-				self.checkmarkCurrentLanguage();
 				self.checkmarkCurrentTheme();
 				self.initializeWalkthrough();
 			}

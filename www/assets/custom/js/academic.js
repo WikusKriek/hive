@@ -194,18 +194,18 @@ function dashtablegen(){
       var date= new Date(assign[ass].assignment.due);
       var today= new Date();
 
-      if((((date.getDate()>=today.getDate())&&(date.getMonth()==today.getMonth()))||(date.getMonth()>today.getMonth()) )&&
+      if((((date.getDate()>today.getDate())&&(date.getMonth()==today.getMonth()))||(date.getMonth()>today.getMonth()) )&&
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
-        document.getElementById("assignStillDue").innerHTML += `<li>
-          <div class="block-title">${assign[ass].assignment.subject}</div>
-          <div class="item-content">
+        document.getElementById("assignStillDue").innerHTML += `<li style="background-color:${app.utils.theme.getColor()}">
+          <div  class="block-title">${assign[ass].assignment.subject}</div>
+          <div class="item-content" >
             <div class="item-inner item-cell">
-              <div class="item-row bg-color-blue-1">
+              <div class="item-row  ">
                 <div class="item-cell">${assign[ass].assignment.title}</div>
 
               </div>
-              <div class="item-row bg-color-blue-1">
+              <div class="item-row ">
                 <div class="item-cell">
                   <div class="item-row">Due</div>
                   <div class="item-row">${assign[ass].assignment.due}</div>
@@ -227,15 +227,15 @@ function dashtablegen(){
       else if(((date.getDate()==today.getDate())&&(date.getMonth()==today.getMonth()))&&
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
-        document.getElementById("assignDueToday").innerHTML += `<li>
+        document.getElementById("assignDueToday").innerHTML += `<li style="background-color:${app.utils.theme.getColor()}">
           <div class="block-title">${assign[ass].assignment.subject}</div>
           <div class="item-content">
             <div class="item-inner item-cell">
-              <div class="item-row bg-color-blue-1">
+              <div class="item-row ">
                 <div class="item-cell">${assign[ass].assignment.title}</div>
 
               </div>
-              <div class="item-row bg-color-blue-1">
+              <div class="item-row ">
                 <div class="item-cell">
                   <div class="item-row">Due</div>
                   <div class="item-row">${assign[ass].assignment.due}</div>
@@ -255,15 +255,15 @@ function dashtablegen(){
         k++;
       }
       else{
-        document.getElementById("assignDone").innerHTML += `<li>
+        document.getElementById("assignDone").innerHTML += `<li style="background-color:${app.utils.theme.getColor()}">
           <div class="block-title">${assign[ass].assignment.subject}</div>
           <div class="item-content">
             <div class="item-inner item-cell">
-              <div class="item-row bg-color-blue-1">
+              <div class="item-row ">
                 <div class="item-cell">${assign[ass].assignment.title}</div>
 
               </div>
-              <div class="item-row bg-color-blue-1">
+              <div class="item-row ">
                 <div class="item-cell">
                   <div class="item-row">Due</div>
                   <div class="item-row">${assign[ass].assignment.due}</div>
@@ -360,4 +360,33 @@ var def = JSON.parse(localStorage.getItem('defaultsubjects'));
 
 
 });}
+};
+function LightenDarkenColor(col, amt) {
+
+    var usePound = false;
+
+    if (col[0] == "#") {
+        col = col.slice(1);
+        usePound = true;
+    }
+
+    var num = parseInt(col,16);
+
+    var r = (num >> 16) + amt;
+
+    if (r > 255) r = 255;
+    else if  (r < 0) r = 0;
+
+    var b = ((num >> 8) & 0x00FF) + amt;
+
+    if (b > 255) b = 255;
+    else if  (b < 0) b = 0;
+
+    var g = (num & 0x0000FF) + amt;
+
+    if (g > 255) g = 255;
+    else if (g < 0) g = 0;
+
+    return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+
 };

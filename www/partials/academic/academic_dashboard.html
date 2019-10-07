@@ -1,61 +1,72 @@
 
 <template>
-	<div class="page">
+	<div class="page no-swipeback">
 
 		<div class="navbar">
 			<div class="navbar-inner">
+				{{#js_if "app.data.config.theme.navigation == 'hamburger'"}}
 				<div class="left">
-					<a href="#" class="link back">
-						<i class="icon icon-back"></i>
-						<span class="ios-only" data-i18n="back">Back</span>
+					<a href="#" class="link icon-only panel-open" data-panel="left">
+						<i class="hamburger hamburger--boring">
+							<span class="hamburger-box">
+								<span class="hamburger-inner"></span>
+							</span>
+						</i>
 					</a>
 				</div>
-				<div class="title md-only" data-i18n="academics">Academics</div>
+				{{/js_if}}
+				<div class="title">
+					<img class="ios-only theme-light-only" src="assets/custom/img/logo-text-black.svg" height="24" alt="" />
+					<img class="ios-only theme-dark-only" src="assets/custom/img/logo-text-white.svg" height="24" alt="" />
+					<img class="md-only" src="assets/custom/img/logo-text-white.svg" height="24" alt="" />
+				</div>
 				<div class="right">
 					<a id="assignmentduetoday"  data-popup=".popup" class="link icon-only popup-open">
 						<i class="icon f7-icons ios-only">bell<span class="badge color-red">5</span></i>
 						<i class="icon material-icons md-only">notifications<span class="badge color-red">5</span></i>
 					</a>
+					<a href="#" class="link icon-only" @click="openThemeSelector">
+						<i class="icon material-icons">palette</i>
+					</a>
 				</div>
 
-				<div class="subnavbar ios-only">
+
+				<div class="subnavbar" >
 					<div class="subnavbar-inner">
-						<div class="title" data-i18n="academics">Academics</div>
+						<div class="segmented segmented-raised">
+						<a href="#tab-profile" class="button tab-link tab-link-active">
+							<i class="icon f7-icons ios-only">data</i>
+							<i class="icon material-icons md-only">dashboard</i>
+							<span class="tabbar-label">Dashboard</span>
+						</a>
+						<a href="#tab-announcements" class="button tab-link">
+							<i class="icon f7-icons ios-only">alert</i>
+							<i class="icon material-icons md-only">announcement</i>
+							<span class="tabbar-label">Announ</span>
+						</a>
+						<a href="#tab-assignments" class="button tab-link">
+							<i class="icon f7-icons ios-only">document_text</i>
+							<i class="icon material-icons md-only">assignment</i>
+							<span class="tabbar-label">Assign</span>
+						</a>
+						<a href="#tab-tables" class="button tab-link">
+							<i class="icon f7-icons ios-only">calendar</i>
+							<i class="icon material-icons md-only">date_range</i>
+							<span class="tabbar-label">Exam</span>
+						</a>
+						<a href="#tab-custom1" class="button tab-link">
+							<i class="icon f7-icons ios-only">settings</i>
+							<i class="icon material-icons md-only">settings</i>
+							<span class="custom1">Settings</span>
+						</a>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
 
-		<div class="toolbar tabbar tabbar-labels">
-			<div class="toolbar-inner">
-				<a href="#tab-profile" class="tab-link tab-link-active">
-					<i class="icon f7-icons ios-only">data</i>
-					<i class="icon material-icons md-only">dashboard</i>
-					<span class="tabbar-label">Dashboard</span>
-				</a>
-				<a href="#tab-announcements" class="tab-link">
-					<i class="icon f7-icons ios-only">alert</i>
-					<i class="icon material-icons md-only">announcement</i>
-					<span class="tabbar-label">Announ</span>
-				</a>
-				<a href="#tab-assignments" class="tab-link">
-					<i class="icon f7-icons ios-only">document_text</i>
-					<i class="icon material-icons md-only">assignment</i>
-					<span class="tabbar-label">Assign</span>
-				</a>
-				<a href="#tab-tables" class="tab-link">
-					<i class="icon f7-icons ios-only">calendar</i>
-					<i class="icon material-icons md-only">date_range</i>
-					<span class="tabbar-label">Tables</span>
-				</a>
-				<a href="#tab-custom1" class="tab-link">
-					<i class="icon f7-icons ios-only">settings</i>
-					<i class="icon material-icons md-only">settings</i>
-					<span class="custom1">Settings</span>
-				</a>
-			</div>
-		</div>
+
 		<div class="popup popup-tablet-fullscreen">
 			<div class="view">
 				<div class="page">
@@ -107,7 +118,7 @@
 							<div class="block block-greet">
 								<div class="greet-avatar">
 									<a href='/academic/image'>
-									<img id="profilepic" class="img-circle" src="https://randomuser.me/api/portraits/men/60.jpg" height="72" width="72" alt="" />
+									<img id="profilepic" class="img-circle" src="assets/custom/img/user.svg" height="72" width="72" alt="" />
 									</a>
 								</div>
 								<div class="greet-text">
@@ -171,7 +182,7 @@
 													</i>
 												</div>
 												<div class="card-stats-info">
-													<div class="card-stats-label">Assignments Still Due</div>
+													<div class="card-stats-label title">Assignments Still Due</div>
 													<div id="assignmentsdue" class="card-stats-value"></div>
 												</div>
 											</div>
@@ -253,11 +264,11 @@
 											<div class="block-title">{{this.module}}</div>
 											<div class="item-content">
 												<div class="item-inner item-cell">
-													<div class="item-row bg-color-blue-1">
+													<div class="item-row ">
 														<div class="item-cell">{{this.author}}</div>
 														<div class="item-cell-data">{{this.date}}</div>
 													</div>
-													<div class="item-row bg-color-blue-1">
+													<div class="item-row ">
 														<div class="item-cell">{{this.title}}</div>
 
 													</div>
@@ -641,6 +652,77 @@
 	return {
 
 		methods: {
+			openThemeSelector: function() {
+				var self = this;
+				var themeSelector = app.actions.create({
+					grid: true,
+					buttons: [
+						{
+							label: true,
+							text: i18next.t('change-theme')
+						},
+						{
+							icon: '<i class="fas fa-3x fa-circle text-color-red"></i>',
+							text: i18next.t('red'),
+							onClick: function() {
+								app.utils.theme.setColor('red');
+							}
+						},
+						{
+							icon: '<i class="fas fa-3x fa-circle text-color-green"></i>',
+							text: i18next.t('green'),
+							onClick: function() {
+								app.utils.theme.setColor('green');
+							}
+						},
+						{
+							icon: '<i class="fas fa-3x fa-circle text-color-blue"></i>',
+							text: i18next.t('blue'),
+							onClick: function() {
+								app.utils.theme.setColor('blue');
+							}
+						},
+						{
+							icon: '<i class="fas fa-3x fa-circle text-color-pink"></i>',
+							text: i18next.t('pink'),
+							onClick: function() {
+								app.utils.theme.setColor('pink');
+							}
+						},
+						{
+							icon: '<i class="fas fa-3x fa-circle text-color-yellow"></i>',
+							text: i18next.t('yellow'),
+							onClick: function() {
+								app.utils.theme.setColor('yellow');
+							}
+						},
+						{
+							icon: '<i class="fas fa-3x fa-circle text-color-orange"></i>',
+							text: i18next.t('orange'),
+							onClick: function() {
+								app.utils.theme.setColor('orange');
+							}
+						},
+						{
+							icon: '<i class="fas fa-3x fa-circle text-color-gray"></i>',
+							text: i18next.t('gray'),
+							onClick: function() {
+								app.utils.theme.setColor('gray');
+							}
+						},
+						{
+							icon: '<i class="fas fa-3x fa-circle text-color-black"></i>',
+							text: i18next.t('black'),
+							onClick: function() {
+								app.utils.theme.setColor('black');
+							}
+						}
+					]
+				});
+				themeSelector.open();
+
+		},
+
 			loadData: function() {
 				var self = this;
 				var	announ= JSON.parse(localStorage.getItem('announcements'));
