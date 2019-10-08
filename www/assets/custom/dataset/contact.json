@@ -1,10 +1,10 @@
 {
-	"name": "Nectar Inc.",
-	"address": "Palo Alto, California - 94303, USA",
-	"latitude": 37.441169,
-	"longitude": -122.143249,
-	"phone": "+1-9876543210",
-	"email": "info@nectar.com",
+	"name": "Hive Inc.",
+	"address": "Molen 35, Potchefstroom , South Africa",
+	"latitude": -26.686129,
+	"longitude": 27.096808,
+	"phone": "+27 83 274 3002",
+	"email": "info@hive.com",
 	"social": {
 		"facebook": "https://facebook.com",
 		"twitter": "https://twitter.com",
@@ -18,7 +18,7 @@
 		},
 		{
 			"day": "Saturday",
-			"time": "10 AM - 2 PM"
+			"time": "Closed"
 		},
 		{
 			"day": "Sunday",
