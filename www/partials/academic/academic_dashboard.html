@@ -242,10 +242,10 @@
 										</a>
 									</div>
 									<div class="col">
-										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #74B816 0%, #94D82D 100%);">
+										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #74B816 0%, #94D82D 100%);" onclick="updatelogin();">
 											<div class="card-content card-content-padding">
 												<i class="material-icons-outlined text-color-white">exit_to_app</i>
-												<span>Log Out</span>
+												<span>Update Password</span>
 											</div>
 										</div>
 									</div>
@@ -257,60 +257,52 @@
 					<div id="tab-announcements" class="page-content tab">
 						<div class="list custom-list">
 							<div class="block-title">Announcements</div>
-							{{#if announcements}}
-											<ul>
-										{{#each announcements}}
-										<li>
-											<div class="block-title">{{this.module}}</div>
-											<div class="item-content">
-												<div class="item-inner item-cell">
-													<div class="item-row ">
-														<div class="item-cell">{{this.author}}</div>
-														<div class="item-cell-data">{{this.date}}</div>
-													</div>
-													<div class="item-row ">
-														<div class="item-cell">{{this.title}}</div>
 
-													</div>
+											<ul id="announlist">
+
+<!--call function setAnnouncements in academic.js -->
 
 
-												</div>
-											</div>
-										</li>
-
-
-										{{/each}}
 									</ul>
-					  {{/if}}
+
 						</div>
 					</div>
 
 					<div id="tab-assignments" class="page-content tab">
-						<div class="list custom-list">
-							<div class="block-title">Assignments Due Today</div>
+						<div class="card card-outline">
+							<div class="list custom-list">
+								<div class="block-title">Assignments Due Today</div>
+									<div  id="assignDueToday">
 
-											<ul id="assignDueToday">
 												<!-- script-->
 
-									</ul>
 
+									</div>
+
+							</div>
 						</div>
-						<div class="list custom-list">
-							<div class="block-title">Assignments Still Due</div>
+						<div class="card card-outline">
+							<div class="list custom-list">
+								<div class="block-title">Assignments Still Due</div>
+									<div  id="assignStillDue">
 
-											<ul id="assignStillDue">
-<!-- script-->
-									</ul>
-
-						</div>
-						<div class="list custom-list">
-							<div class="block-title">Assignments Expired/Completed</div>
-
-											<ul id="assignDone">
 <!-- script-->
 
-									</ul>
+									</div>
+							</div>
+						</div>
+						<div class="card card-outline">
+							<div class="list custom-list">
+								<div class="block-title">Assignments Expired/Completed</div>
+								<div id="assignDone">
+									<!-- script-->
+									</div>
 
+
+
+
+
+							</div>
 						</div>
 
 
@@ -725,14 +717,10 @@
 
 			loadData: function() {
 				var self = this;
-				var	announ= JSON.parse(localStorage.getItem('announcements'));
-						self.$setState({
-							announcements: announ
-						});
+
 						if(localStorage.getItem('profileimage')!=null){
 					document.getElementById("profilepic").src=JSON.parse(localStorage.getItem('profileimage'));
 				}
-				document.getElementById("studentbalancedisplay").innerHTML = 'R'+localStorage.getItem('studentBalance');
 				var userName=JSON.parse(localStorage.getItem('user'));
 				document.getElementById("username").innerHTML = String(userName[1]).split("Name")[1].trim();
 
@@ -748,30 +736,7 @@
 				);
 
 			},
-			logincheck: function() {
 
-				var self = this;
-
-						if(localStorage.getItem('credentials')==null){
-
-							app.dialog.login(
-								'Enter your university number and password',
-								window.config.app.title,
-								function(username, password) {
-									credentials={"username":username,"password":password};
-									localStorage.setItem('credentials', JSON.stringify(credentials));
-									app.toast.show({
-										text: 'Welcome!',
-										position:'bottom',
-										cssClass: 'toast-round bg-color-green'
-									});
-								}
-							);
-
-
-				    }
-
-			},
 			greetBar: function() {
 				var self = this;
 				var animation = anime({
@@ -814,71 +779,6 @@
 				    return i;
 				}
 			},
-			scraper: function(){
-				var self = this;
-				var pass=JSON.parse(localStorage.getItem('credentials')).password;
-				var username=JSON.parse(localStorage.getItem('credentials')).username;
-				app.request.get(`partials/scraper/proxy.php?a=${username}&b=${pass} `
-
-		   ,function(login,response,data){
-		        // The full html of the authenticated page
-						var login=JSON.parse(login);
-						if(login.status==='true'){
-			        var nwuAppData=JSON.parse(data.responseText);
-							if(localStorage.getItem('studentBalance')==null){
-								localStorage.setItem('studentBalance', nwuAppData.balance);
-							}
-
-							if(localStorage.getItem('examResults')==null){
-								localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
-							}else{
-							localStorage.removeItem('examResults');
-							localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
-							}
-
-
-					}else{
-						alert('Could not login');
-					}
-		    });
-				app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
-
-		   ,function(login,response,data){
-		        // The full html of the authenticated page
-
-						var login=JSON.parse(login);
-						if(login[0].login==='true'){
-			        var nwuAppData=JSON.parse(data.responseText);
-
-						if(localStorage.getItem('subjects')==null){
-								localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
-							}else{
-							localStorage.removeItem('subjects');
-							localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
-							}
-						if(localStorage.getItem('assignments')==null){
-								localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
-							}else{
-							localStorage.removeItem('assignments');
-							localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
-							}
-						if(localStorage.getItem('announcements')==null){
-								localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
-							}else{
-							localStorage.removeItem('announcements');
-							localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
-							}
-						if(localStorage.getItem('user')==null){
-								localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
-							}else{
-							localStorage.removeItem('user');
-							localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
-							}
-					}else{
-						alert('Could not login');
-					}
-		    });
-			},
 			renderChart: function() {
 				var self = this;
 				var config = {
@@ -905,15 +805,16 @@
 		on: {
 			pageInit: function() {
 				var self = this;
-				self.logincheck();
 				self.greetBar();
 				//self.renderChart();
-					self.scraper();
-defaultsubjectlist();
+					scrape();
+					defaultsubjectlist();
 					self.loadData();
 					dashtablegen();
 					assignmentsDue();
 					examtimeline();
+					setBalance();
+					setAnnouncements();
 
 
 

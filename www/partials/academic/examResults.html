@@ -24,36 +24,13 @@
 
 			<div class="block-title">Pull to refresh exam results</div>
 			<div class="list custom-list">
-{{#if examresults}}
-				<ul>
-{{#each examresults}}
-					<li>
-						<div class="block-title">{{this.moduleName}}</div>
-						<div class="item-content">
-							<div class="item-inner item-cell">
-								<div class="item-row ">
-									<div class="item-cell">Participation Mark</div>
-									<div class="item-cell-data">{{this.participationMark}}</div>
 
-								</div>
-								<div class="item-row ">
-									<div class="item-cell">Exam Mark</div>
-									<div class="item-cell-data">{{this.examMark}}</div>
-								</div>
-								<div class="item-row ">
-									<div class="item-cell">Module Mark</div>
-									<div class="item-cell-data">{{this.finalMark}}</div>
-								</div>
-								<div class="item-row ">
-									<div class="item-cell-data">{{this.finalMarkComment}}</div>
+				<ul id="examlist">
 
-								</div>
-							</div>
-						</div>
-					</li>
-{{/each}}
+					<!-- function setgradesbalance in academic.js -->
+
 				</ul>
-{{/if}}
+
 			</div>
 
 
@@ -82,26 +59,13 @@
 
 <script>
 	return {
-		data: function() {
-			return {
-				examresults: null
-			}
-		},
-		methods: {
-		loadExam: function() {
-			var self = this;
-	var	examresults= JSON.parse(localStorage.getItem('examResults'));
-			self.$setState({
-				examresults: examresults
-			});
 
 
-		}
-},
 		on: {
 			pageInit: function() {
 				var self = this;
-				self.loadExam();
+
+				setgrades();
 			}
 		}
 	}

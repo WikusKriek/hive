@@ -190,6 +190,11 @@ function dashtablegen(){
     var i=0;
     var k=0;
     var obj=[];
+    var colour=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], -10);
+    var colour1=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 60);
+    document.getElementById("assignDone").innerHTML ='';
+    document.getElementById("assignStillDue").innerHTML ='';
+      document.getElementById("assignDueToday").innerHTML ="";
     for (ass in assign){
       var date= new Date(assign[ass].assignment.due);
       var today= new Date();
@@ -197,10 +202,11 @@ function dashtablegen(){
       if((((date.getDate()>today.getDate())&&(date.getMonth()==today.getMonth()))||(date.getMonth()>today.getMonth()) )&&
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
-        document.getElementById("assignStillDue").innerHTML += `<li style="background-color:${app.utils.theme.getColor()}">
-          <div  class="block-title">${assign[ass].assignment.subject}</div>
-          <div class="item-content" >
-            <div class="item-inner item-cell">
+        document.getElementById("assignStillDue").innerHTML += `
+  <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" onClick="updatelogin();">
+          <div  class=" card-header">${assign[ass].assignment.subject}</div>
+            <div class="card-content card-content-padding">
+            <div class=" item-inner item-cell">
               <div class="item-row  ">
                 <div class="item-cell">${assign[ass].assignment.title}</div>
 
@@ -217,19 +223,23 @@ function dashtablegen(){
 
 
               </div>
+              </div>
 
 
             </div>
+
+
           </div>
-        </li>`
+        `
         i++;
       }
       else if(((date.getDate()==today.getDate())&&(date.getMonth()==today.getMonth()))&&
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
-        document.getElementById("assignDueToday").innerHTML += `<li style="background-color:${app.utils.theme.getColor()}">
-          <div class="block-title">${assign[ass].assignment.subject}</div>
-          <div class="item-content">
+        document.getElementById("assignDueToday").innerHTML += `
+          <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" onClick="updatelogin();">
+          <div class=" card-header" >${assign[ass].assignment.subject}</div>
+          <div class="card-content card-content-padding">
             <div class="item-inner item-cell">
               <div class="item-row ">
                 <div class="item-cell">${assign[ass].assignment.title}</div>
@@ -248,38 +258,48 @@ function dashtablegen(){
 
               </div>
 
-
+              </div>
             </div>
+
           </div>
-        </li>`
+        `
         k++;
       }
       else{
-        document.getElementById("assignDone").innerHTML += `<li style="background-color:${app.utils.theme.getColor()}">
-          <div class="block-title">${assign[ass].assignment.subject}</div>
-          <div class="item-content">
-            <div class="item-inner item-cell">
+        //style="background-color:${app.utils.theme.getColor()}
+
+        document.getElementById("assignDone").innerHTML += `
+
+
+
+        <div class="card card-outline " style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" onClick="updatelogin();">
+          <div class=" card-header" >${assign[ass].assignment.subject} </div>
+          <div class="card-content card-content-padding">
+          <div class=" item-inner item-cell">
               <div class="item-row ">
                 <div class="item-cell">${assign[ass].assignment.title}</div>
 
               </div>
               <div class="item-row ">
-                <div class="item-cell">
-                  <div class="item-row">Due</div>
-                  <div class="item-row">${assign[ass].assignment.due}</div>
-                </div>
-                <div class="item-cell">
-                  <div class="item-row">Status</div>
-                  <div class="item-row">${assign[ass].assignment.status}</div>
-                </div>
+                  <div class="item-cell">
+                    <div class="item-row">Due</div>
+                    <div class="item-row">${assign[ass].assignment.due}</div>
+                  </div>
+                  <div class="item-cell">
+                    <div class="item-row">Status</div>
+                    <div class="item-row">${assign[ass].assignment.status}</div>
+                  </div>
+
 
 
               </div>
-
-
+            </div>
+            </div>
+            <div class="card-footer">Read more</div>
             </div>
           </div>
-        </li>`
+
+        `
       }
 
     }
@@ -390,3 +410,147 @@ function LightenDarkenColor(col, amt) {
     return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
 
 };
+
+function scrape(){
+  var self = this;
+  var pass=JSON.parse(localStorage.getItem('credentials')).password;
+  var username=JSON.parse(localStorage.getItem('credentials')).username;
+  app.request.get(`partials/scraper/proxy.php?a=${username}&b=${pass} `
+
+ ,function(login,response,data){
+      // The full html of the authenticated page
+      var login=JSON.parse(login);
+      if(login.status==='true'){
+        var nwuAppData=JSON.parse(data.responseText);
+        if(localStorage.getItem('studentBalance')==null){
+          localStorage.setItem('studentBalance', nwuAppData.balance);
+        }
+
+        if(localStorage.getItem('examResults')==null){
+          localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+        }else{
+        localStorage.removeItem('examResults');
+        localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+        }
+
+setBalance();
+    }else{
+      alert('Could not login');
+    }
+  });
+  app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
+
+ ,function(login,response,data){
+      // The full html of the authenticated page
+
+      var login=JSON.parse(login);
+      if(login[0].login==='true'){
+        var nwuAppData=JSON.parse(data.responseText);
+
+      if(localStorage.getItem('subjects')==null){
+          localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+        }else{
+        localStorage.removeItem('subjects');
+        localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+        }
+      if(localStorage.getItem('assignments')==null){
+          localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+        }else{
+        localStorage.removeItem('assignments');
+        localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+        }
+      if(localStorage.getItem('announcements')==null){
+          localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+        }else{
+        localStorage.removeItem('announcements');
+        localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+        }
+      if(localStorage.getItem('user')==null){
+          localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+        }else{
+        localStorage.removeItem('user');
+        localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+        }
+      setAnnouncements();
+      assignmentsDue();
+    }else{
+      alert('Could not login');
+    }
+  });
+};
+ function setGrades(){
+
+
+   	var	examresults= JSON.parse(localStorage.getItem('examResults'));
+    alert(examresults);
+    for(res in examresults){
+      document.getElementById("examlist").innerHTML+=`
+      <li>
+        <div class="block-title">${examresults[res].moduleName}</div>
+        <div class="item-content">
+          <div class="item-inner item-cell">
+            <div class="item-row ">
+              <div class="item-cell">Participation Mark</div>
+              <div class="item-cell-data">${examresults[res].participationMark}</div>
+
+            </div>
+            <div class="item-row ">
+              <div class="item-cell">Exam Mark</div>
+              <div class="item-cell-data">${examresults[res].examMark}</div>
+            </div>
+            <div class="item-row ">
+              <div class="item-cell">Module Mark</div>
+              <div class="item-cell-data">${examresults[res].finalMark}</div>
+            </div>
+            <div class="item-row ">
+              <div class="item-cell-data">${examresults[res].finalMarkComment}</div>
+
+            </div>
+          </div>
+        </div>
+      </li>`
+    }
+ };
+
+ function setBalance(){
+   document.getElementById("studentbalancedisplay").innerHTML = 'R'+localStorage.getItem('studentBalance');
+ };
+
+ function setAnnouncements(){
+   	var	anoun= JSON.parse(localStorage.getItem('announcements'));
+   for(i in anoun){
+     document.getElementById("announlist").innerHTML+=`<li>
+       <div class="block-title">${anoun[i].module}</div>
+       <div class="item-content">
+         <div class="item-inner item-cell">
+           <div class="item-row ">
+             <div class="item-cell">${anoun[i].author}</div>
+             <div class="item-cell-data">${anoun[i].date}</div>
+           </div>
+           <div class="item-row ">
+             <div class="item-cell">${anoun[i].title}</div>
+
+           </div>
+
+
+         </div>
+       </div>
+     </li>`
+   }
+ };
+
+ function updatelogin(){
+   app.dialog.login(
+     'Enter your university number and password',
+     window.config.app.title,
+     function(username, password) {
+       credentials={"username":username,"password":password};
+       localStorage.setItem('credentials', JSON.stringify(credentials));
+       app.toast.show({
+         text: 'Welcome!',
+         position:'bottom',
+         cssClass: 'toast-round bg-color-green'
+       });
+     }
+   );
+ }
