@@ -335,13 +335,11 @@
 				if(localStorage.getItem("addtohomescreen")=="true"){
 				this.openSlideLanguage();
 			}else{
-alert("here");
 				app.a2hs.prompt();
 				app.a2hs.userChoice
 					.then(function(choice) {
 					if (choice.outcome == 'accepted') {
 						localStorage.setItem("addtohomescreen","true");
-						alert(localStorage.getItem("addtohomescreen"));
 						this.openSlideLanguage();
 						app.toast.show({
 							text: 'Yaay! Added to Home Screen',
