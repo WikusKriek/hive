@@ -190,7 +190,7 @@ function dashtablegen(){
     var i=0;
     var k=0;
     var obj=[];
-    var colour=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], -10);
+    var colour=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 10);
     var colour1=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 60);
     document.getElementById("assignDone").innerHTML ='';
     document.getElementById("assignStillDue").innerHTML ='';
@@ -203,7 +203,7 @@ function dashtablegen(){
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
         document.getElementById("assignStillDue").innerHTML += `
-  <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" onClick="updatelogin();">
+  <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
           <div  class=" card-header">${assign[ass].assignment.subject}</div>
             <div class="card-content card-content-padding">
             <div class=" item-inner item-cell">
@@ -237,7 +237,7 @@ function dashtablegen(){
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
         document.getElementById("assignDueToday").innerHTML += `
-          <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" onClick="updatelogin();">
+          <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);">
           <div class=" card-header" >${assign[ass].assignment.subject}</div>
           <div class="card-content card-content-padding">
             <div class="item-inner item-cell">
@@ -272,7 +272,7 @@ function dashtablegen(){
 
 
 
-        <div class="card card-outline " style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" onClick="updatelogin();">
+        <div class="card card-outline " style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
           <div class=" card-header" >${assign[ass].assignment.subject} </div>
           <div class="card-content card-content-padding">
           <div class=" item-inner item-cell">
@@ -295,7 +295,6 @@ function dashtablegen(){
               </div>
             </div>
             </div>
-            <div class="card-footer">Read more</div>
             </div>
           </div>
 
