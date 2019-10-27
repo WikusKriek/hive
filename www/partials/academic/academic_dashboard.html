@@ -16,9 +16,9 @@
 				</div>
 				{{/js_if}}
 				<div class="title">
-					<img class="ios-only theme-light-only" src="assets/custom/img/logo-text-black.svg" height="24" alt="" />
-					<img class="ios-only theme-dark-only" src="assets/custom/img/logo-text-white.svg" height="24" alt="" />
-					<img class="md-only" src="assets/custom/img/logo-text-white.svg" height="24" alt="" />
+					<img class="ios-only theme-light-only" src="assets/custom/img/logo-text-white.png" height="24" alt="" />
+					<img class="ios-only theme-dark-only" src="assets/custom/img/logo-text-white.png" height="24" alt="" />
+					<img class="md-only" src="assets/custom/img/logo-text-white.png" height="30" alt="" />
 				</div>
 				<div class="right">
 					<a id="assignmentduetoday"  data-popup=".popup" class="link icon-only popup-open">
@@ -36,28 +36,28 @@
 						<div class="segmented segmented-raised">
 						<a href="#tab-profile" class="button tab-link tab-link-active">
 							<i class="icon f7-icons ios-only">data</i>
-							<i class="icon material-icons md-only">dashboard</i>
-							<span class="tabbar-label">Dashboard</span>
+							<i class="fas fa-graduation-cap md-only"></i>
+
 						</a>
 						<a href="#tab-announcements" class="button tab-link">
 							<i class="icon f7-icons ios-only">alert</i>
-							<i class="icon material-icons md-only">announcement</i>
-							<span class="tabbar-label">Announ</span>
+							<i class="fas fa-envelope-open-text md-only" ></i>
+
 						</a>
 						<a href="#tab-assignments" class="button tab-link">
 							<i class="icon f7-icons ios-only">document_text</i>
-							<i class="icon material-icons md-only">assignment</i>
-							<span class="tabbar-label">Assign</span>
+							<i class="fas fa-clipboard-list md-only"></i>
+
 						</a>
 						<a href="#tab-tables" class="button tab-link">
 							<i class="icon f7-icons ios-only">calendar</i>
-							<i class="icon material-icons md-only">date_range</i>
-							<span class="tabbar-label">Exam</span>
+							<i class="fas fa-calendar-alt md-only"></i>
+
 						</a>
 						<a href="#tab-custom1" class="button tab-link">
 							<i class="icon f7-icons ios-only">settings</i>
-							<i class="icon material-icons md-only">settings</i>
-							<span class="custom1">Settings</span>
+							<i class="fas fa-wrench md-only"></i>
+
 						</a>
 						</div>
 					</div>
@@ -225,7 +225,7 @@
 										<a href="http://efundi.nwu.ac.za/portal/" target="_blank" class="external">
 										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #F59F00 0%, #FCC419 100%);">
 											<div class="card-content card-content-padding">
-												<i class="material-icons-outlined text-color-white">local_library</i>
+												<i class="fas fa-book-reader"></i>
 												<span>Efundi</span>
 											</div>
 										</div>
@@ -235,7 +235,7 @@
 										<a href="/academic/emergency" >
 										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #1C7ED6 0%, #339AF0 100%);">
 											<div class="card-content card-content-padding">
-												<i class="material-icons-outlined text-color-white">priority_high</i>
+													<i class="fas fa-exclamation"></i>
 												<span>Emergency</span>
 											</div>
 										</div>
@@ -243,8 +243,8 @@
 									</div>
 									<div class="col">
 										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #74B816 0%, #94D82D 100%);" onclick="updatelogin();">
-											<div class="card-content card-content-padding">
-												<i class="material-icons-outlined text-color-white">exit_to_app</i>
+											<div class="card-content card-content-padding " >
+												<i class="fas fa-user-lock"></i>
 												<span>Password</span>
 											</div>
 										</div>
@@ -255,16 +255,17 @@
 					</div>
 
 					<div id="tab-announcements" class="page-content tab">
+						<div class="card card-outline">
 						<div class="list custom-list">
 							<div class="block-title">Announcements</div>
 
-											<ul id="announlist">
+											<div  id="announlist">
 
 <!--call function setAnnouncements in academic.js -->
 
 
-									</ul>
-
+									</div>
+							</div>
 						</div>
 					</div>
 
@@ -658,6 +659,9 @@
 							text: i18next.t('red'),
 							onClick: function() {
 								app.utils.theme.setColor('red');
+								setAnnouncements();
+								assignmentsDue();
+								examtimeline();
 							}
 						},
 						{
@@ -665,6 +669,9 @@
 							text: i18next.t('green'),
 							onClick: function() {
 								app.utils.theme.setColor('green');
+								setAnnouncements();
+								assignmentsDue();
+								examtimeline();
 							}
 						},
 						{
@@ -672,6 +679,9 @@
 							text: i18next.t('blue'),
 							onClick: function() {
 								app.utils.theme.setColor('blue');
+								setAnnouncements();
+								assignmentsDue();
+								examtimeline();
 							}
 						},
 						{
@@ -679,6 +689,9 @@
 							text: i18next.t('pink'),
 							onClick: function() {
 								app.utils.theme.setColor('pink');
+								setAnnouncements();
+								assignmentsDue();
+								examtimeline();
 							}
 						},
 						{
@@ -686,6 +699,9 @@
 							text: i18next.t('yellow'),
 							onClick: function() {
 								app.utils.theme.setColor('yellow');
+								setAnnouncements();
+								assignmentsDue();
+								examtimeline();
 							}
 						},
 						{
@@ -693,6 +709,9 @@
 							text: i18next.t('orange'),
 							onClick: function() {
 								app.utils.theme.setColor('orange');
+								setAnnouncements();
+								assignmentsDue();
+								examtimeline();
 							}
 						},
 						{
@@ -700,6 +719,9 @@
 							text: i18next.t('gray'),
 							onClick: function() {
 								app.utils.theme.setColor('gray');
+								setAnnouncements();
+								assignmentsDue();
+								examtimeline();
 							}
 						},
 						{
@@ -707,6 +729,9 @@
 							text: i18next.t('black'),
 							onClick: function() {
 								app.utils.theme.setColor('black');
+								setAnnouncements();
+								assignmentsDue();
+								examtimeline();
 							}
 						}
 					]

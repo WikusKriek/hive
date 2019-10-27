@@ -9,12 +9,12 @@
 					<div class="swiper-wrapper walkthrough-wrapper">
 
 						<div class="swiper-slide walkthrough-slide">
-							<div class="slide-title">Welcome to Nectar</div>
+							<div class="slide-title">Welcome to Hive</div>
 							<div class="slide-media">
 								<img class="theme-light-only" src="{{$root.config.app.logo}}" width="128" alt="" />
 								<img class="theme-dark-only" src="assets/custom/img/logo-white.svg" width="128" alt="" />
 							</div>
-							<div class="slide-text">Mobile Web App Kit</div>
+							<div class="slide-text">Mobile Web App</div>
 							<div class="slide-actions">
 								<button class="button button-big button-fill button-round" data-i18n="next" @click="addtohome">Next</button>
 							</div>
@@ -332,7 +332,8 @@
 			},
 			addtohome: function() {
 
-				if(localStorage.getItem("addtohomescreen")=="true"){
+				//if(localStorage.getItem("addtohomescreen")=="true"){   change when on server
+				if(1){
 				this.openSlideLanguage();
 			}else{
 				app.a2hs.prompt();

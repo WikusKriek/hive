@@ -209,6 +209,9 @@
 				var self = this;
 				var color = event.target.value;
 				app.utils.theme.setColor(color);
+				assignmentsDue();
+				examtimeline();
+				setAnnouncements();
 			},
 			changeThemeLayout: function(event) {
 				var self = this;

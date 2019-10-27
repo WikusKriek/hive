@@ -1,7 +1,7 @@
 {
-	"name": "Nectar Lite",
-	"short_name": "Nectar Lite",
-	"description": "Mobile Web App Kit",
+	"name": "Hive",
+	"short_name": "Hive",
+	"description": "Mobile Web App",
 	"start_url": ".",
 	"display": "standalone",
 	"orientation": "portrait",

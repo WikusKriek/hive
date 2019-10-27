@@ -322,8 +322,9 @@ function examtimeline(){
   return new Date(a.fulldate).getTime() - new Date(b.fulldate).getTime();
 }
 
-
-
+var colour=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 10);
+var colour1=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 60);
+document.getElementById("examtimeline").innerHTML="";
 
 
   if(localStorage.getItem("subjects")!=null){
@@ -355,11 +356,11 @@ function examtimeline(){
         for(i in obj){
 
           var date= new Date(obj[i].date+' '+obj[i].time);
-          document.getElementById("examtimeline").innerHTML+=`<div class="timeline-item">
-            <div class="timeline-item-date">${days[date.getDay()]}  ${date.getDate()} <small>${months[date.getMonth()]}</small></div>
-            <div class="timeline-item-divider"></div>
-            <div class="timeline-item-content">
-              <div class="timeline-item-inner">
+          document.getElementById("examtimeline").innerHTML+=`<div class="timeline-item" >
+            <div class="timeline-item-date" >${days[date.getDay()]}  ${date.getDate()} <small>${months[date.getMonth()]}</small></div>
+            <div class="timeline-item-divider" style="background-color: ${colour};"></div>
+            <div class="timeline-item-content" >
+              <div class="timeline-item-inner" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);">
                 <div class="timeline-item-time">${obj[i].time}</div>
                 <div class="timeline-item-title">${obj[i].module.replace(/\s/g, '')}</div>
                 <div class="timeline-item-subtitle">${obj[i].duration}</div>
@@ -478,15 +479,15 @@ setBalance();
   });
 };
  function setGrades(){
-
-
+document.getElementById("examlist").innerHTML="";
+   var colour=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 10);
+   var colour1=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 60);
    	var	examresults= JSON.parse(localStorage.getItem('examResults'));
-    alert(examresults);
     for(res in examresults){
       document.getElementById("examlist").innerHTML+=`
-      <li>
-        <div class="block-title">${examresults[res].moduleName}</div>
-        <div class="item-content">
+      <div class="card card-outline " style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
+        <div class="card-header">${examresults[res].moduleName}</div>
+        <div class="card-content card-content-padding">
           <div class="item-inner item-cell">
             <div class="item-row ">
               <div class="item-cell">Participation Mark</div>
@@ -507,7 +508,7 @@ setBalance();
             </div>
           </div>
         </div>
-      </li>`
+      </div>`
     }
  };
 
@@ -516,11 +517,15 @@ setBalance();
  };
 
  function setAnnouncements(){
+   document.getElementById("announlist").innerHTML="";
    	var	anoun= JSON.parse(localStorage.getItem('announcements'));
+    var colour=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 10);
+    var colour1=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 60);
    for(i in anoun){
-     document.getElementById("announlist").innerHTML+=`<li>
-       <div class="block-title">${anoun[i].module}</div>
-       <div class="item-content">
+     document.getElementById("announlist").innerHTML+=`
+     <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
+       <div class="card-header">${anoun[i].module}</div>
+       <div class="card-content card-content-padding">
          <div class="item-inner item-cell">
            <div class="item-row ">
              <div class="item-cell">${anoun[i].author}</div>
@@ -534,7 +539,7 @@ setBalance();
 
          </div>
        </div>
-     </li>`
+     </div>`
    }
  };
 

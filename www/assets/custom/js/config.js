@@ -9,10 +9,10 @@ window.config = {};
 */
 
 window.config.app = {
-	id: 'website.nectar.classic',
-	version: '2.8.0',
-	title: 'Nectar',
-	tagline: 'Mobile Web App Kit',
+	id: 'website.hive.classic',
+	version: '1.0.1',
+	title: 'Hive',
+	tagline: 'bee better',
 	logo: 'assets/custom/img/logo.svg'
 };
 
