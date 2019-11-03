@@ -5,7 +5,7 @@ include "simple_html_dom.php";
 $user=$_GET['a'];
 $pass=$_GET['b'];
 $urlefundilogin = "https://casprd.nwu.ac.za/cas/login?service=http%3A%2F%2Fefundi.nwu.ac.za%2Fsakai-login-tool%2Fcontainer";
-$cookie1=[];
+$cookie1='';
 
 
 $student=array();
