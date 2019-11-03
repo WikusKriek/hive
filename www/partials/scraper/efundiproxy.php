@@ -5,7 +5,7 @@ include "simple_html_dom.php";
 $user=$_GET['a'];
 $pass=$_GET['b'];
 $urlefundilogin = "https://casprd.nwu.ac.za/cas/login?service=http%3A%2F%2Fefundi.nwu.ac.za%2Fsakai-login-tool%2Fcontainer";
-
+$cookie1=[];
 
 
 $student=array();
@@ -26,6 +26,9 @@ $ltvalue=$html->find('input[name=lt]',0)->value;
 
 
 //got the lt value now pass it with post request
+$heaer=[
+  'User-Agent'=>'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
+];
 $fields = [
   'username'=> $user,
   'password'=> $pass,
@@ -36,7 +39,7 @@ $fields = [
 ];
 $fields_string = http_build_query($fields);
 //post request to login
-curl_setopt($ch, CURLOPT_HTTPHEADER, 'User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36');
+curl_setopt($ch, CURLOPT_HTTPHEADER, $heaer);
 curl_setopt($ch,CURLOPT_URL, $urlefundilogin);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch,CURLOPT_FOLLOWLOCATION, true);
