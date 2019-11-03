@@ -277,7 +277,7 @@ function initializeA2HS() {
 			]
 		});
 		setTimeout(function() {
-			
+			dialog.open();
 		}, 60000);
 	});
 }
