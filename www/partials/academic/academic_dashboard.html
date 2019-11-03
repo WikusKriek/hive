@@ -341,7 +341,7 @@
 										</div>
 									</a>
 								</li>
-								<li>
+								<!--<li>
 									<a href="/screens/faq" class="item-link">
 										<div class="item-content">
 											<div class="item-inner">
@@ -349,7 +349,7 @@
 											</div>
 										</div>
 									</a>
-								</li>
+								</li>-->
 								<li>
 									<a href="/academic/subjects" class="item-link">
 										<div class="item-content">
@@ -391,7 +391,7 @@
 										</div>
 									</div>
 								</li>
-								<li>
+								<!--<li>
 									<a href="#" class="item-link">
 										<div class="item-content">
 											<div class="item-media">
@@ -406,9 +406,9 @@
 											</div>
 										</div>
 									</a>
-								</li>
+								</li>-->
 								<li>
-									<a href="#" class="item-link">
+									<a href="#" class="item-link" @click="showInfoAlertDialog">
 										<div class="item-content">
 											<div class="item-media">
 												<i class="fa-stack">
@@ -472,7 +472,7 @@
 										</div>
 									</a>
 								</li>
-								<li>
+								<!--<li>
 									<a href="#" class="item-link">
 										<div class="item-content">
 											<div class="item-inner">
@@ -480,7 +480,7 @@
 											</div>
 										</div>
 									</a>
-								</li>
+								</li>-->
 							</ul>
 						</div>
 
@@ -738,6 +738,20 @@
 				});
 				themeSelector.open();
 
+		},
+		showInfoAlertDialog: function() {
+			var self = this;
+			var dialog = app.dialog.create({
+				content: '<div class="block no-margin margin-top text-align-center"><i class="fa-stack fa-3x"><span class="fas fa-stack-2x fa-circle text-color-green"></span><span class="fas fa-stack-1x fa-inverse fa-check"></span></i><p>copy and share URL: studenthive.app</p></div>',
+				buttons: [
+					{
+						text: 'Done',
+						bold: true,
+						color: 'green'
+					}
+				]
+			});
+			dialog.open();
 		},
 
 			loadData: function() {
