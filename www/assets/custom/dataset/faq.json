@@ -1,18 +1,23 @@
 [
 	{
-		"question": "What is Lorem Ipsum?",
-		"answer": "Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+		"question": "Where can I find the app in the app store?",
+		"answer": "Hive is a web based app, meaning it is actually just a website optimized for mobile users. This means that the app is not available in any app store because there is no need to download it. The app can however be added to your home screen and it will appear to function like any other local app."
 	},
 	{
-		"question": "Where does it come from?",
-		"answer": "Lorem Ipsum has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. It comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance."
+		"question": "How does the app work?",
+		"answer": "The app logs into your university account with the details you provided. Once logged in we simply tell the app where to go look for the data we want to display to you. The app then browses the university website and collects the importand data. This can sometimes take a while since the app needs to collect data from multiple pages."
 	},
 	{
-		"question": "Why do we use it?",
-		"answer": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
+		"question": "How do I add the app to my home screen?",
+		"answer": "Navigate to your options usually located at the top right of your browser. Open options and select -Add to Home Screen-. Note that on some browsers this option does not seem to work, we are aware of this problem and will work on it as soon as we can. If you expierience this problem we suggest using the app as a normal website by navigating to studenthive.app until the issue is resolved."
 	},
 	{
-		"question": "Where can I get some?",
-		"answer": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable."
+		"question": "Expieriencing buggy behaviour?",
+		"answer": "If something doesn't seem right with the app try clearing the browser cache and data. Navigate to the app domain studenthive.app and the app should now start up again from scratch"
+	}
+	,
+	{
+		"question": "How can I help?",
+		"answer": "Send us some feedback mail: info@studenthive.app Any ideas, bugs even complains will be appreciated"
 	}
 ]
