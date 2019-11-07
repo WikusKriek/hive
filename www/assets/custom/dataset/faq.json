@@ -12,7 +12,7 @@
 		"answer": "Navigate to your options usually located at the top right of your browser. Open options and select -Add to Home Screen-. Note that on some browsers this option does not seem to work, we are aware of this problem and will work on it as soon as we can. If you expierience this problem we suggest using the app as a normal website by navigating to studenthive.app until the issue is resolved."
 	},
 	{
-		"question": "Expieriencing buggy behaviour?",
+		"question": "Experiencing buggy behaviour?",
 		"answer": "If something doesn't seem right with the app try clearing the browser cache and data. Navigate to the app domain studenthive.app and the app should now start up again from scratch"
 	}
 	,
