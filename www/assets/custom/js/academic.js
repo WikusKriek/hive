@@ -424,6 +424,9 @@ function scrape(){
         var nwuAppData=JSON.parse(data.responseText);
         if(localStorage.getItem('studentBalance')==null){
           localStorage.setItem('studentBalance', nwuAppData.balance);
+        }else{
+        localStorage.removeItem('studentBalance');
+        localStorage.setItem('studentBalance', nwuAppData.balance);
         }
 
         if(localStorage.getItem('examResults')==null){
