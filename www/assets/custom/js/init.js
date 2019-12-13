@@ -240,7 +240,7 @@ function initializeA2HS() {
 		app.a2hs = event;
 		var dialog = app.dialog.create({
 			title: '',
-			content: '<div class="block no-margin no-padding text-align-center" style="font-size: 14px;"><img src="'+ window.config.app.logo +'" width="84" alt="" /><p><b>Add Nectar to your Home Screen?</b></p><p>Install Nectar on your home screen for quick and easy access when you\'re on the go.</p></div>',
+			content: '<div class="block no-margin no-padding text-align-center" style="font-size: 14px;"><img src="'+ window.config.app.logo +'" width="84" alt="" /><p><b>Add Hive to your Home Screen?</b></p><p>Install Hive on your home screen for quick and easy access when you\'re on the go.</p></div>',
 			verticalButtons: true,
 			buttons: [
 				{

@@ -551,7 +551,7 @@ document.getElementById("examlist").innerHTML="";
        credentials={"username":username,"password":password};
        localStorage.setItem('credentials', JSON.stringify(credentials));
        app.toast.show({
-         text: 'Welcome!',
+         text: 'Changes updated!',
          position:'bottom',
          cssClass: 'toast-round bg-color-green'
        });

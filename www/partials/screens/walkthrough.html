@@ -20,6 +20,98 @@
 							</div>
 						</div>
 
+						<div class="swiper-slide walkthrough-slide page-content">
+							<div class="slide-title">Login</div>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-after">
+
+										<div class="block text-align-center">
+											<img class="theme-light-only" src="{{$root.config.app.logo}}" width="128" alt="" />
+											<img class="theme-dark-only" src="assets/custom/img/logo-white.svg" width="128" alt="" />
+										</div>
+										<div id="loginerror" class="item-input-info input-error-message"></div>
+
+										<form  id="loginform" name="signup" action="#" method="POST" enctype="multipart/form-data">
+											<div class="list no-hairlines no-hairlines-between no-margin-bottom ">
+												<ul>
+													<li>
+														<div class="item-content item-input">
+															<div class="item-inner">
+																<div class="item-input-wrap">
+																	<input name="campus" type="text" id="picker-campus" placeholder="Your Campus" required />
+																	<div class="item-input-info input-error-message"></div>
+																</div>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="item-content item-input item-input-with-info">
+															<div class="item-media">
+																<i class="icon f7-icons ios-only">person</i>
+																<i class="icon material-icons md-only">person</i>
+															</div>
+															<div class="item-inner">
+																<div class="item-input-wrap">
+																	<input id="studentnumberinput" type="text" name="number" placeholder="Student Number" required />
+																	<div class="item-input-info input-error-message"></div>
+																</div>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="item-content item-input item-input-with-info">
+															<div class="item-media">
+																<i class="icon f7-icons ios-only">email</i>
+																<i class="icon material-icons md-only">mail</i>
+															</div>
+															<div class="item-inner">
+																<div class="item-input-wrap">
+																	<input id="emailinput" type="email" name="email" placeholder="Email" required />
+																	<div class="item-input-info input-error-message"></div>
+																</div>
+															</div>
+														</div>
+													</li>
+													<li>
+														<div class="item-content item-input item-input-with-info">
+															<div class="item-media">
+																<i class="icon f7-icons ios-only">lock</i>
+																<i class="icon material-icons md-only">lock</i>
+															</div>
+															<div class="item-inner">
+																<div class="item-input-wrap">
+																	<input id="passwordinput" type="password" name="password" placeholder="Efundi Password" required data-toggle="show-hide-password" />
+																	<div class="item-input-info input-error-message"></div>
+																</div>
+															</div>
+															<div class="item-media">
+																<a href="#" @click="showHidePassword">
+																	{{#if isPasswordVisible}}
+																	<i class="icon f7-icons ios-only">eye_off</i>
+																	<i class="icon material-icons md-only">visibility_off</i>
+																	{{else}}
+																	<i class="icon f7-icons ios-only">eye</i>
+																	<i class="icon material-icons md-only">visibility</i>
+																	{{/if}}
+																</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+												<div class="block text-align-center">
+													<button type="submit" class="button button-big button-fill" data-i18n="login">Log In</button>
+													<p>By logging in, you agree to {{$root.config.app.title}}'s <a href="/screens/terms">Terms of Use</a>, <a href="/screens/privacy">Privacy Policy</a> and <a href="/screens/cookies">Cookie Policy</a>.</p>
+												</div>
+											</div>
+										</form>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
 						<div class="swiper-slide walkthrough-slide">
 							<div class="slide-title">Setting up your account for the first time</div>
 							<div class="item-content">
@@ -124,7 +216,7 @@
 						</div>
 
 						<div class="swiper-slide walkthrough-slide">
-							<div class="slide-title">Explore Nectar</div>
+							<div class="slide-title">Explore Hive</div>
 							<div class="slide-media">
 								<img src="assets/custom/img/rocket.svg" width="128" alt="" />
 							</div>
@@ -306,10 +398,163 @@
 		data: function() {
 			return {
 				nextScreen: '/home',
-				walkthrough: null
+				walkthrough: null,
+				formValidator: null,
+				isPasswordVisible: false
 			}
 		},
 		methods: {
+			initializePickerCampus: function() {
+				var self = this;
+				var picker = app.picker.create({
+					inputEl: '#picker-campus',
+					cols: [
+						{
+							textAlign: 'center',
+							values: [ 'Potchefstroom', 'Vaal Triangle', 'Mafikeng']
+						}
+					]
+				});
+			},
+
+			showHidePassword: function(event) {
+				var self = this;
+				var input = self.$('input[data-toggle=show-hide-password]');
+				if (input.attr('type') == 'password') {
+					input.attr('type', 'text');
+					self.$setState({
+						isPasswordVisible: true
+					});
+				}
+				else {
+					input.attr('type', 'password');
+					self.$setState({
+						isPasswordVisible: false
+					});
+				}
+			},
+			initializeFormValidator: function() {
+				var self = this;
+				self.formValidator = jQuery('form[name=signup]').validate({
+					rules: {
+						name: {
+							required: true
+						},
+						campus: {
+							required: true
+						},
+						number: {
+							required: true
+						},
+						email: {
+							required: true,
+        			email:true
+      			},
+      			password: {
+							required: true
+						}
+					},
+    			messages: {
+						name: {
+							required: 'Please enter name.'
+      			},
+						campus: {
+							required: 'Please enter campus.'
+      			},
+						number: {
+							required: 'Please enter student number.'
+      			},
+						email: {
+							required: 'Please enter email address.',
+        			email: 'Please enter a valid email address.'
+      			},
+						password: {
+							required: 'Please enter efundi password.'
+      			}
+					},
+					submitHandler: function(form) {
+						self.submitForm(form);
+					}
+				});
+			},
+			submitForm: function(form) {
+				var self = this;
+				var username=document.getElementById("studentnumberinput").value;
+				var password=document.getElementById("passwordinput").value;
+				var email=document.getElementById("emailinput").value;
+				var col =document.getElementById("picker-campus").value;
+				credentials={"username":username,"password":password,"email":email};
+				localStorage.setItem('credentials', JSON.stringify(credentials));
+
+
+				var pass=JSON.parse(localStorage.getItem('credentials')).password;
+				var username=JSON.parse(localStorage.getItem('credentials')).username;
+				app.preloader.show();
+				app.request.get(`partials/scraper/proxy.php?a=${username}&b=${pass} `
+
+				,function(login,response,data){
+						// The full html of the authenticated page
+						var login=JSON.parse(login);
+						if(login.status==='true'){
+							self.walkthrough.slideNext();
+							var nwuAppData=JSON.parse(data.responseText);
+							if(localStorage.getItem('studentBalance')==null){
+								localStorage.setItem('studentBalance', nwuAppData.balance);
+							}
+
+							if(localStorage.getItem('examResults')==null){
+								localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+							}else{
+							localStorage.removeItem('examResults');
+							localStorage.setItem('examResults', JSON.stringify(nwuAppData.exam));
+							}
+
+
+					}else{
+						alert('Could not login');
+						document.getElementById('loginerror').innerHTML="Could not log in with information provided, make sure your information was entered correctly.";
+					}
+				});
+				app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
+
+				,function(login,response,data){
+						// The full html of the authenticated page
+						var login=JSON.parse(login);
+						if(login[0].login==='true'){
+							var nwuAppData=JSON.parse(data.responseText);
+							localStorage.setItem("radio1","1")
+
+
+						if(localStorage.getItem('subjects')==null){
+								localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+							}else{
+							localStorage.removeItem('subjects');
+							localStorage.setItem('subjects', JSON.stringify(nwuAppData[2].subjects));
+							}
+						if(localStorage.getItem('assignments')==null){
+								localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+							}else{
+							localStorage.removeItem('assignments');
+							localStorage.setItem('assignments', JSON.stringify(nwuAppData[1].assignments));
+							}
+						if(localStorage.getItem('announcements')==null){
+								localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+							}else{
+							localStorage.removeItem('announcements');
+							localStorage.setItem('announcements', JSON.stringify(nwuAppData[3].announcements));
+							}
+						if(localStorage.getItem('user')==null){
+								localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+							}else{
+							localStorage.removeItem('user');
+							localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
+							}
+							defaultsubjectlist();
+							app.preloader.hide();
+							self.openSlideTheme();
+					}
+				});
+			},
 			checkmarkCurrentLanguage: function() {
 				var self = this;
 				var currentLanguage = app.utils.i18n.getLanguage();
@@ -334,7 +579,7 @@
 
 				//if(localStorage.getItem("addtohomescreen")=="true"){   change when on server
 				if(1){
-				this.openSlideLanguage();
+				this.openSlideLogin();
 			}else{
 				app.a2hs.prompt();
 				app.a2hs.userChoice
@@ -362,24 +607,14 @@
 				});
 }
 			},
-			openSlideLanguage: function() {
-				var self = this;
-
-				if(localStorage.getItem('credentials')==null){
-
-					app.dialog.login(
-						'Enter your university number and efundi password',
-						window.config.app.title,
-						function(username, password) {
+			openSlideLogin: function() {
+							var self = this;
+							self.walkthrough.slideNext();
 							credentials={"username":username,"password":password};
 							localStorage.setItem('credentials', JSON.stringify(credentials));
-	self.walkthrough.slideNext();
+							self.walkthrough.slideNext();
 
-							app.toast.show({
-								text: 'Welcome!',
-								position:'bottom',
-								cssClass: 'toast-round bg-color-green'
-							});
+
 							var pass=JSON.parse(localStorage.getItem('credentials')).password;
 							var username=JSON.parse(localStorage.getItem('credentials')).username;
 							app.preloader.show();
@@ -448,14 +683,10 @@
 								}
 							});
 
-						}
-					);
-
-
 				}
 
 
-			},
+			,
 			openSlideTheme: function() {
 				var self = this;
 				self.walkthrough.slideNext();
@@ -478,6 +709,8 @@
 				var self = this;
 				self.checkmarkCurrentTheme();
 				self.initializeWalkthrough();
+				self.initializeFormValidator();
+				self.initializePickerCampus();
 			}
 		}
 	}

@@ -21,7 +21,7 @@
 		<div class="page-content">
 
 			<div class="block">
-				<p>File API provides access to the filesystem-level information about the files such as name, size, MIME type, last modified date, content without sending the file to the server.</p>
+				<p>Select an image to use as your profile picture.</p>
 			</div>
 
 			<div class="block">
@@ -117,6 +117,18 @@
 
 ,
 		methods: {
+			explore: function() {
+				var self = this;
+				var popup = app.popup.create({
+					el: '.popup-explore',
+					on: {
+						opened: function() {
+							self.$('[type=file]').on('change', self.onFileChange);
+						}
+					}
+				});
+				popup.open();
+			},
 
 
 			onFileChange: function(event) {
@@ -133,8 +145,8 @@
 				fileData.size = file.size + ' bytes';
 				fileData.type = file.type;
 				fileData.lastModifiedDate = file.lastModifiedDate;
-				var reader = new FileReader();
 
+				var reader = new FileReader();
 				reader.addEventListener('load', function() {
 					localStorage.removeItem('profileimage');
 					localStorage.setItem('profileimage',JSON.stringify(reader.result));

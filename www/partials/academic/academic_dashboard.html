@@ -24,10 +24,11 @@
 				<div class="right">
 					<a id="assignmentduetoday"  data-popup=".popup" class="link icon-only popup-open">
 						<i class="icon f7-icons ios-only">bell<span class="badge color-red">5</span></i>
-						<i class="icon material-icons md-only">notifications<span class="badge color-red">5</span></i>
+						<i class="fas fa-bell md-only"></i><span class="badge color-red">5</span></i>
 					</a>
 					<a href="#" class="link icon-only" @click="openThemeSelector">
-						<i class="icon material-icons">palette</i>
+						<i class="icon f7-icons ios-only">paintbrush</i>
+						<i class="fas fa-palette md-only"></i>
 					</a>
 				</div>
 
@@ -125,9 +126,9 @@
 							<!__ start of content inside tab  __>
 
 							<div class="block block-greet">
-								<div class="greet-avatar">
+								<div class="user-picture">
 									<a href='/academic/image'>
-									<img id="profilepic" class="img-circle" src="assets/custom/img/user.svg" height="72" width="72" alt="" />
+									<img id="profilepic" class="profile-pic" src="assets/custom/img/user.png" height="72" width="72" alt="" />
 									</a>
 								</div>
 								<div class="greet-text">
@@ -527,6 +528,19 @@
 		font-weight: bold;
 		line-height: 1.2;
 	}
+	.user-picture{
+    width: 75px;
+    height: 75px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.profile-pic {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
 
 	.greet-icon {
 		margin-left: auto;
