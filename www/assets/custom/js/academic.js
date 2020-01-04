@@ -203,7 +203,7 @@ function dashtablegen(){
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
         document.getElementById("assignStillDue").innerHTML += `
-  <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
+        <div onclick="assignmentInfo(${ass})" class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
           <div  class=" card-header">${assign[ass].assignment.subject}</div>
             <div class="card-content card-content-padding">
             <div class=" item-inner item-cell">
@@ -237,7 +237,7 @@ function dashtablegen(){
       (assign[ass].assignment.status.includes("Not")) &&
       (date.getFullYear()==today.getFullYear())){
         document.getElementById("assignDueToday").innerHTML += `
-          <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);">
+          <div onclick="assignmentInfo(${ass})" class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);">
           <div class=" card-header" >${assign[ass].assignment.subject}</div>
           <div class="card-content card-content-padding">
             <div class="item-inner item-cell">
@@ -272,7 +272,7 @@ function dashtablegen(){
 
 
 
-        <div class="card card-outline " style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
+        <div onclick="assignmentInfo(${ass})" class="card card-outline " style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
           <div class=" card-header" >${assign[ass].assignment.subject} </div>
           <div class="card-content card-content-padding">
           <div class=" item-inner item-cell">
@@ -474,6 +474,7 @@ setBalance();
         localStorage.removeItem('user');
         localStorage.setItem('user', JSON.stringify(nwuAppData[4].user));
         }
+
       setAnnouncements();
       assignmentsDue();
     }else{
@@ -524,9 +525,12 @@ document.getElementById("examlist").innerHTML="";
    	var	anoun= JSON.parse(localStorage.getItem('announcements'));
     var colour=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 10);
     var colour1=LightenDarkenColor(window.config.colors.md[app.utils.theme.getColor()], 60);
+    var anouninfo='';
    for(i in anoun){
+    anouninfo=anoun[i].InfoUrl;
      document.getElementById("announlist").innerHTML+=`
-     <div class="card card-outline" style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
+
+     <div onclick="announcementInfo(${i})" class="card card-outline"  style="background-image:linear-gradient(135deg, ${colour} 0%,${colour1} 100%);" >
        <div class="card-header">${anoun[i].module}</div>
        <div class="card-content card-content-padding">
          <div class="item-inner item-cell">
@@ -542,9 +546,12 @@ document.getElementById("examlist").innerHTML="";
 
          </div>
        </div>
-     </div>`
+     </div>
+
+    `
+};
    }
- };
+ ;
 
  function updatelogin(){
    app.dialog.login(
@@ -561,3 +568,86 @@ document.getElementById("examlist").innerHTML="";
      }
    );
  }
+ function cookieTest(){
+   var pass=JSON.parse(localStorage.getItem('credentials')).password;
+   var username=JSON.parse(localStorage.getItem('credentials')).username;
+   app.request.get(`partials/scraper/login.php?a=${username}&b=${pass}`
+
+  ,function(login,response,data){
+       // The full html of the authenticated page
+
+       var login=JSON.parse(login);
+       if(login[0].login==='true'){
+         var nwuAppData=JSON.parse(data.responseText);
+         var cookie =JSON.stringify(nwuAppData[1].cookie);
+         alert(cookie);
+         app.request.get(`partials/scraper/announcements.php?a=${cookie}`
+
+        ,function(login1,response1,data1){
+             // The full html of the authenticated page
+
+             var login1=JSON.parse(login1);
+             if(login1[0].login==='true'){
+               alert("final Result");
+               var nwuAppData1=JSON.parse(data1.responseText);
+               alert("final Result");
+               alert(nwuAppData1);
+           }else{
+             alert('Could not login');
+           }
+         });
+     }else{
+       alert('Could not login');
+     }
+   });
+ }
+function announcementInfo(url){
+  var	anoun= JSON.parse(localStorage.getItem('announcements'));
+  var pass=JSON.parse(localStorage.getItem('credentials')).password;
+  var username=JSON.parse(localStorage.getItem('credentials')).username;
+  app.views.current.router.navigate('/academic/announcementinfo');
+  app.progressbar.show('multi');
+  var infourl=anoun[url].InfoUrl;
+  //infourl=infourl.slice(infourl.indexOf("tool/")+5,infourl.indexOf("?item"));
+  app.request.get(`partials/scraper/announcementInfo.php?a=${username}&b=${pass}&c=${encodeURIComponent(infourl)}`
+  ,function(login1,response1,data1){
+    app.progressbar.hide();
+      // The full html of the authenticated page
+
+      var login1=JSON.parse(login1);
+      if(login1[0].login==='true'){
+        var nwuAppData1=JSON.parse(data1.responseText);
+        document.getElementById("heading").innerHTML+=nwuAppData1[0].heading;
+        document.getElementById("anouninfoform").innerHTML+=nwuAppData1[0].form;
+        document.getElementById("anouninfomessage").innerHTML+=nwuAppData1[0].message;
+
+    }else{
+      alert('Could not access the data!');
+    }
+  });
+}
+
+function assignmentInfo(url){
+  var	assign= JSON.parse(localStorage.getItem('assignments'));
+  var pass=JSON.parse(localStorage.getItem('credentials')).password;
+  var username=JSON.parse(localStorage.getItem('credentials')).username;
+  app.views.current.router.navigate('/academic/assignmentinfo');
+  app.progressbar.show('multi');
+  var infourl=assign[url].assignment.InfoUrl;
+  //infourl=infourl.slice(infourl.indexOf("tool/")+5,infourl.indexOf("?item"));
+  app.request.get(`partials/scraper/assignmentInfo.php?a=${username}&c=${encodeURIComponent(infourl)}&b=${pass}`
+  ,function(login1,response1,data1){
+    app.progressbar.hide();
+      // The full html of the authenticated page
+
+      var login1=JSON.parse(login1);
+      if(login1[0].login==='true'){
+        var nwuAppData1=JSON.parse(data1.responseText);
+        document.getElementById("heading").innerHTML+=nwuAppData1[0].heading;
+        document.getElementById("infomessage").innerHTML+=nwuAppData1[0].instructions;
+
+    }else{
+      alert('Could not access the data!');
+    }
+  });
+}

@@ -10,6 +10,14 @@ window.routes = [
 		componentUrl: './partials/academic/subjects.html'
 	},
   {
+		path: '/academic/announcementInfo',
+		componentUrl: './partials/academic/announcementInfo.html'
+	},
+  {
+		path: '/academic/assignmentInfo',
+		componentUrl: './partials/academic/assignmentInfo.html'
+	},
+  {
 		path: '/academic/emergency',
 		componentUrl: './partials/academic/emergency.html'
 	},

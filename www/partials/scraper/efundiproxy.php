@@ -17,11 +17,11 @@ $ch = curl_init();
 //get the lt value in order to login
 curl_setopt($ch,CURLOPT_URL, $urlefundilogin);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch,CURLOPT_COOKIEFILE, $cookie1);
 curl_setopt($ch,CURLOPT_COOKIEJAR, $cookie1);
 $result3 = curl_exec($ch);
 $html= new simple_html_dom();
 $html->load($result3);
-
 $ltvalue=$html->find('input[name=lt]',0)->value;
 
 
@@ -86,6 +86,7 @@ foreach($starsubjects as $subject) {
       foreach(array_slice($new,1) as $subject1){
         $array2=array('subject'=>trim($subject->find('span',0)->plaintext),
         "title"=> trim($subject1->find('a',0)->title),
+        "InfoUrl"=> trim($subject1->find('a',0)->href),
         'due'=>trim($subject1->find('td[headers=dueDate]',0)->plaintext),
         'status'=>trim($subject1->find('td[headers=status]',0)->plaintext)
         );
@@ -119,6 +120,7 @@ foreach(array_slice($fields2,1) as $row){
    array_push($announcement,array("title"=>trim($row->find('th',0)->find('span',0)->plaintext),
   "author"=>trim($row->find('td[headers=author]',0)->plaintext),
   "date"=>trim($row->find('td[headers=date]',0)->plaintext),
+  "InfoUrl"=>trim($row->find('a',0)->href),
   "module"=>trim($row->find('td[headers=channel]',0)->plaintext)));
 
 }
@@ -128,6 +130,7 @@ curl_setopt($ch,CURLOPT_URL, $accounturl);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch,CURLOPT_FOLLOWLOCATION, true);
 curl_setopt($ch,CURLOPT_POST, false);
+curl_setopt ($ch, CURLOPT_COOKIEFILE, $cookie1);
 curl_setopt($ch,CURLOPT_COOKIEJAR, $cookie1);
 $result3 = curl_exec($ch);
 $html->load($result3);
@@ -146,7 +149,7 @@ echo json_encode($student);
   }else{
   echo '[{"login":"false"}]';
   }
-curl_close($ch);
+
 
 
 
