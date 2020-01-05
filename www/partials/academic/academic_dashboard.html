@@ -24,11 +24,12 @@
 				<div class="right">
 					<a id="assignmentduetoday"  data-popup=".popup" class="link icon-only popup-open">
 						<i class="icon f7-icons ios-only">bell<span class="badge color-red">5</span></i>
-						<i class="fas fa-bell md-only"></i><span class="badge color-red">5</span></i>
+						<i class="fas fa-bell md-only"></i>
+						<span class="badge color-red">5</span>
 					</a>
-					<a href="#" class="link icon-only" @click="openThemeSelector">
-						<i class="icon f7-icons ios-only">paintbrush</i>
-						<i class="fas fa-palette md-only"></i>
+					<a href="/settings" class="link icon-only">
+						<i class="icon f7-icons ios-only">settings</i>
+						<i class="fas fa-wrench md-only"></i>
 					</a>
 				</div>
 
@@ -71,12 +72,7 @@
 					<span class="tabbar-label">Timeline</span>
 
 				</a>
-				<a href="#tab-custom1" class="tab-link">
-					<i class="icon f7-icons ios-only">settings</i>
-					<i class="fas fa-wrench md-only"></i>
-					<span class="tabbar-label">Settings</span>
-
-				</a>
+		
 
 			</div>
 		</div>
@@ -188,7 +184,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-100 margin-top">
+									<div class="col-100 tablet-50 margin-top">
 										<div class="card card-stats" style="background-image: linear-gradient(135deg, #04BEFE 0%, #4481EB 100%);">
 											<div class="card-content card-content-padding">
 												<div class="card-stats-icon">
@@ -203,6 +199,25 @@
 												</div>
 											</div>
 										</div>
+									</div>
+
+									<div class="col-100 tablet-50 margin-top">
+										<a href="/academic/tasks">
+										<div class="card card-stats" style="background-image: linear-gradient(135deg, #94D82D 0%, #51CF66 100%);">
+											<div class="card-content card-content-padding">
+												<div class="card-stats-icon">
+													<i class="fa-stack fa-2x">
+														<span class="fas fa-circle fa-stack-2x"></span>
+														<span class="fas fa-award fa-stack-1x fa-inverse"></span>
+													</i>
+												</div>
+												<div class="card-stats-info">
+
+													<div class="card-stats-value">Tasks</div>
+												</div>
+											</div>
+										</div>
+										</a>
 									</div>
 								</div>
 							</div>
@@ -249,7 +264,7 @@
 									</div>
 									<div class="col">
 										<a href="/academic/emergency" >
-										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #1C7ED6 0%, #339AF0 100%);">
+										<div class="card card-vitals" style="background-image: linear-gradient(135deg, #C92A2A 0%, #FF6B6B 100%);">
 											<div class="card-content card-content-padding">
 													<i class="fas fa-exclamation"></i>
 												<span>Emergency</span>
@@ -344,165 +359,7 @@
 
 
 					</div>
-					<div id="tab-custom1" class="page-content tab" >
-						<div class="block-title" data-i18n="help">Help</div>
-						<div class="list inset">
-							<ul>
-								<li>
-									<a href="/screens/about" class="item-link">
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-title" data-i18n="about">About</div>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/screens/faq" class="item-link">
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-title" data-i18n="faq">FAQ</div>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/academic/subjects" class="item-link">
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-title" data-i18n="subjects">Change Subjects</div>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/screens/contact-us" class="item-link">
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-title" data-i18n="contact-us">Contact Us</div>
-											</div>
-										</div>
-									</a>
-								</li>
-							</ul>
-						</div>
 
-
-
-						<div class="block-title" data-i18n="app-title">{{$root.config.app.title}}</div>
-						<div class="list inset">
-							<ul>
-								<li>
-									<div class="item-content">
-										<div class="item-media">
-											<i class="fa-stack">
-												<span class="fas fa-square fa-stack-2x text-color-blue ios-only"></span>
-												<span class="fas fa-circle fa-stack-2x text-color-blue md-only"></span>
-												<span class="fas fa-info fa-stack-1x fa-inverse"></span>
-											</i>
-										</div>
-										<div class="item-inner">
-											<div class="item-title" data-i18n="version">Version</div>
-											<div class="item-after">{{appVersion}}</div>
-										</div>
-									</div>
-								</li>
-								<!--<li>
-									<a href="#" class="item-link">
-										<div class="item-content">
-											<div class="item-media">
-												<i class="fa-stack">
-													<span class="fas fa-square fa-stack-2x text-color-yellow ios-only"></span>
-													<span class="fas fa-circle fa-stack-2x text-color-yellow md-only"></span>
-													<span class="fas fa-star fa-stack-1x fa-inverse"></span>
-												</i>
-											</div>
-											<div class="item-inner">
-												<div class="item-title" data-i18n="rate-app">Rate App</div>
-											</div>
-										</div>
-									</a>
-								</li>-->
-								<li>
-									<a href="#" class="item-link" @click="showInfoAlertDialog">
-										<div class="item-content">
-											<div class="item-media">
-												<i class="fa-stack">
-													<span class="fas fa-square fa-stack-2x text-color-green ios-only"></span>
-													<span class="fas fa-circle fa-stack-2x text-color-green md-only"></span>
-													<span class="fas fa-share-alt fa-stack-1x fa-inverse"></span>
-												</i>
-											</div>
-											<div class="item-inner">
-												<div class="item-title" data-i18n="share-app">Share App</div>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/screens/feedback" class="item-link">
-										<div class="item-content">
-											<div class="item-media">
-												<i class="fa-stack">
-													<span class="fas fa-square fa-stack-2x text-color-pink ios-only"></span>
-													<span class="fas fa-circle fa-stack-2x text-color-pink md-only"></span>
-													<span class="fas fa-comment-dots fa-stack-1x fa-inverse"></span>
-												</i>
-											</div>
-											<div class="item-inner">
-												<div class="item-title">Leave Feedback</div>
-											</div>
-										</div>
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="block-title" data-i18n="legal">Legal</div>
-						<div class="list inset">
-							<ul>
-								<li>
-									<a href="/screens/terms" class="item-link">
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-title" data-i18n="terms-of-use">Terms of Use</div>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/screens/privacy" class="item-link">
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-title" data-i18n="privacy-policy">Privacy Policy</div>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/screens/cookies" class="item-link">
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-title" data-i18n="cookie-policy">Cookie Policy</div>
-											</div>
-										</div>
-									</a>
-								</li>
-								<!--<li>
-									<a href="#" class="item-link">
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-title" data-i18n="acknowledgements">Acknowledgements</div>
-											</div>
-										</div>
-									</a>
-								</li>-->
-							</ul>
-						</div>
-
-
-
-					</div>
 				</div>
 			</div>
 
@@ -677,114 +534,6 @@
 	return {
 
 		methods: {
-			openThemeSelector: function() {
-				var self = this;
-				var themeSelector = app.actions.create({
-					grid: true,
-					buttons: [
-						{
-							label: true,
-							text: i18next.t('change-theme')
-						},
-						{
-							icon: '<i class="fas fa-3x fa-circle text-color-red"></i>',
-							text: i18next.t('red'),
-							onClick: function() {
-								app.utils.theme.setColor('red');
-								setAnnouncements();
-								assignmentsDue();
-								examtimeline();
-							}
-						},
-						{
-							icon: '<i class="fas fa-3x fa-circle text-color-green"></i>',
-							text: i18next.t('green'),
-							onClick: function() {
-								app.utils.theme.setColor('green');
-								setAnnouncements();
-								assignmentsDue();
-								examtimeline();
-							}
-						},
-						{
-							icon: '<i class="fas fa-3x fa-circle text-color-blue"></i>',
-							text: i18next.t('blue'),
-							onClick: function() {
-								app.utils.theme.setColor('blue');
-								setAnnouncements();
-								assignmentsDue();
-								examtimeline();
-							}
-						},
-						{
-							icon: '<i class="fas fa-3x fa-circle text-color-pink"></i>',
-							text: i18next.t('pink'),
-							onClick: function() {
-								app.utils.theme.setColor('pink');
-								setAnnouncements();
-								assignmentsDue();
-								examtimeline();
-							}
-						},
-						{
-							icon: '<i class="fas fa-3x fa-circle text-color-yellow"></i>',
-							text: i18next.t('yellow'),
-							onClick: function() {
-								app.utils.theme.setColor('yellow');
-								setAnnouncements();
-								assignmentsDue();
-								examtimeline();
-							}
-						},
-						{
-							icon: '<i class="fas fa-3x fa-circle text-color-orange"></i>',
-							text: i18next.t('orange'),
-							onClick: function() {
-								app.utils.theme.setColor('orange');
-								setAnnouncements();
-								assignmentsDue();
-								examtimeline();
-							}
-						},
-						{
-							icon: '<i class="fas fa-3x fa-circle text-color-gray"></i>',
-							text: i18next.t('gray'),
-							onClick: function() {
-								app.utils.theme.setColor('gray');
-								setAnnouncements();
-								assignmentsDue();
-								examtimeline();
-							}
-						},
-						{
-							icon: '<i class="fas fa-3x fa-circle text-color-black"></i>',
-							text: i18next.t('black'),
-							onClick: function() {
-								app.utils.theme.setColor('black');
-								setAnnouncements();
-								assignmentsDue();
-								examtimeline();
-							}
-						}
-					]
-				});
-				themeSelector.open();
-
-		},
-		showInfoAlertDialog: function() {
-			var self = this;
-			var dialog = app.dialog.create({
-				content: '<div class="block no-margin margin-top text-align-center"><i class="fa-stack fa-3x"><span class="fas fa-stack-2x fa-circle text-color-green"></span><span class="fas fa-stack-1x fa-inverse fa-check"></span></i><p>copy and share URL: studenthive.app</p></div>',
-				buttons: [
-					{
-						text: 'Done',
-						bold: true,
-						color: 'green'
-					}
-				]
-			});
-			dialog.open();
-		},
 
 			loadData: function() {
 				var self = this;

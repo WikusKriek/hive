@@ -6,6 +6,10 @@ window.routes = [
 		componentUrl: './partials/academic/imageSelector.html'
 	},
   {
+		path: '/academic/tasks',
+		componentUrl: './partials/academic/tasks.html'
+	},
+  {
 		path: '/academic/subjects',
 		componentUrl: './partials/academic/subjects.html'
 	},
@@ -617,10 +621,6 @@ window.routes = [
 				componentUrl: './partials/screens/recipe.html'
 			},
 			{
-				path: '/settings',
-				componentUrl: './partials/screens/settings.html'
-			},
-			{
 				path: '/signup',
 				componentUrl: './partials/screens/signup.html'
 			},
@@ -666,6 +666,10 @@ window.routes = [
 		path: '/themes',
 		componentUrl: './partials/themes.html'
 	},
+  {
+    path: '/settings',
+    componentUrl: './partials/settings.html'
+  },
 	{
 		path: '/web-apis',
 		componentUrl: './partials/web-apis.html',
