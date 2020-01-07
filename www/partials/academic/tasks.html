@@ -87,6 +87,7 @@
 				var self = this;
 				alasql.promise('CREATE LOCALSTORAGE DATABASE IF NOT EXISTS todo')
 				.then(function() {
+					
 					return alasql.promise('ATTACH LOCALSTORAGE DATABASE todo');
 				})
 				.then(function() {

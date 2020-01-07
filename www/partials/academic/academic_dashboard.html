@@ -29,7 +29,7 @@
 					</a>
 					<a href="/settings" class="link icon-only">
 						<i class="icon f7-icons ios-only">settings</i>
-						<i class="fas fa-wrench md-only"></i>
+						<i class="fas fa-cog md-only"></i>
 					</a>
 				</div>
 
@@ -44,7 +44,9 @@
 
 			  gtag('config', 'UA-151415904-1');
 			</script>
+
 		</div>
+
 		<div class="toolbar tabbar tabbar-labels toolbar-bottom-md" >
 			<div class="toolbar-inner">
 
@@ -56,7 +58,7 @@
 				</a>
 				<a href="#tab-announcements" class="tab-link">
 					<i class="icon f7-icons ios-only">alert</i>
-					<i class="fas fa-envelope-open-text md-only" ></i>
+					<i class="fas fa-bullhorn md-only" ></i>
 					<span class="tabbar-label">Announ</span>
 
 				</a>
@@ -72,7 +74,7 @@
 					<span class="tabbar-label">Timeline</span>
 
 				</a>
-		
+
 
 			</div>
 		</div>
@@ -146,8 +148,8 @@
 							<div class="block block-stats">
 								<div class="row">
 
-									<div class="col-100 tablet-50 margin-top">
-										<a href="/academic/examresults">
+									<div onclick="app.views.current.router.navigate('/academic/examresults')" class="col-100 tablet-50 margin-top">
+
 										<div class="card card-stats" style="background-image: linear-gradient(135deg, #5F72BD 0%, #9B23EA 100%);">
 											<div class="card-content card-content-padding">
 												<div class="card-stats-icon">
@@ -162,7 +164,7 @@
 												</div>
 											</div>
 										</div>
-										</a>
+
 									</div>
 
 									<div class="col-100 tablet-50 margin-top">
@@ -184,8 +186,11 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-100 tablet-50 margin-top">
+							<a href="#tab-assignments" class="tab-link col-100 tablet-50 margin-top">
+									<div class="col-100 tablet-100">
+
 										<div class="card card-stats" style="background-image: linear-gradient(135deg, #04BEFE 0%, #4481EB 100%);">
+
 											<div class="card-content card-content-padding">
 												<div class="card-stats-icon">
 													<i class="fa-stack fa-2x">
@@ -198,17 +203,21 @@
 													<div id="assignmentsdue" class="card-stats-value"></div>
 												</div>
 											</div>
-										</div>
-									</div>
 
-									<div class="col-100 tablet-50 margin-top">
-										<a href="/academic/tasks">
+										</div>
+
+									</div>
+									</a>
+
+
+									<div onclick="app.views.current.router.navigate('/academic/tasks')" class="col-100 tablet-50 margin-top">
+
 										<div class="card card-stats" style="background-image: linear-gradient(135deg, #94D82D 0%, #51CF66 100%);">
 											<div class="card-content card-content-padding">
 												<div class="card-stats-icon">
 													<i class="fa-stack fa-2x">
 														<span class="fas fa-circle fa-stack-2x"></span>
-														<span class="fas fa-award fa-stack-1x fa-inverse"></span>
+														<span class="fas fa-clipboard-check fa-stack-1x fa-inverse"></span>
 													</i>
 												</div>
 												<div class="card-stats-info">
@@ -217,12 +226,12 @@
 												</div>
 											</div>
 										</div>
-										</a>
+
 									</div>
 								</div>
 							</div>
 
-							<div class="card" width="100%">
+							<div onclick="app.views.current.router.navigate('/academic/subjects')" class="card" width="100%">
 
 
 								<div class="block-title">Timetable</div>

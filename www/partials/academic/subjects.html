@@ -52,6 +52,30 @@
 
 					</ul>
 				</div>
+				
+				<div class="block-title">Timetable</div>
+
+					<table class="time-table" id="table1" >
+
+						<thead>
+							<tr>
+								<th class="label-cell">Time</th>
+								<th class="numeric-cell">M</th>
+								<th class="numeric-cell">T</th>
+								<th class="numeric-cell">W</th>
+								<th class="numeric-cell">T</th>
+								<th class="numeric-cell">F</th>
+							</tr>
+						</thead>
+						<tbody id="timetable1">
+
+
+
+
+
+						</tbody >
+					</table>
+
 
 			</div>
 			<div class="block block-strong">
@@ -172,6 +196,8 @@
 				var self = this;
 				self.loadlist();
 				self.setradio();
+				populateDatabaseTimeTable("timetabledefault");
+				drawTimeTable("timetabledefault");
 			}
 		}
 	}
