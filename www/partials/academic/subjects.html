@@ -52,8 +52,8 @@
 
 					</ul>
 				</div>
-				
-				<div class="block-title">Timetable</div>
+
+				<div class="block-title">Default</div>
 
 					<table class="time-table" id="table1" >
 
@@ -68,6 +68,49 @@
 							</tr>
 						</thead>
 						<tbody id="timetable1">
+
+
+
+
+
+						</tbody >
+					</table>
+					<div class="block-title">Custom1</div>
+
+					<table class="time-table" id="table2" >
+
+						<thead>
+							<tr>
+								<th class="label-cell">Time</th>
+								<th class="numeric-cell">M</th>
+								<th class="numeric-cell">T</th>
+								<th class="numeric-cell">W</th>
+								<th class="numeric-cell">T</th>
+								<th class="numeric-cell">F</th>
+							</tr>
+						</thead>
+						<tbody id="timetable2">
+
+
+
+
+
+						</tbody >
+					</table>
+<div class="block-title">Custom2</div>
+					<table class="time-table" id="table3" >
+
+						<thead>
+							<tr>
+								<th class="label-cell">Time</th>
+								<th class="numeric-cell">M</th>
+								<th class="numeric-cell">T</th>
+								<th class="numeric-cell">W</th>
+								<th class="numeric-cell">T</th>
+								<th class="numeric-cell">F</th>
+							</tr>
+						</thead>
+						<tbody id="timetable3">
 
 
 
@@ -150,6 +193,65 @@
 			</script>
 
 		</div>
+		<div class="popup popup-tablet-fullscreen popup-timeTable">
+			<div class="view">
+				<div class="page">
+
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="left ios-only">
+								<a href="#" class="link popup-close">
+									<span data-i18n="close">Close</span>
+								</a>
+							</div>
+							<div class="title">Popup</div>
+							<div class="right md-only">
+								<a href="#" class="link icon-only popup-close">
+									<i class="icon material-icons md-only">close</i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+
+						<div class="list no-hairlines no-hairlines-between">
+			        <ul>
+								<li class="item-content item-input inline-label">
+			            <div class="item-inner">
+			              <div class="item-title item-label">Subject Name</div>
+			              <div class="item-input-wrap">
+			                <input id="subjectNameInput" type="text" placeholder="" />
+			                <span class="input-clear-button"></span>
+			              </div>
+			            </div>
+			          </li>
+								<li class="item-content item-input inline-label">
+			            <div class="item-inner">
+			              <div class="item-title item-label">Venue</div>
+			              <div class="item-input-wrap">
+			                <input id="venueInput" type="text" />
+			                <span class="input-clear-button"></span>
+			              </div>
+			            </div>
+			          </li>
+						<li class="item-content item-input">
+	            <div class="item-inner">
+	              <div class="item-title item-floating-label">Color</div>
+	              <div class="item-input-wrap">
+	                <input id="colourInput" type="color" />
+	              </div>
+	            </div>
+	          </li>
+
+
+					</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
 
 	</div>
 </template>
@@ -197,7 +299,9 @@
 				self.loadlist();
 				self.setradio();
 				populateDatabaseTimeTable("timetabledefault");
-				drawTimeTable("timetabledefault");
+				drawTimeTable("timetabledefault","timetable1");
+				drawTimeTable("timetablecustom1","timetable2");
+				drawTimeTable("timetablecustom2","timetable3");
 			}
 		}
 	}

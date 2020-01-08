@@ -163,27 +163,59 @@ alasql.promise('DETACH DATABASE student')
 });
 };
 
-function drawTimeTable(tablename){
+function drawTimeTable(tablename,timetableid){
   var self = this;
   var cellObject;
   var div;
   alasql('ATTACH LOCALSTORAGE DATABASE student');
   alasql('USE DATABASE student');
-let timetable = document.getElementById("timetable1");
+let timetable = document.getElementById(timetableid);
 for (i = 6; i >= 1; i--){
   var row = timetable.insertRow(0);
   for (j = 5; j >= 0; j--){
     var cel1 = row.insertCell(0);
-    cellObject=alasql(`SELECT subject,venue,colour FROM ${tablename} WHERE time=? AND day=?`, [i,j]);
+    cellObject=alasql(`SELECT subject,venue,colour,cell FROM ${tablename} WHERE time=? AND day=?`, [i,j]);
+    cel1.setAttribute('id', cellObject[0].cell);
+    cel1.addEventListener('click',  function(){
+      localStorage.setItem('cellid', this.id);
+      if(tablename!=="timetabledefault"){
+        cellClicked(tablename);
+      }
+});
+    //append cel1 as client coz needs to be appended every time
     if (cellObject.length) {
-          div = document.createElement("div");
-
-      div.innerHTML = cellObject[0].subject.trim()+"<br />" ;
-      div.innerHTML +=cellObject[0].venue.trim() ;
-      div.style.backgroundColor=cellObject[0].colour;
-      cel1.appendChild(div);
+      cel1.innerHTML = cellObject[0].subject.trim()+"<br />" ;
+      cel1.innerHTML +=cellObject[0].venue.trim() ;
+      cel1.style.backgroundColor=cellObject[0].colour;
     }
   }}
   alasql('DETACH DATABASE student');
+
+};
+
+function cellClicked(tablename){
+  var popup = app.popup.create({
+    el: '.popup-timeTable',
+    on: {
+      opened: function() {
+        alasql('ATTACH LOCALSTORAGE DATABASE student');
+        alasql('USE DATABASE student');
+        cellObject=alasql(`SELECT subject,venue,colour FROM ${tablename} WHERE cell=?`, [parseInt(localStorage.getItem("cellid"))]);
+        console.log(cellObject);
+        document.getElementById("subjectNameInput").setAttribute("value",cellObject[0].subject.trim());
+        document.getElementById("venueInput").setAttribute("value",cellObject[0].venue.trim());
+        document.getElementById("colourInput").setAttribute("value",cellObject[0].colour.trim());
+console.log("here");
+      },
+      closed: function() {
+
+          alasql(`UPDATE ${tablename} SET subject=?, venue=?, colour=?  WHERE cell=?`, [document.getElementById("subjectNameInput").value, document.getElementById("venueInput").value, document.getElementById("colourInput").value, parseInt(localStorage.getItem("cellid"))]);
+        console.log(alasql(`SELECT * FROM ${tablename}`));
+        alasql('DETACH DATABASE student');
+      }
+    }
+  });
+  popup.open();
+
 
 };

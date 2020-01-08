@@ -1,0 +1,195 @@
+<template>
+	<div class="page">
+
+
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="left ios-only">
+								<a href="#" class="link back" @click="closeDatabase">
+									<span data-i18n="close">Close</span>
+								</a>
+							</div>
+							<div class="title">Edit Cell</div>
+							<div class="right md-only">
+								<a href="#" class="link back icon-only" @click="closeDatabase">
+									<i class="icon material-icons">close</i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+
+						<div class="list no-hairlines no-hairlines-between">
+			        <ul>
+								<li class="item-content item-input inline-label">
+			            <div class="item-inner">
+			              <div class="item-title item-label">Subject Name</div>
+			              <div class="item-input-wrap">
+			                <input id="sunjectNameInput" type="text" placeholder="" />
+			                <span class="input-clear-button"></span>
+			              </div>
+			            </div>
+			          </li>
+								<li class="item-content item-input inline-label">
+			            <div class="item-inner">
+			              <div class="item-title item-label">Venue</div>
+			              <div class="item-input-wrap">
+			                <input id="venueInput" type="text" />
+			                <span class="input-clear-button"></span>
+			              </div>
+			            </div>
+			          </li>
+						<li class="item-content item-input">
+	            <div class="item-inner">
+	              <div class="item-title item-floating-label">Color</div>
+	              <div class="item-input-wrap">
+	                <input type="color" />
+	              </div>
+	            </div>
+	          </li>
+
+
+					</div>
+					</div>
+
+
+
+				</div>
+
+</template>
+
+
+
+<script>
+	return {
+
+		methods: {
+			openDatabase: function() {
+				var self = this;
+				alasql.promise('CREATE LOCALSTORAGE DATABASE IF NOT EXISTS todo')
+				.then(function() {
+
+					return alasql.promise('ATTACH LOCALSTORAGE DATABASE todo');
+				})
+				.then(function() {
+					return alasql.promise('USE DATABASE todo');
+				})
+				.then(function() {
+					return alasql.promise('CREATE TABLE IF NOT EXISTS tasks (id INT AUTO_INCREMENT PRIMARY KEY, title STRING, is_complete BOOLEAN)');
+				})
+				.then(function() {
+					self.populateTodoList();
+				})
+				.catch(function(error) {
+					self.showError(error);
+				});
+			},
+			populateTodoList: function() {
+				var self = this;
+				alasql.promise('SELECT * FROM tasks')
+				.then(function(tasks) {
+					if (tasks.length) {
+						self.$setState({
+							tasks: tasks
+						});
+					}
+					else {
+						self.$setState({
+							tasks: null
+						});
+					}
+				})
+			},
+			addTask: function() {
+				var self = this;
+				app.dialog.prompt(
+					'',
+					'Add Task',
+					function(title) {
+						if (title.trim().length) {
+							alasql.promise('INSERT INTO tasks (title, is_complete) VALUES (?, ?)', [title, 0])
+							.then(function() {
+								self.populateTodoList();
+							})
+							.catch(function(error) {
+								self.populateTodoList();
+							});
+						}
+					}
+				);
+			},
+			editTask: function(event) {
+				var self = this;
+				var target = event.target.tagName === 'A' ? event.target : event.currentTarget;
+				var id = target.dataset.id;
+				var title = target.dataset.title;
+				app.dialog.prompt(
+					'',
+					'Edit Task',
+					function(title) {
+						if (title.trim().length) {
+							alasql.promise('UPDATE tasks SET title=? WHERE id=?', [title, parseInt(id)])
+							.then(function() {
+								self.populateTodoList();
+							});
+						}
+					},
+					function() {},
+					title
+				);
+			},
+			deleteTask: function(event) {
+				var self = this;
+				var target = event.target.tagName === 'A' ? event.target : event.currentTarget;
+				var id = target.dataset.id;
+				alasql.promise('DELETE FROM tasks WHERE id=?', [parseInt(id)])
+				.then(function() {
+					self.populateTodoList();
+				});
+			},
+			setTaskStatus: function(event) {
+				var self = this;
+				var id = event.target.dataset.id;
+				var is_complete = event.target.checked ? 1 : 0;
+				alasql.promise('UPDATE tasks SET is_complete=? WHERE id=?', [parseInt(is_complete), parseInt(id)])
+				.then(function(result) {
+					if (result > 0) {
+						event.target.value = is_complete;
+					}
+					else {
+						event.target.checked = !event.target.checked;
+					}
+				})
+				.catch(function(error) {
+					event.target.checked = !event.target.checked;
+				});
+			},
+			closeDatabase: function() {
+				var self = this;
+				alasql.promise('DETACH DATABASE todo')
+				.then(function() {
+					self.$setState({
+						tasks: null
+					});
+				})
+				.catch(function(error) {
+					self.showError(error);
+				});
+			},
+			showError: function(error) {
+				var self = this;
+				app.toast.show({
+					text: error,
+					cssClass: 'bg-color-red'
+				});
+			}
+		},
+		on: {
+			pageInit: function() {
+				var self = this;
+				self.openDatabase();
+			}
+		}
+	}
+</script>

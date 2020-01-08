@@ -6,6 +6,10 @@ window.routes = [
 		componentUrl: './partials/academic/imageSelector.html'
 	},
   {
+		path: '/academic/editTimeTableCell',
+		componentUrl: './partials/academic/editTimeTableCell.html'
+	},
+  {
 		path: '/academic/tasks',
 		componentUrl: './partials/academic/tasks.html'
 	},
