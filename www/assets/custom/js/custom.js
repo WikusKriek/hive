@@ -26,6 +26,7 @@ function checkbox(){
       localStorage.removeItem('custom1');
       localStorage.setItem('custom1', JSON.stringify(obj));
     }
+    populateDatabaseTimeTable("timetablecustom1",'custom1');
   }else{
     if(localStorage.getItem('custom2')==null){
       localStorage.setItem('custom2', JSON.stringify(obj));
@@ -33,13 +34,21 @@ function checkbox(){
       localStorage.removeItem('custom2');
       localStorage.setItem('custom2', JSON.stringify(obj));
     }
+    populateDatabaseTimeTable("timetablecustom2",'custom2');
   }
 var cus1 = JSON.parse(localStorage.getItem('custom1'));
 var cus2 = JSON.parse(localStorage.getItem('custom2'));
 
 
 }
-);};
+);
+app.toast.show({
+  icon: '<i class="icon fas fa-lg fa-check"></i>',
+  text: 'Subjects added',
+  position: 'bottom',
+  cssClass: 'toast-round bg-color-green'
+});
+};
 
 function generatetimetablelocal(){
 console.log("here");
@@ -254,4 +263,14 @@ console.log("here");
         alert('Could not login');
       }
     });
+  };
+
+  function forceSWupdate () {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.update()
+        }
+      })
+    }
   };

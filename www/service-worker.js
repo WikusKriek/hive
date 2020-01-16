@@ -46,3 +46,10 @@ workbox.routing.registerRoute(
     cacheName: 'cache-font'
   })
 );
+
+workbox.routing.registerRoute(
+  /.*\.(?:php)/,
+  workbox.strategies.staleWhileRevalidate({
+    cacheName: 'cache-php'
+  })
+);

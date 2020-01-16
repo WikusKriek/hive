@@ -10,9 +10,9 @@ window.config = {};
 
 window.config.app = {
 	id: 'website.hive.classic',
-	version: '1.0.1',
+	version: '1.0.2',
 	title: 'Hive',
-	tagline: 'bee better',
+	tagline: 'Bee extraordinary',
 	logo: 'assets/custom/img/logo.svg'
 };
 
@@ -34,7 +34,7 @@ window.config.algoliaPlaces = {
 */
 
 window.config.envato = {
-	itemUrl: 'https://themeforest.net/item/nectar-mobile-web-app-kit/20466093?ref=pmsgz'
+	itemUrl: 'https://studenthive.app'
 };
 
 /*

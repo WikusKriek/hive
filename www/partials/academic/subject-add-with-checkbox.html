@@ -34,7 +34,7 @@
 			<div class="block block-strong">
 				<div class="row">
 					<div class="col">
-						<a  class="button button-fill button-raised button-round" onclick='self.checkbox();'>Submit Selected</a>
+						<a  class="button button-fill button-raised button-round" onclick='self.checkbox();'>Add Subjects</a>
 					</div>
 
 				</div>
@@ -67,15 +67,7 @@
 					</ul>
 				</div>
 			</div>
-			<script type="text/javascript">
 
-				$('input[type=checkbox][name=subject]').onClick(function() {
-			alert("clicked");
-			});
-
-
-
-			</script>
 
 		</div>
 
@@ -93,8 +85,15 @@
 
 			loadJson: function() {
 				var self = this;
+				if(localStorage.getItem('campus')==="Potchefstroom"){
+			    var subjectJson="assets/custom/dataset/Potch_Final.json";
+			  }else if(localStorage.getItem('campus')==="Mafikeng"){
+			    var subjectJson="assets/custom/dataset/Mafikeng_Final.json";
+			  }else{
+			  var subjectJson="assets/custom/dataset/Vaal_Final.json";
+			  }
 				app.request.json(
-					'assets/custom/dataset/Potch_Final.json',
+					subjectJson,
 					function(data) {
 						self.$setState({
 							countries: data

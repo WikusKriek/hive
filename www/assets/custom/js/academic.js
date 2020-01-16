@@ -1,7 +1,14 @@
 function defaultsubjectlist(){
+  if(localStorage.getItem('campus')==="Potchefstroom"){
+    var subjectJson="assets/custom/dataset/Potch_Final.json";
+  }else if(localStorage.getItem('campus')==="Mafikeng"){
+    var subjectJson="assets/custom/dataset/Mafikeng_Final.json";
+  }else{
+  var subjectJson="assets/custom/dataset/Vaal_Final.json";
+  }
   if(localStorage.getItem("subjects")!=null){
   app.request.json(
-    'assets/custom/dataset/Potch_Final.json',
+    subjectJson,
     function(data) {
       var cleaned='';
       var obj=[];

@@ -4,7 +4,7 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="left">
-					<a href="#" class="link back">
+					<a href="#" class="link back" onclick="location.href();">
 						<i class="icon icon-back"></i>
 						<span class="ios-only" data-i18n="back">Back</span>
 					</a>
@@ -46,14 +46,31 @@
 				</label>
 				<span>Use Default subject List</span>
 
+				<div class="list accordion-list">
+					<ul>
+				<li class="accordion-item">
+					<a href="#" class="item-link">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title">Default subject list</div>
+							</div>
+						</div>
+					</a>
+					<div class="accordion-item-content">
+						<div class="block">
+							<div class="list simple-list">
+								<ul id='defaultlist'>
 
-					<div class="list simple-list">
-						<ul id='defaultlist'>
-
-					</ul>
+							</ul>
+						</div>
+							</div>
+					</div>
+				</li>
+				</ul>
 				</div>
 
-				<div class="block-title">Default</div>
+
+				<div class="block-title">Default class Timetable</div>
 
 					<table class="time-table" id="table1" >
 
@@ -75,49 +92,8 @@
 
 						</tbody >
 					</table>
-					<div class="block-title">Custom1</div>
-
-					<table class="time-table" id="table2" >
-
-						<thead>
-							<tr>
-								<th class="label-cell">Time</th>
-								<th class="numeric-cell">M</th>
-								<th class="numeric-cell">T</th>
-								<th class="numeric-cell">W</th>
-								<th class="numeric-cell">T</th>
-								<th class="numeric-cell">F</th>
-							</tr>
-						</thead>
-						<tbody id="timetable2">
 
 
-
-
-
-						</tbody >
-					</table>
-<div class="block-title">Custom2</div>
-					<table class="time-table" id="table3" >
-
-						<thead>
-							<tr>
-								<th class="label-cell">Time</th>
-								<th class="numeric-cell">M</th>
-								<th class="numeric-cell">T</th>
-								<th class="numeric-cell">W</th>
-								<th class="numeric-cell">T</th>
-								<th class="numeric-cell">F</th>
-							</tr>
-						</thead>
-						<tbody id="timetable3">
-
-
-
-
-
-						</tbody >
-					</table>
 
 
 			</div>
@@ -139,11 +115,37 @@
 				<div class="block block-strong">
 					<div class="row">
 						<div class="col">
-							<a href="/academic/addremove" id="editcustom1" class="button button-fill button-raised button-round"onclick='buttonnum(1);'>Edit Custom 1</a>
+							<a href="/academic/addremove" id="editcustom1" class="button button-fill button-raised button-round"onclick='buttonnum(1);'>Add subjects to Custom 1</a>
 						</div>
-
+						<div class="col">
+							<a   class="button button-fill button-raised button-round"onclick='addsubjects(1);'>Redraw Table</a>
+						</div>
 					</div>
 				</div>
+
+				<div class="block-title">Custom Timetable 1</div>
+
+				<table class="time-table" id="table2" >
+
+					<thead>
+						<tr>
+							<th class="label-cell">Time</th>
+							<th class="numeric-cell">M</th>
+							<th class="numeric-cell">T</th>
+							<th class="numeric-cell">W</th>
+							<th class="numeric-cell">T</th>
+							<th class="numeric-cell">F</th>
+						</tr>
+					</thead>
+					<tbody id="timetable2">
+
+
+
+
+
+					</tbody >
+				</table>
+
 			</div>
 			<div class="block block-strong">
 
@@ -165,11 +167,36 @@
 				<div class="block block-strong">
 					<div class="row">
 						<div class="col">
-							<a href="/academic/addremove"id="editcustom2" class="button button-fill button-raised button-round"onclick='buttonnum(2);'>Edit Custom 2</a>
+							<a href="/academic/addremove"id="editcustom2" class="button button-fill button-raised button-round"onclick='buttonnum(2);'>Add subjects to Custom 2</a>
 						</div>
-
+						<div class="col">
+							<a   class="button button-fill button-raised button-round"onclick='addsubjects(2);'>Redraw Table</a>
+						</div>
 					</div>
 				</div>
+
+				<div class="block-title">Custom Timetable 2</div>
+									<table class="time-table" id="table3" >
+
+										<thead>
+											<tr>
+												<th class="label-cell">Time</th>
+												<th class="numeric-cell">M</th>
+												<th class="numeric-cell">T</th>
+												<th class="numeric-cell">W</th>
+												<th class="numeric-cell">T</th>
+												<th class="numeric-cell">F</th>
+											</tr>
+										</thead>
+										<tbody id="timetable3">
+
+
+
+
+
+										</tbody >
+									</table>
+
 			</div>
 			<script type="text/javascript">
 
@@ -235,14 +262,49 @@
 			              </div>
 			            </div>
 			          </li>
-						<li class="item-content item-input">
-	            <div class="item-inner">
-	              <div class="item-title item-floating-label">Color</div>
-	              <div class="item-input-wrap">
-	                <input id="colourInput" type="color" />
-	              </div>
-	            </div>
-	          </li>
+
+											</ul>
+						<div class="block block-strong">
+							<div class="item-title item-label">Color Select</div>
+							<div class="row margin-top">
+								<div class="col">
+									<button id="evenbutton" onclick="setcolour('even');" class="button button-fill color-red">Empty</button>
+								</div>
+								<div class="col">
+									<button id="oddbutton" onclick="setcolour('odd');" class="button button-fill color-green">Empty-Dark</button>
+								</div>
+								</div>
+								<div class="row margin-top">
+								<div class="col">
+									<button id="previousbutton" onclick="setcolour('previous');" class="button button-fill color-green">Previous</button>
+								</div>
+								<div class="col">
+									<button id="fromcellbutton" onclick="setcolour('fromcell');" class="button button-fill color-green">Active</button>
+								</div>
+							</div>
+
+				        <ul>
+							<li class="item-content item-input">
+											<div class="item-inner">
+												<div class="item-title item-floating-label">Color Selector</div>
+												<div class="item-input-wrap">
+													<input id="colourInput" type="color" value="#ff4545" onchange="setcolour('customcolor');"/>
+												</div>
+											</div>
+										</li>
+										</ul>
+							</div>
+
+							</div>
+
+
+	<div class="block block-strong">
+			<div class="col">
+				<button onclick="savecolor()" id="colorbutton"class="button button-fill">Save</button>
+			</div>
+			</div>
+</div>
+
 
 
 					</div>
@@ -251,9 +313,9 @@
 
 				</div>
 			</div>
-		</div>
 
-	</div>
+
+
 </template>
 
 
@@ -298,7 +360,7 @@
 				var self = this;
 				self.loadlist();
 				self.setradio();
-				populateDatabaseTimeTable("timetabledefault");
+				populateDatabaseTimeTable("timetabledefault",'defaultsubjects');
 				drawTimeTable("timetabledefault","timetable1");
 				drawTimeTable("timetablecustom1","timetable2");
 				drawTimeTable("timetablecustom2","timetable3");

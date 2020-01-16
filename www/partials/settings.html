@@ -20,7 +20,7 @@
 
 		<div class="page-content">
 
-			<div class="block-title" data-i18n="account">Account</div>
+		<!--<div class="block-title" data-i18n="account">Account</div>
 			<div class="list inset">
 				<ul>
 					<li>
@@ -56,7 +56,7 @@
 						</a>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 
 			<div class="block-title" data-i18n="app-title">{{$root.config.app.title}}</div>
 			<div class="list inset">
@@ -70,10 +70,12 @@
 									<span class="fas fa-info fa-stack-1x fa-inverse"></span>
 								</i>
 							</div>
+
 							<div class="item-inner">
 								<div class="item-title" data-i18n="version">Version</div>
 								<div class="item-after">{{appVersion}}</div>
 							</div>
+
 						</div>
 					</li>
 					<!--<li>
@@ -109,7 +111,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="item-link" @click="showInfoAlertDialog">
+						<a  class="item-link" @click="explore">
 							<div class="item-content">
 								<div class="item-media">
 									<i class="fa-stack">
@@ -164,15 +166,7 @@
 								</div>
 							</a>
 						</li>
-						<li>
-							<a href="/academic/subjects" class="item-link">
-								<div class="item-content">
-									<div class="item-inner">
-										<div class="item-title" data-i18n="subjects">Change Subjects</div>
-									</div>
-								</div>
-							</a>
-						</li>
+						
 						<li>
 							<a href="/screens/contact-us" class="item-link">
 								<div class="item-content">
@@ -238,6 +232,82 @@
 
 
 		</div>
+		<div class="popup popup-tablet-fullscreen popup-explore">
+			<div class="view">
+				<div class="page">
+
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="left ios-only">
+								<a href="#" class="link popup-close">
+									<span data-i18n="close">Close</span>
+								</a>
+							</div>
+							<div class="title" data-i18n="web-share-api">Share App</div>
+							<div class="right md-only">
+								<a href="#" class="link icon-only popup-close">
+									<i class="icon material-icons">close</i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+
+
+
+						<form>
+							<div class="list no-hairlines no-hairlines-between">
+								<ul>
+									<li>
+										<div class="item-content item-input item-input-with-clear-button">
+											<div class="item-inner">
+												<div class="item-title item-label">Title</div>
+												<div class="item-input-wrap">
+													<input type="text" name="title" value="{{$root.config.app.title}}" />
+													<span class="input-clear-button"></span>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="item-content item-input item-input-with-clear-button">
+											<div class="item-inner">
+												<div class="item-title item-label">Text</div>
+												<div class="item-input-wrap">
+													<textarea class="resizable" name="text">{{$root.config.app.title}} - {{$root.config.app.tagline}}</textarea>
+													<span class="input-clear-button"></span>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="item-content item-input item-input-with-clear-button">
+											<div class="item-inner">
+												<div class="item-title item-label">URL</div>
+												<div class="item-input-wrap">
+													<input type="url" name="url" value="{{$root.config.envato.itemUrl}}" />
+													<span class="input-clear-button"></span>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="block">
+								<button type="submit" class="button button-big button-fill">Share</button>
+							</div>
+						</form>
+
+						<div class="note note-warning text-align-center">
+							<p>If you leave all the fields blank, then URL of the current page will be shared.</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
 
 	</div>
 </template>
@@ -271,6 +341,49 @@
 			});
 			dialog.open();
 		},
+		explore: function() {
+			console.log("here");
+			var self = this;
+			var popup = app.popup.create({
+				el: '.popup-explore',
+				on: {
+					opened: function() {
+						self.$('form').on('submit', self.onFormSubmit);
+					},
+					closed: function() {
+						self.$('form').off('submit', self.onFormSubmit);
+					}
+				}
+			});
+			popup.open();
+		},
+		onFormSubmit: function(event) {
+			var self = this;
+			event.preventDefault();
+			self.share(app.form.convertToData(event.target));
+		},
+		share: function(data) {
+			var self = this;
+			navigator.share({
+				title: data.title,
+				text: data.text,
+				url: data.url
+			})
+			.then(function() {
+				app.toast.show({
+					text: 'Shared Successfully',
+					position: 'bottom',
+					cssClass: 'toast-round bg-color-green'
+				});
+			})
+			.catch(function(error) {
+				app.toast.show({
+					text: error.message,
+					position: 'bottom',
+					cssClass: 'toast-round bg-color-red'
+				});
+			});
+		}
 	}
 }
 </script>

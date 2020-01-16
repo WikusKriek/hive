@@ -485,6 +485,7 @@
 				var col =document.getElementById("picker-campus").value;
 				credentials={"username":username,"password":password,"email":email};
 				localStorage.setItem('credentials', JSON.stringify(credentials));
+				localStorage.setItem('campus', col);
 
 
 				var pass=JSON.parse(localStorage.getItem('credentials')).password;
@@ -638,7 +639,7 @@
 			},
 			loadNextScreen: function() {
 				var self = this;
-				localStorage.setItem('Nectar_OldUser', 'true');
+				localStorage.setItem('Hive_OldUser', 'true');
 				app.views.current.router.navigate(self.nextScreen);
 			}
 		},
