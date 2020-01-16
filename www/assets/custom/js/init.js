@@ -150,7 +150,10 @@ app.on('routerAjaxError', function() {
 
 function initializeServiceWorker() {
 	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('./service-worker.js');
+		navigator.serviceWorker.register('./service-worker.js').then(reg => {
+  // sometime later…
+  reg.update();
+});
 	}
 }
 
