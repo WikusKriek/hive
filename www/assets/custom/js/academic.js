@@ -311,7 +311,7 @@ function dashtablegen(){
     }
     if(k>=1){
         document.getElementById("assignmentduetoday").innerHTML = `<i class="icon f7-icons ios-only">bell<span class="badge color-red">5</span></i>
-        <i class="icon material-icons md-only">notifications<span class="badge color-red">${k}</span></i>`;
+        <i class="fas fa-bell md-only"><span class="badge color-red">${k}</span></i>`;
         document.getElementById("assignmentsduetodaypopup").innerHTML = `<p>${k} Assignments Due Today</p>`;
 
     }else{
@@ -445,7 +445,7 @@ function scrape(){
 
 setBalance();
     }else{
-      alert('Could not login');
+      alert('Could not login, Make sure your password has not changed');
     }
   });
   app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
@@ -484,8 +484,6 @@ setBalance();
 
       setAnnouncements();
       assignmentsDue();
-    }else{
-      alert('Could not login');
     }
   });
 };
