@@ -28,7 +28,7 @@ workbox.routing.registerRoute(
 /* Cache JS */
 workbox.routing.registerRoute(
   /.*\.js/,
-  workbox.strategies.staleWhileRevalidate({
+  workbox.strategies.networkFirst({
     cacheName: 'cache-js'
   })
 );
