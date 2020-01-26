@@ -3,8 +3,10 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox
 
 /* Workbox Config */
 workbox.setConfig({
-  debug: false
+  debug: true
 });
+workbox.core.skipWaiting()
+workbox.core.clientsClaim()
 
 /* Cache HTML */
 workbox.routing.registerRoute(
@@ -46,24 +48,3 @@ workbox.routing.registerRoute(
     cacheName: 'cache-font'
   })
 );
-
-self.addEventListener('install', event => {
-  self.skipWaiting();
-
-
-});
-
-self.addEventListener('activate', event => {
-  // delete any caches that aren't in expectedCaches
-  event.waitUntil(
-    caches.keys().then(keys => Promise.all(
-      keys.map(key => {
-
-          return caches.delete(key);
-
-      })
-    )).then(() => {
-      console.log('V3 now ready to handle fetches!');
-    })
-  );
-});

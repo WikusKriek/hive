@@ -315,7 +315,7 @@ function dashtablegen(){
         document.getElementById("assignmentsduetodaypopup").innerHTML = `<p>${k} Assignments Due Today</p>`;
 
     }else{
-        document.getElementById("assignmentduetoday").innerHTML = `<i class="icon f7-icons ios-only">bell</i> <i class="icon material-icons md-only">notifications</i>`;
+        document.getElementById("assignmentduetoday").innerHTML = `<i class="icon f7-icons ios-only">bell</i> <i class="fas fa-bell md-only">`;
         document.getElementById("assignmentsduetodaypopup").innerHTML = `<p>${k} Assignments Due Today</p>`;
 
     }
@@ -446,6 +446,7 @@ function scrape(){
 setBalance();
     }else{
       alert('Could not login, Make sure your password has not changed');
+      updatelogin();
     }
   });
   app.request.get(`partials/scraper/efundiproxy.php?a=${username}&b=${pass}`
