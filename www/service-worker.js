@@ -8,7 +8,7 @@ workbox.setConfig({
 workbox.core.skipWaiting()
 workbox.core.clientsClaim()
 
-/* Cache HTML */
+/* Cache HTML ff */
 workbox.routing.registerRoute(
   /.*\.html/,
 	workbox.strategies.networkFirst({

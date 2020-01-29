@@ -59,7 +59,7 @@
 															</div>
 														</div>
 													</li>
-													<li>
+												<!--	<li>
 														<div class="item-content item-input item-input-with-info">
 															<div class="item-media">
 																<i class="icon f7-icons ios-only">email</i>
@@ -73,6 +73,7 @@
 															</div>
 														</div>
 													</li>
+													-->
 													<li>
 														<div class="item-content item-input item-input-with-info">
 															<div class="item-media">
@@ -481,9 +482,8 @@
 				var self = this;
 				var username=document.getElementById("studentnumberinput").value;
 				var password=document.getElementById("passwordinput").value;
-				var email=document.getElementById("emailinput").value;
 				var col =document.getElementById("picker-campus").value;
-				credentials={"username":username,"password":password,"email":email};
+				credentials={"username":username,"password":password};
 				localStorage.setItem('credentials', JSON.stringify(credentials));
 				localStorage.setItem('campus', col);
 
