@@ -639,11 +639,13 @@
 					scrape();
 					defaultsubjectlist();
 					self.loadData();
-					drawTimeTableDash();
 					assignmentsDue();
 					examtimeline();
 					setBalance();
 					setAnnouncements();
+					cleantable("timetabledefault");
+					createDatabaseStudent("timetabledefault");
+					drawTimeTableDash();
 
 
 
