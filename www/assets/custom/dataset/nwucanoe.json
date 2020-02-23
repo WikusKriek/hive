@@ -1,0 +1,50 @@
+{
+	"name": "NWU Canoe Club",
+	"logo": "assets/custom/img/clover.svg",
+	"hero": "https://scontent-jnb1-1.xx.fbcdn.net/v/t1.0-9/11063751_438029569700544_5077961230475357498_n.png?_nc_cat=109&_nc_ohc=QEFHzYkwio4AX-xcmP5&_nc_ht=scontent-jnb1-1.xx&oh=b454bbdb204d4c1e3974033e72ab236c&oe=5EC2072B",
+	"rating": 4.5,
+	"about": "The NWU Canoe Club is a registered sporting body at the NWU Potchefstroom and represents one of the competitive sporting codes. The club is furthermore a member of the Gauteng Canoe Union (GCU) which is affiliated to Canoeing South Africa (CSA).",
+  "beginners": "If you've just started paddling and your confidence level still needs some work then feel free to come Wednesdays every week. The club's more experienced members will assist all beginners on Wednesdays starting at about 5 pm. See you there!",
+	"address": "Calderbank Ave, Potchefstroom, 2520",
+	"latitude": -26.672351929337914,
+	"longitude": 27.09370063720914,
+	"phone": "082 895 2106",
+	"email": "henk.louw@nwu.ac.za",
+	"social": {
+		"facebook": "https://www.facebook.com/POTCHKANO/"
+	},
+	"opening_hours": [
+		{
+			"day": "Monday - Friday",
+			"time": "10 AM - 6 PM"
+		},
+		{
+			"day": "Saturday",
+			"time": "10 AM - 2 PM"
+		},
+		{
+			"day": "Sunday",
+			"time": "Closed"
+		}
+	],
+	"photos": [
+		{
+			"url": "https://scontent-jnb1-1.xx.fbcdn.net/v/t1.0-9/67212920_1233092190194274_3860196647208222720_o.jpg?_nc_cat=104&_nc_ohc=e-x1_M8U1c4AX9yYV1-&_nc_ht=scontent-jnb1-1.xx&oh=932f91f4229a855768592238ebc6052d&oe=5EBF1BA1"
+		},
+		{
+			"url": "https://scontent-jnb1-1.xx.fbcdn.net/v/t1.0-9/67391624_1233105723526254_4118667568628105216_o.jpg?_nc_cat=106&_nc_ohc=Dy1qepa617sAX8uXkDZ&_nc_ht=scontent-jnb1-1.xx&oh=2e0687555d78bb5dfda690bd3f4a6eff&oe=5EFEA97B"
+		},
+		{
+			"url": "https://scontent-jnb1-1.xx.fbcdn.net/v/t1.0-9/60713675_1188303221339838_1280084697283559424_n.jpg?_nc_cat=103&_nc_ohc=DOXhYdC_p4AAX8LzUWf&_nc_ht=scontent-jnb1-1.xx&oh=1f4af103a1dcfe2fbbcfbc2fd1cbd33e&oe=5EF05B49"
+		},
+		{
+			"url": "https://scontent-jnb1-1.xx.fbcdn.net/v/t1.0-9/60598809_1188718201298340_8079629929626468352_o.jpg?_nc_cat=105&_nc_ohc=yXE60wTSruEAX8IaswS&_nc_ht=scontent-jnb1-1.xx&oh=07fb07b3a0162a22fe1829ae1c7afd11&oe=5EFE8D72"
+		},
+		{
+			"url": "https://scontent-jnb1-1.xx.fbcdn.net/v/t31.0-8/10959084_399978846838950_3806353283199924110_o.jpg?_nc_cat=105&_nc_ohc=2zEaeqkwoKkAX8SWYNy&_nc_ht=scontent-jnb1-1.xx&oh=69f83b196f1ec018c983abab3e3c46e9&oe=5EB5056E"
+		},
+		{
+			"url": "https://scontent-jnb1-1.xx.fbcdn.net/v/t1.0-9/42165794_1027788114058017_3991962524407824384_o.jpg?_nc_cat=105&_nc_ohc=V8GC5jvOHfYAX-5VQ0I&_nc_ht=scontent-jnb1-1.xx&oh=e8c67314b201565da77f8605349ba3a1&oe=5EF9E9BD"
+		}
+	]
+}
