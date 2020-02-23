@@ -16,6 +16,18 @@
 					</div>
 				</div>
 			</div>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151415904-1"></script>
+			<script>
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+
+			  gtag('config', 'UA-151415904-1');
+				gtag('event', 'screen_view', {
+  'app_name': 'Hive',
+  'screen_name' : 'NWU_Canoe_Club'
+});
+			</script>
 		</div>
 
 
@@ -182,12 +194,17 @@
 								<span class="fas fa-info fa-stack-1x fa-inverse"></span>
 							</i>
 							<span>&ensp;</span>
-							<span>About Us</span>
+							<span>Getting Started</span>
 						</div>
 						<div class="card-content card-content-padding">
 							<p>{{business.beginners}}</p>
 						</div>
 					</div>
+          <div class="card-content card-content-padding">
+            <div class="photo-gallery padding-horizontal-half" >
+          <img class="img-responsive" src="{{business.poster}}" alt="" />
+          </div>
+          </div>
 				</div>
 
 
