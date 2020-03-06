@@ -2,6 +2,18 @@
 
 window.routes = [
   {
+		path: '/games',
+		componentUrl: './partials/games.html'
+	},
+  {
+		path: '/games/hextris',
+		componentUrl: './partials/games/hextris/hextris.html'
+	},
+  {
+		path: '/games/taptaptap',
+		componentUrl: './partials/games/taptaptap/taptaptap.html'
+	},
+  {
 		path: '/academic/image',
 		componentUrl: './partials/academic/imageSelector.html'
 	},

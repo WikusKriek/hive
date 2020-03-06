@@ -6,7 +6,7 @@ $pass=$_GET['b'];
 
 $url = "http://mobile.nwu.ac.za/mdot/services/authentication/login.json";
 $url2="http://mobile.nwu.ac.za/mdot/buy/getBalance?";
-$url3='http://mobile.nwu.ac.za/mdot/grades/getResults?endDate=2019-12-31&startDate=2019-01-01';
+$url3='http://mobile.nwu.ac.za/mdot/grades/getResults?endDate=2020-12-31&startDate=2020-01-01';
 $fields = [
   'loginName'=> $user,
   'password'=> $pass
