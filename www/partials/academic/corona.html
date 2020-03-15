@@ -1,0 +1,192 @@
+<template>
+	<div class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="link back">
+						<i class="icon icon-back"></i>
+						<span class="ios-only" data-i18n="searchbar">Searchbar</span>
+					</a>
+				</div>
+				<div class="title" data-i18n="corona-status">CCOVID-19</div>
+			</div>
+		</div>
+
+		<form class="searchbar searchbar-init" data-search-container=".search-list" data-search-item="li" data-search-in=".item-title">
+			<div class="searchbar-inner">
+				<div class="searchbar-input-wrap">
+					<input type="search" placeholder="Search" data-i18n="[placeholder]search" />
+					<i class="searchbar-icon"></i>
+					<span class="input-clear-button"></span>
+				</div>
+				<span class="searchbar-disable-button" data-i18n="cancel">Cancel</span>
+			</div>
+		</form>
+
+		<div class="page-content">
+
+
+      <div class="block">
+				<p>COVID-19 CORONAVIRUS OUTBREAK.</p>
+			</div>
+
+      <div  class="block-title">Total Cases</div>
+			<div id="total_cases" class="note note-warning"></div>
+
+      <div class="block-title">Total Deaths</div>
+			<div id="death_count" class="note note-danger"></div>
+
+			<div class="block-title">Total Recovered</div>
+			<div id="recover_count" class="note note-success"></div>
+
+      <div class="block-title">New Cases</div>
+			<div id="new_cases" class="note note-warning"></div>
+
+      <div class="block-title">New Deaths</div>
+			<div id="new_deaths" class="note note-warning"></div>
+
+			<div class="block-title">Statistics Taken at:</div>
+			<div id="date_taken" class="note note-info"></div>
+
+
+
+			<div class="searchbar-not-found">
+				<div class="empty-state">
+					<div class="empty-state-media">
+						<img src="assets/custom/img/no-search.svg" alt="" />
+					</div>
+					<div class="empty-state-title" data-i18n="no-search-results">No Search Results</div>
+				</div>
+			</div>
+
+<div class="block-title">Confirmed Cases and Deaths by Country, Territory, or Conveyance</div>
+			<div class="searchbar-found">
+				<div class="list search-list">
+					<ul>
+						{{#each countries}}
+						<li>
+							<div class="item-content">
+
+                <div class="item-inner item-cell">
+
+                  <div class="item-row">
+  									<h2 class="item-title">{{country_name}}</h2>
+  								</div>
+                  <div class="item-row bg-color-red-1">
+
+  									<div class="item-cell">
+                      <div class="item-row">Cases</div>
+                      <div class="item-row">{{cases}}</div>
+                    </div>
+  									<div class="item-cell">
+                      <div class="item-row">Deaths</div>
+                      <div class="item-row">{{deaths}}</div>
+                    </div>
+  									<div class="item-cell">
+                      <div class="item-row">Recovered</div>
+                      <div class="item-row">{{total_recovered}}</div>
+                    </div>
+  								</div>
+                  </div>
+
+							</div>
+						</li>
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</template>
+
+<style scoped>
+	.cards .card {
+		background-color: #292929;
+    background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		box-shadow: none;
+		color: #FFFFFF;
+    display: flex;
+    height: 48vw;
+	}
+
+	.theme-dark {{this}} .cards .card {
+		background-color: #292929;
+	}
+
+  .card .card-content {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+</style>
+
+<script>
+	return {
+		data: function() {
+			return {
+				articles: null
+			}
+		},
+		methods: {
+      loadCorona: function() {
+				var self = this;
+
+        var settings = {
+  	"async": true,
+  	"crossDomain": true,
+  	"url": "https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php",
+  	"method": "GET",
+  	"headers": {
+  		"x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+  		"x-rapidapi-key": "16d678e84bmshc355be600f65532p18a8f1jsn57d0ce9f6cc9"
+  	}
+  }
+
+  $.ajax(settings).done(function (response) {
+  	console.log(response);
+    response=JSON.parse(response);
+    self.$setState({
+      countries: response.countries_stat
+    });
+  });
+  var settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
+		"x-rapidapi-key": "16d678e84bmshc355be600f65532p18a8f1jsn57d0ce9f6cc9"
+	}
+}
+
+$.ajax(settings).done(function (response) {
+  response=JSON.parse(response);
+  document.getElementById("total_cases").innerHTML=`<h1>${response.total_cases}</h1>`;
+  document.getElementById("death_count").innerHTML=`<h1>${response.total_deaths}</h1>`;
+  document.getElementById("recover_count").innerHTML=`<h1>${response.total_recovered}</h1>`;
+  document.getElementById("new_cases").innerHTML=`<h1>${response.new_cases}</h1>`;
+  document.getElementById("new_deaths").innerHTML=`<h1>${response.new_deaths}</h1>`;
+    document.getElementById("date_taken").innerHTML=`<h1>${response.statistic_taken_at}</h1>`;
+	console.log(response);
+});
+
+
+
+
+			}
+		},
+		on: {
+			pageInit: function() {
+				var self = this;
+        self.loadCorona();
+			}
+		}
+	}
+</script>

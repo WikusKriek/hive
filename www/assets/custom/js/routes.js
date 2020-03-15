@@ -14,6 +14,10 @@ window.routes = [
 		componentUrl: './partials/games/taptaptap/taptaptap.html'
 	},
   {
+		path: '/academic/corona',
+		componentUrl: './partials/academic/corona.html'
+	},
+  {
 		path: '/academic/image',
 		componentUrl: './partials/academic/imageSelector.html'
 	},
