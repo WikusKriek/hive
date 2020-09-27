@@ -1,2 +1,2 @@
-# 50percet
+# Student Hive App
 Student app
