@@ -1,0 +1,86 @@
+<template>
+	<div class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="link back">
+						<i class="icon icon-back"></i>
+						<span class="ios-only" data-i18n="exam-results">Exam Results</span>
+					</a>
+				</div>
+				<div class="title md-only" data-i18n="exam-results">Exam Results</div>
+				<div class="subnavbar ios-only">
+					<div class="subnavbar-inner">
+						<div class="title" data-i18n="exam-results">Exam Results</div>
+					</div>
+				</div>
+			</div>
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151415904-1"></script>
+			<script>
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+
+			  gtag('config', 'UA-151415904-1');
+				gtag('event', 'screen_view', {
+  'app_name': 'Hive',
+  'screen_name' : 'Exam_Results'
+});
+			</script>
+		</div>
+
+		<div class="page-content">
+
+
+
+			<div class="block-title">Pull to refresh exam results</div>
+			<div class="card card-outline">
+			<div class="list custom-list">
+
+				<div id="examlist">
+
+					<!-- function setgradesbalance in academic.js -->
+
+				</div>
+
+			</div>
+
+
+</div>
+		</div>
+
+	</div>
+</template>
+
+<style scoped>
+	.fa-stack {
+		width: 2em;
+	}
+
+	.custom-list .item-row .item-cell {
+		box-sizing: border-box;
+		padding: 4px;
+		text-align: left;
+	}
+	.item-cell-data{
+		box-sizing: border-box;
+		padding: 4px;
+		text-align: center;
+	}
+</style>
+
+<script>
+	return {
+
+
+		on: {
+			pageInit: function() {
+				var self = this;
+
+				setGrades();
+			}
+		}
+	}
+</script>

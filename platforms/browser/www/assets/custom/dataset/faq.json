@@ -1,0 +1,23 @@
+[
+	{
+		"question": "Where can I find the app in the app store?",
+		"answer": "Hive is a web based app, meaning it is actually just a website optimized for mobile users. This means that the app is not available in any app store because there is no need to download it. The app can however be added to your home screen and it will appear to function like any other local app."
+	},
+	{
+		"question": "How does the app work?",
+		"answer": "The app logs into your university account with the details you provided. Once logged in we simply tell the app where to go look for the data we want to display to you. The app then browses the university website and collects the importand data. This can sometimes take a while since the app needs to collect data from multiple pages."
+	},
+	{
+		"question": "How do I add the app to my home screen?",
+		"answer": "Navigate to your options usually located at the top right of your browser. Open options and select -Add to Home Screen-. Note that on some browsers this option does not seem to work, we are aware of this problem and will work on it as soon as we can. If you expierience this problem we suggest using the app as a normal website by navigating to studenthive.app until the issue is resolved."
+	},
+	{
+		"question": "Experiencing buggy behaviour?",
+		"answer": "If something doesn't seem right with the app try clearing the browser cache and data. Navigate to the app domain studenthive.app and the app should now start up again from scratch"
+	}
+	,
+	{
+		"question": "How can I help?",
+		"answer": "Send us some feedback mail: info@studenthive.app Any ideas, bugs even complains will be appreciated"
+	}
+]

@@ -1,0 +1,93 @@
+<template>
+	<div class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="link back">
+						<i class="icon icon-back"></i>
+						<span class="ios-only" data-i18n="back">Back</span>
+					</a>
+				</div>
+				<div class="title md-only" data-i18n="cookie-policy">Cookie Policy</div>
+				{{#if cookiesAccepted}}
+				{{else}}
+				<div class="right ios-only">
+					<a href="#" class="link" data-i18n="accept" @click="acceptCookies">Accept</a>
+				</div>
+				{{/if}}
+				<div class="subnavbar ios-only">
+					<div class="subnavbar-inner">
+						<div class="title" data-i18n="cookie-policy">Cookie Policy</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content">
+
+			<div class="note note-info">
+				<p>This cookie policy was last updated on {{lastUpdated}}.</p>
+			</div>
+
+			<div class="block">
+				<p>Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.
+
+This Service does not use these "cookies" explicitly. However, the app may use third party code and libraries that use "cookies" to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.</p>
+			</div>
+
+		</div>
+
+		{{#if cookiesAccepted}}
+		{{else}}
+		<div class="fab fab-extended fab-center-bottom color-green md-only">
+			<a href="#" @click="acceptCookies">
+				<div class="fab-text" data-i18n="accept">Accept</div>
+			</a>
+		</div>
+		{{/if}}
+
+	</div>
+</template>
+
+<script>
+	return {
+		data: function() {
+			return {
+				lastUpdated: (function() {
+					var date = new Date('2019-10-08');
+					var options = {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+						weekday: 'long'
+					};
+					return date.toLocaleDateString('en-us', options);
+				})(),
+				cookiesAccepted: (function() {
+					if (localStorage.getItem('Nectar_CookiesAccepted')) {
+						return true;
+					}
+					else {
+						return false;
+					}
+				})()
+			}
+		},
+		methods: {
+			acceptCookies: function() {
+				var self = this;
+				localStorage.setItem('Nectar_CookiesAccepted', 'true');
+				self.$setState({
+					cookiesAccepted: true
+				});
+				app.toast.show({
+					icon: '<i class="fas fa-fw fa-cookie-bite"></i>',
+					text: 'Thank you for accepting cookies.',
+					position: 'bottom',
+					cssClass: 'toast-round bg-color-yellow text-color-black'
+				});
+			}
+		}
+	}
+</script>

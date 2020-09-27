@@ -1,0 +1,29 @@
+{
+	"name": "Hive Inc.",
+	"address": "Potchefstroom , South Africa",
+	"latitude": -26.687762,
+	"longitude": 27.094011,
+	"phone": "",
+	"URL": "studenthive.app",
+	"email": "info@studenthive.app",
+	"social": {
+		"facebook": "https://facebook.com",
+		"twitter": "https://twitter.com",
+		"linkedin": "https://linkedin.com",
+		"youtube": "https://youtube.com"
+	},
+	"opening_hours": [
+		{
+			"day": "Monday - Friday",
+			"time": "10 AM - 6 PM"
+		},
+		{
+			"day": "Saturday",
+			"time": "Closed"
+		},
+		{
+			"day": "Sunday",
+			"time": "Closed"
+		}
+	]
+}

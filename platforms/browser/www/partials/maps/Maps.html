@@ -1,0 +1,68 @@
+<template>
+	<div class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="link back">
+						<i class="icon icon-back"></i>
+						<span class="ios-only" data-i18n="home">Home</span>
+					</a>
+				</div>
+				<div class="title md-only" data-i18n="themes">Themes</div>
+				<div class="subnavbar ios-only">
+					<div class="subnavbar-inner">
+						<div class="title" data-i18n="themes">Themes</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content">
+
+			<div>
+				new tesstssds
+				</div>
+
+		</div>
+
+	</div>
+</template>
+
+<style scoped>
+	.color-gray-0 {
+		color: var(--oc-color-gray-0) !important;
+	}
+</style>
+
+<script>
+	return {
+		methods: {
+			checkmarkCurrentTheme: function() {
+				var self = this;
+				var color = app.utils.theme.getColor();
+				var layout = app.utils.theme.getLayout();
+				self.$('[name=theme-color][value=' + color + ']').prop('checked', true);
+				self.$('[name=theme-layout][value=' + layout + ']').prop('checked', true);
+			},
+			changeThemeColor: function(event) {
+				var self = this;
+				var color = event.target.value;
+				app.utils.theme.setColor(color);
+			},
+			changeThemeLayout: function(event) {
+				var self = this;
+				var layout = event.target.value;
+				app.utils.theme.setLayout(layout);
+			}
+		},
+		on: {
+			pageInit: function() {
+				var self = this;
+				self.checkmarkCurrentTheme();
+				self.$('[name=theme-color]').on('change', self.changeThemeColor);
+				self.$('[name=theme-layout]').on('change', self.changeThemeLayout);
+			}
+		}
+	}
+</script>

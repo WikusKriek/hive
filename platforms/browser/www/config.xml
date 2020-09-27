@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="website.nectar.classic" version="2.8.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Nectar</name>
+    <description>Mobile Web App Kit</description>
+    <author email="praveen.mujawdiya@gmail.com">Praveen Mujawdiya</author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
+        <activity android:theme="@style/CordovaWindowBackgroundTheme" />
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Nectar requires location access to find nearby things.</string>
+    </edit-config>
+    <preference name="android-build-tool" value="gradle" />
+    <preference name="phonegap-version" value="cli-8.1.1" />
+    <preference name="KeyboardShrinksView" value="true" />
+    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+</widget>

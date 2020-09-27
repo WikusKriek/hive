@@ -1,0 +1,171 @@
+<template>
+	<div class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="link back">
+						<i class="icon icon-back"></i>
+						<span class="ios-only" data-i18n="web-apis">Web APIs</span>
+					</a>
+				</div>
+				<div class="title md-only" data-i18n="file-api">File API</div>
+				<div class="subnavbar ios-only">
+					<div class="subnavbar-inner">
+						<div class="title" data-i18n="file-api">File API</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content">
+
+			<div class="block">
+				<p>Select an image to use as your profile picture.</p>
+			</div>
+
+			<div class="block">
+				<img class="img-center img-placeholder img-responsive" src="{{file.content}}" alt="" />
+			</div>
+
+			<div class="list">
+				<ul>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title">
+									<div class="item-header">Name</div>
+									<div class="item-footer">{{file.name}}</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title">
+									<div class="item-header">Size</div>
+									<div class="item-footer">{{file.size}}</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title">
+									<div class="item-header">MIME Type</div>
+									<div class="item-footer">{{file.type}}</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title">
+									<div class="item-header">Last Modified Date</div>
+									<div class="item-footer">{{file.lastModifiedDate}}</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="block">
+				<label class="button button-big button-fill button-file">
+					<input type="file" accept="image/*" />
+					<span>Upload Image</span>
+				</label>
+			</div>
+
+		</div>
+
+
+
+	</div>
+</template>
+
+<style scoped>
+	{{html}} .img-placeholder[src=''] {
+		height: 256px;
+		width: 384px;
+	}
+</style>
+
+<script>
+	return {
+		data: function() {
+			return {
+				file: {
+					name: null,
+					size: null,
+					type: null,
+					lastModifiedDate: null,
+					content: null
+				}
+			}
+		},
+		on: {
+			pageInit: function() {
+				var self = this;
+				self.$('[type=file]').on('change', self.onFileChange);
+
+			}
+		}
+
+,
+		methods: {
+			explore: function() {
+				var self = this;
+				var popup = app.popup.create({
+					el: '.popup-explore',
+					on: {
+						opened: function() {
+							self.$('[type=file]').on('change', self.onFileChange);
+						}
+					}
+				});
+				popup.open();
+			},
+
+
+			onFileChange: function(event) {
+				var self = this;
+				var file = event.target.files[0];
+
+				self.updateFileInfo(file);
+
+			},
+			updateFileInfo: function(file) {
+				var self = this;
+				var fileData = {};
+				fileData.name = file.name;
+				fileData.size = file.size + ' bytes';
+				fileData.type = file.type;
+				fileData.lastModifiedDate = file.lastModifiedDate;
+
+				var reader = new FileReader();
+				reader.addEventListener('load', function() {
+					localStorage.removeItem('profileimage');
+					localStorage.setItem('profileimage',JSON.stringify(reader.result));
+					self.$setState({
+						file: Object.assign({}, self.file, { content: reader.result })
+					});
+				});
+				reader.addEventListener('error', function() {
+					app.toast.show({
+						text: reader.error,
+						position: 'bottom',
+						cssClass: 'toast-round bg-color-red'
+					});
+				});
+				reader.readAsDataURL(file);
+				self.$setState({
+					file: fileData
+				});
+			}
+		}
+	}
+</script>

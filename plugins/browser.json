@@ -1,0 +1,67 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-admob-plus": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-buildinfo": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-fingerprint-aio": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "website.nectar.classic"
+    }
+  }
+}

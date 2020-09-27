@@ -1,0 +1,370 @@
+<template>
+	<div class="page">
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="link back" onclick="location.href();">
+						<i class="icon icon-back"></i>
+						<span class="ios-only" data-i18n="back">Back</span>
+					</a>
+				</div>
+				<div class="title md-only" data-i18n="subjects">Subjects</div>
+				<div class="subnavbar ios-only">
+					<div class="subnavbar-inner">
+						<div class="title" data-i18n="subjects">Subjects</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-content">
+			<div class="list accordion-list">
+				<ul>
+			<li class="accordion-item">
+				<a href="#" class="item-link">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title">How do the subject lists work?</div>
+						</div>
+					</div>
+				</a>
+				<div class="accordion-item-content">
+					<div class="block">
+						<p>You can create a custom subject list based on your preferences. The selected list will be used to create your custom timetable. We will however still use the default list to display announcements and subject assignments. The default list is constructed from your starred/favorite subjects on efundi. Adding or removing subjects from your efundi starred/favorite list will also show changes in this app.</p>
+					</div>
+				</div>
+			</li>
+			</ul>
+			</div>
+			<div class="block block-strong">
+
+
+				<label class="radio">
+					<input id="radio1" type="radio" name="radio" value="1" />
+					<i class="icon-radio"></i>
+				</label>
+				<span>Use Default subject List</span>
+
+				<div class="list accordion-list">
+					<ul>
+				<li class="accordion-item">
+					<a href="#" class="item-link">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title">Default subject list</div>
+							</div>
+						</div>
+					</a>
+					<div class="accordion-item-content">
+						<div class="block">
+							<div class="list simple-list">
+								<ul id='defaultlist'>
+
+							</ul>
+						</div>
+							</div>
+					</div>
+				</li>
+				</ul>
+				</div>
+
+
+				<div class="block-title">Default class Timetable</div>
+
+					<table class="time-table" id="table1" >
+
+						<thead>
+							<tr>
+								<th class="label-cell">Time</th>
+								<th class="numeric-cell">M</th>
+								<th class="numeric-cell">T</th>
+								<th class="numeric-cell">W</th>
+								<th class="numeric-cell">T</th>
+								<th class="numeric-cell">F</th>
+							</tr>
+						</thead>
+						<tbody id="timetable1">
+
+
+
+
+
+						</tbody >
+					</table>
+
+
+
+
+			</div>
+			<div class="block block-strong">
+
+
+				<label class="radio">
+					<input id="radio2" type="radio" name="radio" value="2" />
+					<i class="icon-radio"></i>
+				</label>
+				<span>Use Custom 1</span>
+
+
+					<div class="list simple-list">
+						<ul id="custom1list">
+
+					</ul>
+				</div>
+				<div class="block block-strong">
+					<div class="row">
+						<div class="col">
+							<a href="/academic/addremove" id="editcustom1" class="button button-fill button-raised button-round"onclick='buttonnum(1);'>Add subjects to Custom 1</a>
+						</div>
+						<div class="col">
+							<a   class="button button-fill button-raised button-round"onclick='addsubjects(1);'>Redraw Table</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="block-title">Custom Timetable 1</div>
+
+				<table class="time-table" id="table2" >
+
+					<thead>
+						<tr>
+							<th class="label-cell">Time</th>
+							<th class="numeric-cell">M</th>
+							<th class="numeric-cell">T</th>
+							<th class="numeric-cell">W</th>
+							<th class="numeric-cell">T</th>
+							<th class="numeric-cell">F</th>
+						</tr>
+					</thead>
+					<tbody id="timetable2">
+
+
+
+
+
+					</tbody >
+				</table>
+
+			</div>
+			<div class="block block-strong">
+
+
+				<label class="radio">
+					<input id="radio3" type="radio" name="radio" value="3"/>
+					<i class="icon-radio"></i>
+				</label>
+				<span>Use Custom 2</span>
+
+
+					<div class="list simple-list">
+						<ul id="custom2list">
+
+
+					</ul>
+
+				</div>
+				<div class="block block-strong">
+					<div class="row">
+						<div class="col">
+							<a href="/academic/addremove"id="editcustom2" class="button button-fill button-raised button-round"onclick='buttonnum(2);'>Add subjects to Custom 2</a>
+						</div>
+						<div class="col">
+							<a   class="button button-fill button-raised button-round"onclick='addsubjects(2);'>Redraw Table</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="block-title">Custom Timetable 2</div>
+									<table class="time-table" id="table3" >
+
+										<thead>
+											<tr>
+												<th class="label-cell">Time</th>
+												<th class="numeric-cell">M</th>
+												<th class="numeric-cell">T</th>
+												<th class="numeric-cell">W</th>
+												<th class="numeric-cell">T</th>
+												<th class="numeric-cell">F</th>
+											</tr>
+										</thead>
+										<tbody id="timetable3">
+
+
+
+
+
+										</tbody >
+									</table>
+
+			</div>
+			<script type="text/javascript">
+
+
+				$('input[type=radio][name=radio]').change(function() {
+			if (this.value == '1') {
+			localStorage.removeItem('radio1');
+			localStorage.setItem('radio1', '1');
+			}
+			else if (this.value == '2') {
+			localStorage.removeItem('radio1');
+			localStorage.setItem('radio1', '2');
+			}else{
+			localStorage.removeItem('radio1');
+			localStorage.setItem('radio1', '3');
+			}
+			});
+
+
+
+			</script>
+
+		</div>
+		<div class="popup popup-tablet-fullscreen popup-timeTable">
+			<div class="view">
+				<div class="page">
+
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="left ios-only">
+								<a href="#" class="link popup-close">
+									<span data-i18n="close">Close</span>
+								</a>
+							</div>
+							<div class="title">Popup</div>
+							<div class="right md-only">
+								<a href="#" class="link icon-only popup-close">
+									<i class="icon material-icons md-only">close</i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+
+						<div class="list no-hairlines no-hairlines-between">
+			        <ul>
+								<li class="item-content item-input inline-label">
+			            <div class="item-inner">
+			              <div class="item-title item-label">Subject Name</div>
+			              <div class="item-input-wrap">
+			                <input id="subjectNameInput" type="text" placeholder="" />
+			                <span class="input-clear-button"></span>
+			              </div>
+			            </div>
+			          </li>
+								<li class="item-content item-input inline-label">
+			            <div class="item-inner">
+			              <div class="item-title item-label">Venue</div>
+			              <div class="item-input-wrap">
+			                <input id="venueInput" type="text" />
+			                <span class="input-clear-button"></span>
+			              </div>
+			            </div>
+			          </li>
+
+											</ul>
+						<div class="block block-strong">
+							<div class="item-title item-label">Color Select</div>
+							<div class="row margin-top">
+								<div class="col">
+									<button id="evenbutton" onclick="setcolour('even');" class="button button-fill color-red">Empty</button>
+								</div>
+								<div class="col">
+									<button id="oddbutton" onclick="setcolour('odd');" class="button button-fill color-green">Empty-Dark</button>
+								</div>
+								</div>
+								<div class="row margin-top">
+								<div class="col">
+									<button id="previousbutton" onclick="setcolour('previous');" class="button button-fill color-green">Previous</button>
+								</div>
+								<div class="col">
+									<button id="fromcellbutton" onclick="setcolour('fromcell');" class="button button-fill color-green">Active</button>
+								</div>
+							</div>
+
+				        <ul>
+							<li class="item-content item-input">
+											<div class="item-inner">
+												<div class="item-title item-floating-label">Color Selector</div>
+												<div class="item-input-wrap">
+													<input id="colourInput" type="color" value="#ff4545" onchange="setcolour('customcolor');"/>
+												</div>
+											</div>
+										</li>
+										</ul>
+							</div>
+
+							</div>
+
+
+	<div class="block block-strong">
+			<div class="col">
+				<button onclick="savecolor()" id="colorbutton"class="button button-fill">Save</button>
+			</div>
+			</div>
+</div>
+
+
+
+					</div>
+
+					</div>
+
+				</div>
+			</div>
+
+
+
+</template>
+
+
+
+<script>
+	return {
+		methods: {
+			setradio:function(){
+				if(localStorage.getItem('radio1')==null){
+					localStorage.setItem('radio1', '1');
+				}
+			document.getElementById('radio'+localStorage.getItem('radio1')).checked="true"	;
+			},
+			loadlist:function(){
+
+
+				var custom1 = JSON.parse(localStorage.getItem('custom1'));
+				var custom2 = JSON.parse(localStorage.getItem('custom2'));
+				if (custom1!=null){
+					for(var sub in custom1){
+
+						$("#custom1list").append('<li>'+custom1[sub].subject+'</li>');
+					}
+
+				}
+				if (custom2!=null){
+					for(var sub in custom2){
+
+						$("#custom2list").append('<li>'+custom2[sub].subject+'</li>');
+					}
+
+				}
+				var subjects=JSON.parse(localStorage.getItem('subjects'));
+				for(var sub in subjects){
+					$("#defaultlist").append('<li>'+subjects[sub].subject+'</li>');
+				}
+
+			}
+		},
+		on: {
+			pageInit: function() {
+				var self = this;
+				self.loadlist();
+				self.setradio();
+				populateDatabaseTimeTable("timetabledefault",'defaultsubjects');
+				drawTimeTable("timetabledefault","timetable1");
+				drawTimeTable("timetablecustom1","timetable2");
+				drawTimeTable("timetablecustom2","timetable3");
+			}
+		}
+	}
+</script>
